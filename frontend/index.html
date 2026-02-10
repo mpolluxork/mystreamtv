@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyStreamTV - Tu Guía de Streaming</title>
+  <meta name="description"
+    content="Guía de programación estilo EPG para eliminar la parálisis de decisión en streaming">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Ambient backdrop -->
+  <div id="backdrop" class="backdrop-overlay"></div>
+
+  <!-- CRT scanlines effect -->
+  <div class="scanlines"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="epg-header">
+      <div class="logo">MyStreamTV</div>
+      <div class="header-right">
+        <span id="current-time" class="current-time">00:00</span>
+        <span id="current-date" class="current-date"></span>
+        <a href="admin.html" class="admin-link" title="Console Access">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Loading state -->
+    <div id="loading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Cargando programación...</div>
+    </div>
+
+    <!-- Error state -->
+    <div id="error" class="error-container" style="display: none;">
+      <div class="error-text">Error al cargar la guía</div>
+      <p class="error-hint">Asegúrate de que el backend esté corriendo en localhost:8000</p>
+      <button onclick="loadGuide()" class="btn-retry">Reintentar</button>
+    </div>
+
+    <!-- EPG Container -->
+    <div id="epg-container" class="epg-container" style="display: none;">
+      <!-- Channel sidebar -->
+      <div id="channel-list" class="channel-list"></div>
+
+      <!-- Grid area -->
+      <div class="grid-wrapper">
+        <!-- Time ruler -->
+        <div id="time-ruler" class="time-ruler"></div>
+
+        <!-- Program grid -->
+        <div id="program-grid" class="program-grid">
+          <!-- Now line -->
+          <div id="now-line" class="now-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keyboard hints -->
+    <div class="keyboard-hints">
+      <div class="hint">
+        <span class="key">←</span>
+        <span class="key">↑</span>
+        <span class="key">↓</span>
+        <span class="key">→</span>
+        <span>Navegar</span>
+      </div>
+      <div class="hint">
+        <span class="key">Enter</span>
+        <span>Seleccionar</span>
+      </div>
+      <div class="hint">
+        <span class="key">Esc</span>
+        <span>Cerrar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program Modal -->
+  <div id="modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button id="modal-close" class="btn-close" aria-label="Cerrar">✕</button>
+      <div id="modal-backdrop" class="modal-backdrop"></div>
+      <div class="modal-info">
+        <h2 id="modal-title" class="modal-title"></h2>
+        <div id="modal-meta" class="modal-year-rating"></div>
+        <p id="modal-overview" class="modal-overview"></p>
+        <div id="modal-providers" class="modal-providers"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

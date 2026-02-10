@@ -1,0 +1,742 @@
+/* MyStreamTV - Vintage EPG Styling */
+/* Inspired by 90s cable TV guides with modern polish */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+    /* Color palette - Dark cyberpunk with accent neons */
+    --epg-bg-dark: #0a0a12;
+    --epg-bg-medium: #12121e;
+    --epg-bg-light: #1a1a2e;
+    --epg-grid-bg: #16213e;
+    --epg-channel-bg: #0f3460;
+    --epg-channel-hover: #1a4a7a;
+
+    /* Accent colors */
+    --epg-accent-pink: #e94560;
+    --epg-accent-cyan: #00d9ff;
+    --epg-accent-green: #00ff41;
+    --epg-accent-yellow: #ffd700;
+    --epg-accent-purple: #9d4edd;
+
+    /* Text colors */
+    --epg-text-primary: #ffffff;
+    --epg-text-secondary: #a0aec0;
+    --epg-text-dim: #64748b;
+
+    /* Timing ruler */
+    --epg-time-bg: #1e293b;
+    --epg-time-line: #334155;
+
+    /* Shadows and glows */
+    --glow-pink: 0 0 20px rgba(233, 69, 96, 0.5);
+    --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+    --glow-green: 0 0 10px rgba(0, 255, 65, 0.5);
+
+    /* Sizing */
+    --channel-width: 200px;
+    --time-height: 50px;
+    --row-height: 100px;
+    --minute-width: 4px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background: var(--epg-bg-dark);
+    color: var(--epg-text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ======================== MAIN LAYOUT ======================== */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--epg-bg-dark) 0%, var(--epg-bg-medium) 100%);
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.epg-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(90deg, var(--epg-bg-medium), var(--epg-bg-dark));
+    border-bottom: 2px solid var(--epg-accent-cyan);
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+    z-index: 10;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--epg-accent-cyan), var(--epg-accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.current-time {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--epg-accent-green);
+    text-shadow: var(--glow-green);
+}
+
+.current-date {
+    font-size: 0.9rem;
+    color: var(--epg-text-secondary);
+    margin-left: 16px;
+}
+
+.admin-link {
+    margin-left: 20px;
+    color: var(--epg-accent-cyan);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.admin-link:hover {
+    color: var(--epg-accent-cyan);
+    opacity: 1;
+    filter: drop-shadow(var(--glow-cyan));
+}
+
+/* ======================== EPG GRID ======================== */
+
+.epg-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Channel sidebar */
+.channel-list {
+    width: var(--channel-width);
+    background: var(--epg-bg-medium);
+    border-right: 1px solid var(--epg-grid-bg);
+    overflow-y: hidden;
+    scrollbar-width: none;
+    padding-top: var(--time-height);
+    flex-shrink: 0;
+}
+
+.channel-list::-webkit-scrollbar {
+    display: none;
+}
+
+.channel-item {
+    height: var(--row-height);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--epg-grid-bg);
+    transition: background 0.2s;
+}
+
+.channel-item.active {
+    background: var(--epg-channel-bg);
+}
+
+.channel-icon {
+    font-size: 2rem;
+    margin-right: 12px;
+}
+
+.channel-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Program grid area */
+.grid-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Time ruler at top */
+.time-ruler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--time-height);
+    background: var(--epg-time-bg);
+    display: flex;
+    z-index: 10;
+    border-bottom: 2px solid var(--epg-accent-cyan);
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.time-ruler::-webkit-scrollbar {
+    display: none;
+}
+
+.time-mark {
+    flex-shrink: 0;
+    width: calc(var(--minute-width) * 30);
+    border-right: 1px solid var(--epg-time-line);
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.75rem;
+    color: var(--epg-text-secondary);
+}
+
+.time-mark.hour {
+    color: var(--epg-text-primary);
+    font-weight: bold;
+}
+
+/* Program rows */
+.program-grid {
+    position: absolute;
+    top: var(--time-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--epg-accent-cyan) var(--epg-bg-dark);
+}
+
+.program-row {
+    display: flex;
+    height: var(--row-height);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ======================== PROGRAM CARDS ======================== */
+
+.program-card {
+    height: calc(var(--row-height) - 8px);
+    min-width: 120px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--epg-accent-cyan), var(--epg-accent-pink));
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.program-card:focus,
+.program-card.focused {
+    outline: none;
+    background: linear-gradient(135deg, var(--epg-channel-bg), var(--epg-channel-hover));
+    border-color: var(--epg-accent-cyan);
+    box-shadow: var(--glow-cyan), inset 0 0 30px rgba(0, 217, 255, 0.1);
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+.program-card:focus::before,
+.program-card.focused::before {
+    opacity: 1;
+}
+
+.program-card.now-playing {
+    border-left: 3px solid var(--epg-accent-green);
+}
+
+.program-card.now-playing::after {
+    content: 'EN VIVO';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    background: var(--epg-accent-green);
+    color: var(--epg-bg-dark);
+    border-radius: 2px;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.program-genre {
+    font-size: 0.6rem;
+    color: var(--epg-accent-pink);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.program-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--epg-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.program-meta {
+    font-size: 0.7rem;
+    color: var(--epg-text-secondary);
+}
+
+.program-time {
+    font-size: 0.65rem;
+    color: var(--epg-text-dim);
+    margin-top: auto;
+}
+
+/* Info container (left side of card) */
+.program-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    /* Allow text overflow */
+}
+
+/* Poster thumbnail (right side of card) */
+.program-poster {
+    width: 50px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.program-card:hover .program-poster,
+.program-card.focused .program-poster {
+    opacity: 1;
+}
+
+/* ======================== BACKDROP PREVIEW ======================== */
+
+.backdrop-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s, background-image 0.5s;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.backdrop-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom,
+            rgba(10, 10, 18, 0.7) 0%,
+            rgba(10, 10, 18, 0.4) 50%,
+            rgba(10, 10, 18, 0.9) 100%);
+}
+
+/* ======================== PROGRAM MODAL ======================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    background: var(--epg-bg-medium);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), var(--glow-cyan);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-backdrop {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+}
+
+.modal-backdrop::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(transparent, var(--epg-bg-medium));
+}
+
+.modal-info {
+    padding: 24px 32px;
+    position: relative;
+    margin-top: -80px;
+}
+
+.modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-year-rating {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    color: var(--epg-text-secondary);
+}
+
+.modal-rating {
+    color: var(--epg-accent-yellow);
+    font-weight: bold;
+}
+
+.modal-overview {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--epg-text-secondary);
+    margin-bottom: 24px;
+}
+
+.modal-providers {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Tune In Button */
+.btn-tune {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--epg-accent-cyan), var(--epg-accent-pink));
+    color: var(--epg-bg-dark);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--glow-cyan);
+    text-decoration: none;
+}
+
+.btn-tune:hover,
+.btn-tune:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.6);
+}
+
+.btn-tune img {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+.btn-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--epg-text-dim);
+    border-radius: 50%;
+    color: var(--epg-text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+    background: var(--epg-accent-pink);
+    border-color: var(--epg-accent-pink);
+}
+
+/* ======================== NOW PLAYING LINE ======================== */
+
+.now-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--epg-accent-green);
+    box-shadow: var(--glow-green);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.now-line::before {
+    content: 'AHORA';
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: var(--epg-accent-green);
+    white-space: nowrap;
+}
+
+/* ======================== CRT SCANLINES EFFECT ======================== */
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.03;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.3) 2px,
+            rgba(0, 0, 0, 0.3) 4px);
+}
+
+/* ======================== LOADING STATE ======================== */
+
+.loading-container,
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 24px;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--epg-bg-light);
+    border-top-color: var(--epg-accent-cyan);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--epg-accent-cyan);
+    animation: blink 1s ease infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.error-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--epg-accent-pink);
+}
+
+.error-hint {
+    color: var(--epg-text-dim);
+}
+
+.btn-retry {
+    padding: 12px 24px;
+    font-family: 'Orbitron', sans-serif;
+    background: var(--epg-accent-cyan);
+    color: var(--epg-bg-dark);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ======================== KEYBOARD HINTS ======================== */
+
+.keyboard-hints {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 24px;
+    padding: 12px 24px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    border: 1px solid var(--epg-grid-bg);
+    z-index: 50;
+}
+
+.hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--epg-text-secondary);
+}
+
+.key {
+    padding: 4px 8px;
+    background: var(--epg-bg-light);
+    border: 1px solid var(--epg-text-dim);
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--epg-text-primary);
+}
+
+/* ======================== RESPONSIVE ======================== */
+
+@media (min-width: 1920px) {
+    :root {
+        --minute-width: 5px;
+        --row-height: 120px;
+        --channel-width: 240px;
+    }
+
+    .program-title {
+        font-size: 1rem;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --minute-width: 2px;
+        --row-height: 80px;
+        --channel-width: 120px;
+    }
+
+    .channel-name {
+        font-size: 0.7rem;
+    }
+
+    .program-title {
+        font-size: 0.75rem;
+    }
+
+    .keyboard-hints {
+        display: none;
+    }
+}
