@@ -1,38 +1,48 @@
 {
     "channels": [
         {
-            "id": "scifi-channel",
             "name": "🚀 Sci-Fi Channel",
             "icon": "🚀",
+            "priority": 50,
+            "description": "",
             "day_of_week": 0,
+            "enabled": true,
             "slots": [
                 {
                     "start": "06:00",
                     "end": "12:00",
                     "label": "Clásicos Sci-Fi",
+                    "content_type": "movie",
                     "genres": [
                         878
                     ],
                     "decade": [
-                        1970,
-                        1999
+                        1930,
+                        2030
                     ],
-                    "content_type": "movie"
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": []
                 },
                 {
                     "start": "12:00",
                     "end": "18:00",
                     "label": "Series Sci-Fi",
+                    "content_type": "tv",
                     "genres": [
                         878,
                         10765
                     ],
-                    "content_type": "tv"
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": []
                 },
                 {
                     "start": "18:00",
                     "end": "22:00",
-                    "label": "Sci-Fi Moderno",
+                    "label": "Space Opera",
+                    "content_type": "movie",
                     "genres": [
                         878
                     ],
@@ -40,28 +50,47 @@
                         2000,
                         2030
                     ],
-                    "content_type": "movie"
+                    "keywords": [
+                        "space",
+                        "aliens"
+                    ],
+                    "with_people": [],
+                    "universes": []
                 },
                 {
                     "start": "22:00",
                     "end": "00:00",
                     "label": "Sci-Fi Premium",
+                    "content_type": "movie",
                     "genres": [
                         878
                     ],
+                    "decade": [
+                        1960,
+                        2030
+                    ],
                     "vote_average_min": 7.5,
-                    "content_type": "movie"
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": []
                 },
                 {
                     "start": "00:00",
                     "end": "06:00",
-                    "label": "Maratón Sci-Fi",
+                    "label": "Time Travel",
+                    "content_type": "movie",
                     "genres": [
                         878
                     ],
-                    "content_type": "movie"
+                    "decade": null,
+                    "keywords": [
+                        "time travel"
+                    ],
+                    "with_people": [],
+                    "universes": []
                 }
-            ]
+            ],
+            "id": "scifi-channel"
         },
         {
             "id": "action-channel",
@@ -446,10 +475,12 @@
             ]
         },
         {
-            "id": "star-wars-universe",
             "name": "⭐ Star Wars",
             "icon": "⭐",
+            "priority": 50,
+            "description": "",
             "day_of_week": 0,
+            "enabled": true,
             "slots": [
                 {
                     "start": "00:00",
@@ -457,7 +488,11 @@
                     "label": "Star Wars Series",
                     "content_type": "tv",
                     "universes": [
-                        "Star Wars"
+                        "Mandalorian",
+                        "Boba Fett",
+                        "Asohka",
+                        "Accolyte",
+                        "Clone Wars"
                     ]
                 },
                 {
@@ -466,19 +501,21 @@
                     "label": "Skywalker Saga & Spinoffs",
                     "content_type": "movie",
                     "universes": [
-                        "Star Wars"
+                        "Star Wars",
+                        "Rogue One"
                     ]
                 },
                 {
                     "start": "18:00",
                     "end": "00:00",
                     "label": "Star Wars Prime Time",
+                    "content_type": "movie",
                     "universes": [
-                        "Star Wars"
-                    ],
-                    "vote_average_min": 7.0
+                        "Star Wars Episode"
+                    ]
                 }
-            ]
+            ],
+            "id": "star-wars-universe"
         },
         {
             "id": "marvel-universe",
@@ -1002,6 +1039,77 @@
                     "vote_average_min": 6.5
                 }
             ]
+        },
+        {
+            "name": "🦸‍♂️ SUPERMAN",
+            "icon": "🦸‍♂️",
+            "priority": 20,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "04:00",
+                    "label": "Donnerverse",
+                    "content_type": "movie",
+                    "decade": [
+                        1978,
+                        2030
+                    ],
+                    "keywords": [
+                        "Superman",
+                        "Supergirl"
+                    ],
+                    "with_people": [
+                        "Richard Donner",
+                        "Christopher Reeve",
+                        "Helen Slater",
+                        "Brandon Routh"
+                    ],
+                    "universes": [
+                        "DC"
+                    ]
+                },
+                {
+                    "start": "10:00",
+                    "end": "17:00",
+                    "label": "DC Series",
+                    "content_type": "tv",
+                    "genres": [
+                        28,
+                        12,
+                        16,
+                        10751,
+                        878
+                    ],
+                    "decade": null,
+                    "keywords": [
+                        "Superman",
+                        "Supergirl",
+                        "Smallville"
+                    ],
+                    "with_people": [],
+                    "universes": []
+                },
+                {
+                    "start": "17:00",
+                    "end": "23:00",
+                    "label": "SnyderVerse",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "Man of Steel",
+                        "Zack Snyder Justice League",
+                        "Wonder Woman"
+                    ],
+                    "with_people": [],
+                    "universes": [
+                        "DCEU"
+                    ]
+                }
+            ],
+            "id": "🦸‍♂️-superman"
         }
     ]
 }

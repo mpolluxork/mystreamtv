@@ -51,6 +51,24 @@ async def build_content_pool(
             {"genres": [18], "content_type": "tv"},     # Drama
         ])
     
+    # --- NUEVO: Iteración Explícita por Proveedor ---
+    # Garantiza que plataformas pequeñas (MGM+, Universal+, etc.) aporten contenido
+    print(f"   🔄 Querying specific content for {len(tmdb_client.providers)} providers...")
+    for provider_name, provider_id in tmdb_client.providers.items():
+        # Movie query for this provider
+        queries.append({
+            "provider_ids": [provider_id],
+            "content_type": "movie",
+            "sort_by": "popularity.desc"
+        })
+        # TV query for this provider (if enabled)
+        if include_tv:
+            queries.append({
+                "provider_ids": [provider_id],
+                "content_type": "tv",
+                "sort_by": "popularity.desc"
+            })
+    
     for query in queries:
         if len(pool) >= max_items:
             break
@@ -185,6 +203,35 @@ async def discover_content_for_filters(
     try:
         print(f"   📊 Standard discovery (genres, decade, rating)...")
         
+        # Resolve text filters to IDs
+        resolved_people_ids = []
+        people_text = filters.get("with_people", [])
+        if people_text:
+            print(f"      Resolving people: {people_text}")
+            for person_name in people_text:
+                if isinstance(person_name, str):
+                    candidates = await tmdb_client.search_person(person_name)
+                    if candidates:
+                        pid = candidates[0]['id']
+                        print(f"         '{person_name}' -> {pid}")
+                        resolved_people_ids.append(pid)
+                elif isinstance(person_name, int):
+                    resolved_people_ids.append(person_name)
+
+        # Resolve keywords to IDs for discovery (complementing the text search above)
+        resolved_keyword_ids = []
+        if keywords_text:
+            print(f"      Resolving keywords: {keywords_text}")
+            for kw_text in keywords_text:
+                if isinstance(kw_text, str):
+                    candidates = await tmdb_client.search_keywords(kw_text)
+                    if candidates:
+                        kid = candidates[0]['id']
+                        print(f"         '{kw_text}' -> {kid}")
+                        resolved_keyword_ids.append(kid)
+                elif isinstance(kw_text, int):
+                    resolved_keyword_ids.append(kw_text) 
+
         for page in range(1, 4):  # 3 páginas máximo
             if len(results) >= max_results:
                 break
@@ -198,8 +245,8 @@ async def discover_content_for_filters(
                 original_language=filters.get("original_language"),
                 production_countries=filters.get("production_countries"),
                 vote_average_min=filters.get("vote_average_min"),
-                with_people=filters.get("with_people", []),
-                keywords=[]  # TMDB keywords API requiere IDs, no strings, así que ignoramos aquí
+                with_people=resolved_people_ids,
+                keywords=resolved_keyword_ids 
             )
             
             items = response.get("results", [])

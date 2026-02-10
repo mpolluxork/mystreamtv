@@ -4,6 +4,8 @@ Extended client with watch providers and discover functionality for EPG.
 """
 import httpx
 import asyncio
+import hashlib
+import json
 from typing import Optional, Dict, Any, List
 import sys
 from pathlib import Path
@@ -94,30 +96,102 @@ class TMDBClient:
         return result.get("results", [])
     
     async def validate_provider_ids(self) -> Dict[str, int]:
-        """Validate and update provider IDs for Mexico region."""
-        providers = await self.get_available_providers("movie")
-        provider_map = {p["provider_name"].lower(): p["provider_id"] for p in providers}
+        """
+        Validate and update provider IDs by synchronizing with misplataformas.txt.
+        This replaces the hardcoded list with dynamic discovery.
+        """
+        user_platforms = []
+        current_hash = ""
         
-        validated = {}
-        for key, default_id in self.providers.items():
-            # Try to match by name
-            name_variants = {
-                "netflix": ["netflix"],
-                "disney": ["disney+", "disney plus"],
-                "hbo_max": ["max", "hbo max"],
-                "prime": ["amazon prime video", "prime video"],
-            }
+        try:
+            platform_file = Path(__file__).parent.parent.parent / "misplataformas.txt"
+            # Define cache file in data directory
+            cache_file = Path(__file__).parent.parent.parent / "data" / "provider_cache.json"
             
-            matched_id = default_id
-            for variant in name_variants.get(key, []):
-                if variant in provider_map:
-                    matched_id = provider_map[variant]
-                    break
-            
-            validated[key] = matched_id
+            if platform_file.exists():
+                # 1. Calculate MD5 of misplataformas.txt
+                with open(platform_file, "rb") as f:
+                    content_bytes = f.read()
+                    current_hash = hashlib.md5(content_bytes).hexdigest()
+                
+                # 2. Check if cache exists and is valid
+                if cache_file.exists():
+                    try:
+                        with open(cache_file, "r", encoding="utf-8") as f:
+                            cache_data = json.load(f)
+                            if cache_data.get("hash") == current_hash:
+                                print("📦 Loading provider IDs from cache (no API calls)...")
+                                self.providers = cache_data.get("providers", {})
+                                return self.providers
+                    except Exception as e:
+                        print(f"⚠️ Cache read error (ignoring): {e}")
+
+                # If no cache match, read platform names for processing
+                content_str = content_bytes.decode("utf-8")
+                for line in content_str.splitlines():
+                    clean = line.strip()
+                    if clean:
+                        # Remove (MX) suffix and normalize
+                        name_only = clean.split("(")[0].strip().lower()
+                        user_platforms.append(name_only)
+                print(f"📋 Loaded {len(user_platforms)} platforms from {platform_file.name}")
+                
+            else:
+                print(f"⚠️ Platform file not found at {platform_file}. Using hardcoded defaults.")
+                return self.providers
+        except Exception as e:
+            print(f"⚠️ Error reading platform file: {e}")
+            return self.providers
+
+        # 3. Fetch official TMDB providers for Mexico (API Call)
+        print("🌍 Fetching available providers from TMDB (MX)...")
+        tmdb_providers = await self.get_available_providers("movie")
+        tmdb_map = {p["provider_name"].lower(): p["provider_id"] for p in tmdb_providers}
+        tmdb_names = list(tmdb_map.keys())
         
-        self.providers = validated
-        return validated
+        # 4. Match user platforms to TMDB IDs
+        from difflib import get_close_matches
+        
+        matched_providers = {}
+        print(f"🔍 Matching {len(user_platforms)} user platforms against TMDB...")
+        
+        for user_plat in user_platforms:
+            # Try exact match
+            if user_plat in tmdb_map:
+                matched_providers[user_plat] = tmdb_map[user_plat]
+                print(f"  ✅ Exact: '{user_plat}' -> {tmdb_map[user_plat]}")
+                continue
+            
+            # Try fuzzy match
+            matches = get_close_matches(user_plat, tmdb_names, n=1, cutoff=0.6)
+            if matches:
+                best_match = matches[0]
+                matched_providers[user_plat] = tmdb_map[best_match]
+                print(f"  ✅ Fuzzy: '{user_plat}' ~= '{best_match}' -> {tmdb_map[best_match]}")
+            else:
+                print(f"  ❌ No match for: '{user_plat}'")
+                
+        # Update self.providers if we found matches
+        if matched_providers:
+            self.providers = matched_providers
+            print(f"✅ Active providers updated: {len(self.providers)} providers linked.")
+            
+            # 5. Save to Cache
+            try:
+                cache_data = {
+                    "hash": current_hash,
+                    "providers": matched_providers
+                }
+                cache_file.parent.mkdir(parents=True, exist_ok=True)
+                with open(cache_file, "w", encoding="utf-8") as f:
+                    json.dump(cache_data, f, indent=2)
+                print(f"💾 Provider cache saved to {cache_file.name}")
+            except Exception as e:
+                print(f"⚠️ Failed to save cache: {e}")
+        else:
+            print("⚠️ No providers matched! Keeping defaults to avoid empty pool.")
+            
+        return self.providers
 
     # ==================== Discover Methods ====================
     
@@ -179,7 +253,8 @@ class TMDBClient:
             params["with_watch_providers"] = "|".join(map(str, all_providers))
         
         # Monetization filter: Only show content that is included in subscriptions (flatrate), free, or ad-supported (ads)
-        params["with_watch_monetization_types"] = "flatrate|free|ads"
+        # UPDATED: Added 'rent' and 'buy' to support transactional platforms like Apple TV Store and Google Play
+        params["with_watch_monetization_types"] = "flatrate|free|ads|rent|buy"
         
         # Keyword filter
         if keywords:
@@ -191,6 +266,11 @@ class TMDBClient:
     async def search_keywords(self, query: str) -> List[Dict]:
         """Search for keyword IDs by text."""
         result = await self._request("GET", "/search/keyword", {"query": query})
+        return result.get("results", [])
+
+    async def search_person(self, query: str) -> List[Dict]:
+        """Search for person IDs by name."""
+        result = await self._request("GET", "/search/person", {"query": query})
         return result.get("results", [])
 
     # ==================== Details Methods ====================

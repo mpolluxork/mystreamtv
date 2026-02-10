@@ -123,22 +123,41 @@ class ScheduleEngine:
         for ch_data in data.get("channels", []):
             slots = []
             for slot_data in ch_data.get("slots", []):
-                start_parts = slot_data["start"].split(":")
-                end_parts = slot_data["end"].split(":")
+                # Robust timing parsing
+                start_str = slot_data.get("start", "00:00")
+                end_str = slot_data.get("end", "04:00")
+                try:
+                    start_parts = start_str.split(":")
+                    start_time = time(int(start_parts[0]), int(start_parts[1]))
+                except (ValueError, IndexError):
+                    start_time = time(0, 0)
                 
+                try:
+                    end_parts = end_str.split(":")
+                    end_time = time(int(end_parts[0]), int(end_parts[1]))
+                except (ValueError, IndexError):
+                    end_time = time(4, 0)
+
+                # Robust content type parsing
+                ctype_str = slot_data.get("content_type", "movie")
+                try:
+                    content_type = ContentType(ctype_str)
+                except ValueError:
+                    content_type = ContentType.MOVIE
+
                 decade = None
-                if "decade" in slot_data:
+                if slot_data.get("decade"):
                     decade = tuple(slot_data["decade"])
                 
                 slot = TimeSlot(
-                    start_time=time(int(start_parts[0]), int(start_parts[1])),
-                    end_time=time(int(end_parts[0]), int(end_parts[1])),
-                    label=slot_data["label"],
+                    start_time=start_time,
+                    end_time=end_time,
+                    label=slot_data.get("label", "Untitled Slot"),
                     genre_ids=slot_data.get("genres", []),
                     decade=decade,
                     keywords=slot_data.get("keywords", []),
                     filter_type=slot_data.get("filter_type"),
-                    content_type=ContentType(slot_data.get("content_type", "movie")),
+                    content_type=content_type,
                     collections=slot_data.get("collections", []),
                     original_language=slot_data.get("original_language"),
                     production_countries=slot_data.get("production_countries"),

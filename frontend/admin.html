@@ -258,14 +258,17 @@
                     <textarea id="field-description" rows="2"></textarea>
                 </div>
 
-                <div class="slots-container">
+                    <div class="slots-container">
                     <h3 style="font-family: 'Space Mono', monospace; font-size: 1rem;">TIME_SLOTS</h3>
                     <div id="slots-list">
-                        <!-- Slots will be added here -->
+                        <!-- Slots will be added here via JS -->
                     </div>
                     <button type="button" id="add-slot-btn" class="btn" style="width: 100%; border-style: dashed;">+
                         ADD_TIME_SLOT</button>
                 </div>
+
+                <!-- Hidden template for cloning in JS (moved logic to JS but keeping structure here for reference if needed, actually JS builds it) -->
+                <!-- We will rely on admin.js to build the HTML structure -->
 
                 <div style="margin-top: 3rem; display: flex; justify-content: flex-end; gap: 1rem;">
                     <button type="button" id="cancel-btn" class="btn">DISCARD_CHANGES</button>
