@@ -90,6 +90,8 @@ class TimeSlot:
     # NEW: Universe and keyword exclusion filters
     universes: List[str] = field(default_factory=list)  # e.g., ["Star Wars", "Marvel"]
     exclude_keywords: List[str] = field(default_factory=list)  # Blacklist keywords
+    title_contains: List[str] = field(default_factory=list)  # Search in title/overview
+    is_favorites_only: bool = False  # If True, only show content from favorites lists
     
     def duration_minutes(self) -> int:
         """Calculate slot duration in minutes."""
@@ -106,10 +108,9 @@ class TimeSlot:
 @dataclass
 class Channel:
     """A themed channel with its schedule template."""
-    id: str           # e.g., "scifi-monday"
-    name: str         # e.g., "Lunes de Sci-Fi"
+    id: str           # e.g., "scifi-channel"
+    name: str         # e.g., "🚀 Sci-Fi Channel"
     icon: str         # Emoji or icon name
-    day_of_week: int  # 0=Monday, 6=Sunday
     
     slots: List[TimeSlot] = field(default_factory=list)
     
@@ -128,7 +129,6 @@ class Channel:
             "id": self.id,
             "name": self.name,
             "icon": self.icon,
-            "day_of_week": self.day_of_week,
             "enabled": self.enabled,
             "priority": self.priority,
             "description": self.description,

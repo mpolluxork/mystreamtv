@@ -42,8 +42,9 @@ async def create_channel(channel_data: Dict[str, Any], background_tasks: Backgro
         with open(TEMPLATES_PATH, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
             
-        # Trigger reload and discovery in background
-        background_tasks.add_task(engine.reload_and_discover)
+        # Reload channels and expand pool only for this new channel
+        engine.reload_channels()
+        background_tasks.add_task(engine.expand_pool_for_channel, channel_data["id"])
         
         return {"status": "success", "channel_id": channel_data["id"]}
     except Exception as e:
@@ -69,7 +70,9 @@ async def update_channel(channel_id: str, channel_data: Dict[str, Any], backgrou
         with open(TEMPLATES_PATH, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
             
-        background_tasks.add_task(engine.reload_and_discover)
+        # Reload channels and expand pool only for this updated channel
+        engine.reload_channels()
+        background_tasks.add_task(engine.expand_pool_for_channel, channel_id)
         return {"status": "success"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

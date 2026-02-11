@@ -153,6 +153,7 @@ function addSlotRow(slot = null) {
     const getVal = (arr) => Array.isArray(arr) ? arr : [];
     const keywords = getVal(slot?.keywords).join(', ');
     const people = getVal(slot?.with_people).join(', '); // Assumes backend handles resolution or we store names
+    const titleContains = getVal(slot?.title_contains).join(', ');
 
     // Decade/Year logic
     let yearStart = '';
@@ -231,6 +232,11 @@ function addSlotRow(slot = null) {
             <input type="text" class="slot-universes" placeholder="Star Wars, Marvel" value="${slot?.universes?.join(', ') || ''}">
         </div>
 
+        <div style="margin-bottom: 0.5rem;">
+            <label style="font-size: 0.7rem;">TITLE CONTAINS (Search in title/synopsis - e.g. Superman, Supergirl)</label>
+            <input type="text" class="slot-title-contains" placeholder="Superman, Man of Steel, Lois" value="${titleContains}">
+        </div>
+
         <button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 5px; right: 5px; padding: 2px 5px;" onclick="this.parentElement.remove()">×</button>
     `;
     container.appendChild(row);
@@ -275,7 +281,8 @@ async function handleFormSubmit(e) {
             vote_average_min: ratingVal ? parseFloat(ratingVal) : undefined,
             keywords: parseList('.slot-keywords'),
             with_people: parseList('.slot-people'),
-            universes: parseList('.slot-universes')
+            universes: parseList('.slot-universes'),
+            title_contains: parseList('.slot-title-contains')
         };
     });
 

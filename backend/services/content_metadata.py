@@ -137,6 +137,23 @@ class ContentMetadata:
             if self.director_id not in slot_filters["with_people"]:
                 return False
         
+        # Title/Overview search filter (search in title and synopsis)
+        if slot_filters.get("title_contains"):
+            search_terms = [term.lower() for term in slot_filters["title_contains"]]
+            
+            # Combine title and overview for searching
+            searchable_text = f"{self.title} {self.overview}".lower()
+            
+            # Check if ANY search term appears in title or overview
+            has_match = False
+            for term in search_terms:
+                if term in searchable_text:
+                    has_match = True
+                    break
+            
+            if not has_match:
+                return False
+        
         # All filters passed
         return True
     

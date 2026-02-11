@@ -39,22 +39,6 @@ async def list_channels():
     }
 
 
-@router.get("/channels/today")
-async def get_today_channel():
-    """
-    Get the channel that corresponds to today's day of week.
-    """
-    engine = get_engine()
-    today = datetime.now()
-    day_of_week = today.weekday()  # 0=Monday
-    
-    channel = engine.get_channel_by_day(day_of_week)
-    if not channel:
-        raise HTTPException(status_code=404, detail="No channel for today")
-    
-    return channel.to_dict()
-
-
 @router.get("/guide")
 async def get_guide(
     start: Optional[str] = Query(None, description="Start datetime ISO format"),
@@ -80,6 +64,11 @@ async def get_guide(
         end_time = now + timedelta(hours=hours)
     
     guide_data = []
+    
+    # Clear usage tracking for the target date to ensure fresh deduplication
+    engine._clear_usage_for_date(start_time.date())
+    if end_time.date() > start_time.date():
+        engine._clear_usage_for_date(end_time.date())
     
     for channel in engine.get_all_channels():
         # Get today's and possibly tomorrow's schedule

@@ -31,12 +31,33 @@ async def lifespan(app: FastAPI):
         from routers.epg import get_engine
         global engine
         engine = get_engine()
-        await engine.build_global_pool(max_items=1000)  # Moderate size for variety
-        if len(engine._global_pool) < 10: # Only expand if pool is empty or very small
+        
+        initial_size = len(engine._global_pool)
+        print(f"📦 Starting with {initial_size} items in pool")
+        
+        # Only expand if pool seems incomplete
+        # A complete pool should have 1000+ items for 18 channels
+        MINIMUM_COMPLETE_POOL_SIZE = 800
+        
+        if initial_size < MINIMUM_COMPLETE_POOL_SIZE:
+            print(f"⚠️ Pool seems incomplete ({initial_size} < {MINIMUM_COMPLETE_POOL_SIZE})")
+            
+            if initial_size < 100:
+                # Pool is empty or very small, do full build first
+                print("   Building base pool...")
+                await engine.build_global_pool(max_items=1000)
+            
+            # Expand with channel-specific content
+            print("   🔍 Expanding pool with channel-specific content...")
+            print("   ⏱️  This will take 3-5 minutes (only happens once)...")
             await engine.expand_pool_for_all_channels()
-            print(f"✅ Content pool ready and expanded with {len(engine._global_pool)} items")
+            
+            final_size = len(engine._global_pool)
+            print(f"✅ Pool expanded: {final_size} items ({final_size - initial_size} new)")
+            print(f"💾 Pool saved to content_pool.json (will be reused on next startup)")
         else:
-            print(f"📦 Using existing pool with {len(engine._global_pool)} items. Use Admin Console to expand.")
+            print(f"✅ Pool is complete ({initial_size} items), skipping expansion")
+            print(f"💡 Use Admin Console to force pool refresh if needed")
     except Exception as e:
         print(f"⚠️ Could not build pool: {e}")
     

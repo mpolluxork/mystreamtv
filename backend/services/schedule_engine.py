@@ -30,9 +30,16 @@ class ScheduleEngine:
         self._global_pool: List[ContentMetadata] = []
         self._schedule_cache: Dict[str, List[Program]] = {}
         
+        # Track content usage to prevent repetition across channels
+        self._content_usage: Dict[str, set[int]] = {}  # {date_hour: {tmdb_ids}}
+        
+        # Track recently played content for cooldown (7 days for movies)
+        self._recently_played: Dict[str, Dict[int, date]] = {}  # {channel_id: {tmdb_id: last_date}}
+        
         # Load channel templates and existing pool
         self._load_channel_templates()
         self._load_content_pool()
+        self._load_cooldown_data()
     
     def _load_content_pool(self):
         """Load persisted content pool from JSON."""
@@ -48,6 +55,27 @@ class ScheduleEngine:
         except Exception as e:
             print(f"⚠️ Error loading content pool: {e}")
 
+    async def build_global_pool(self, max_items: int = 1000):
+        """Build the global content pool from TMDB."""
+        print(f"🔨 Building global content pool (current size: {len(self._global_pool)})...")
+        
+        initial_size = len(self._global_pool)
+        pool = await build_content_pool(self.tmdb, max_items=max_items)
+        
+        # Merge with existing pool (avoid duplicates)
+        seen_ids = {(m.tmdb_id, m.media_type) for m in self._global_pool}
+        new_items = 0
+        
+        for item in pool:
+            cid = (item.tmdb_id, item.media_type)
+            if cid not in seen_ids:
+                self._global_pool.append(item)
+                seen_ids.add(cid)
+                new_items += 1
+        
+        print(f"✅ Global pool ready with {len(self._global_pool)} items (added {new_items} new items)")
+        self._save_content_pool()
+    
     def _save_content_pool(self):
         """Save current pool to JSON."""
         pool_path = Path(__file__).parent.parent.parent / "data" / "content_pool.json"
@@ -67,21 +95,27 @@ class ScheduleEngine:
 
     async def reload_and_discover(self):
         """Reload channels and trigger targeted discovery for new criteria."""
+        print("🔄 Reloading channels and discovering content...")
         self.reload_channels()
         await self.expand_pool_for_all_channels()
         self._save_content_pool()
+        print("✅ Reload complete")
 
     async def expand_pool_for_all_channels(self):
         """Analyze all channels and discover content for their specific filters."""
         from services.content_pool_builder import discover_content_for_filters
         
-        print("🔍 Expanding content pool based on channel filters...")
+        print(f"🔍 Expanding content pool for {len(self.channels)} channels...")
         seen_ids = {(m.tmdb_id, m.media_type) for m in self._global_pool}
         new_items_count = 0
         
-        for channel in self.channels:
+        for idx, channel in enumerate(self.channels, 1):
             if not channel.enabled:
+                print(f"  ⏭️  [{idx}/{len(self.channels)}] Skipping disabled channel: {channel.name}")
                 continue
+            
+            print(f"  🔍 [{idx}/{len(self.channels)}] Processing: {channel.name} ({len(channel.slots)} slots)")
+            
             for slot in channel.slots:
                 # Convert slot to filter dict for discovery
                 filters = {
@@ -108,6 +142,135 @@ class ScheduleEngine:
         print(f"✅ Pool expansion complete. Added {new_items_count} new items.")
         if new_items_count > 0:
             self._save_content_pool()
+    
+    async def expand_pool_for_channel(self, channel_id: str):
+        """
+        Expand pool only for a specific channel's filters.
+        This is more efficient than reload_and_discover when only one channel changes.
+        """
+        from services.content_pool_builder import discover_content_for_filters
+        
+        # Find the channel
+        channel = next((c for c in self.channels if c.id == channel_id), None)
+        if not channel:
+            print(f"⚠️ Channel {channel_id} not found")
+            return
+        
+        print(f"🔍 Expanding pool for channel: {channel.name}")
+        seen_ids = {(m.tmdb_id, m.media_type) for m in self._global_pool}
+        new_items_count = 0
+        
+        for slot in channel.slots:
+            # Convert slot to filter dict for discovery
+            filters = {
+                "genres": slot.genre_ids,
+                "decade": slot.decade,
+                "content_type": slot.content_type.value if slot.content_type else None,
+                "original_language": slot.original_language,
+                "production_countries": slot.production_countries,
+                "vote_average_min": slot.vote_average_min,
+                "with_people": slot.with_people,
+                "keywords": slot.keywords,
+                "universes": slot.universes
+            }
+            
+            # Perform discovery with smaller batch size for single channel
+            results = await discover_content_for_filters(self.tmdb, filters, max_results=30)
+            for metadata in results:
+                cid = (metadata.tmdb_id, metadata.media_type)
+                if cid not in seen_ids:
+                    self._global_pool.append(metadata)
+                    seen_ids.add(cid)
+                    new_items_count += 1
+        
+        print(f"✅ Added {new_items_count} items for channel {channel_id}")
+        if new_items_count > 0:
+            self._save_content_pool()
+
+    
+    def _mark_content_used(self, target_date: date, hour: int, tmdb_id: int):
+        """Mark content as used for a specific date and hour."""
+        key = f"{target_date.isoformat()}_{hour:02d}"
+        if key not in self._content_usage:
+            self._content_usage[key] = set()
+        self._content_usage[key].add(tmdb_id)
+    
+    def _is_content_used(self, target_date: date, hour: int, tmdb_id: int) -> bool:
+        """Check if content is already used in this time slot."""
+        key = f"{target_date.isoformat()}_{hour:02d}"
+        return tmdb_id in self._content_usage.get(key, set())
+    
+    def _clear_usage_for_date(self, target_date: date):
+        """Clear usage tracking for a specific date (for regeneration)."""
+        date_str = target_date.isoformat()
+        keys_to_remove = [k for k in self._content_usage.keys() if k.startswith(date_str)]
+        for key in keys_to_remove:
+            del self._content_usage[key]
+
+    def _load_cooldown_data(self):
+        """Load cooldown tracking from JSON."""
+        cooldown_path = Path(__file__).parent.parent.parent / "data" / "cooldown.json"
+        if not cooldown_path.exists():
+            return
+        
+        try:
+            with open(cooldown_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                # Convert date strings back to date objects
+                for channel_id, items in data.items():
+                    self._recently_played[channel_id] = {
+                        int(tmdb_id): date.fromisoformat(date_str)
+                        for tmdb_id, date_str in items.items()
+                    }
+            print(f"✅ Loaded cooldown data for {len(self._recently_played)} channels")
+        except Exception as e:
+            print(f"⚠️ Error loading cooldown data: {e}")
+    
+    def _save_cooldown_data(self):
+        """Save cooldown tracking to JSON."""
+        cooldown_path = Path(__file__).parent.parent.parent / "data" / "cooldown.json"
+        try:
+            # Convert date objects to strings
+            data = {
+                channel_id: {
+                    str(tmdb_id): date_obj.isoformat()
+                    for tmdb_id, date_obj in items.items()
+                }
+                for channel_id, items in self._recently_played.items()
+            }
+            with open(cooldown_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"⚠️ Error saving cooldown data: {e}")
+    
+    def _is_in_cooldown(self, channel_id: str, tmdb_id: int, media_type: str, current_date: date) -> bool:
+        """Check if content is in cooldown period."""
+        # TV shows NO tienen cooldown (tienen replay value)
+        if media_type == "tv":
+            return False
+        
+        # Películas tienen 7 días de cooldown
+        if channel_id not in self._recently_played:
+            return False
+        
+        last_played = self._recently_played[channel_id].get(tmdb_id)
+        if not last_played:
+            return False
+        
+        days_since = (current_date - last_played).days
+        return days_since < 7
+    
+    def _mark_as_played(self, channel_id: str, tmdb_id: int, play_date: date):
+        """Mark content as played on a specific date."""
+        if channel_id not in self._recently_played:
+            self._recently_played[channel_id] = {}
+        
+        self._recently_played[channel_id][tmdb_id] = play_date
+        
+        # Save periodically (every 10 items to avoid too many writes)
+        if len(self._recently_played[channel_id]) % 10 == 0:
+            self._save_cooldown_data()
+
     
     def _load_channel_templates(self):
         """Load channel definitions from JSON template."""
@@ -165,6 +328,7 @@ class ScheduleEngine:
                     with_people=slot_data.get("with_people", []),
                     universes=slot_data.get("universes", []),
                     exclude_keywords=slot_data.get("exclude_keywords", []),
+                    title_contains=slot_data.get("title_contains", []),
                 )
                 slots.append(slot)
             
@@ -172,33 +336,12 @@ class ScheduleEngine:
                 id=ch_data["id"],
                 name=ch_data["name"],
                 icon=ch_data.get("icon", "📺"),
-                day_of_week=ch_data["day_of_week"],
                 enabled=ch_data.get("enabled", True),
                 priority=ch_data.get("priority", 50),
                 description=ch_data.get("description"),
                 slots=slots,
             )
             self.channels.append(channel)
-    
-    async def build_global_pool(self, max_items: int = 1000):
-        """Build the global content pool once at startup. Merges with existing items."""
-        print(f"🔨 Building global content pool (current size: {len(self._global_pool)})...")
-        new_items = await build_content_pool(
-            self.tmdb,
-            max_items=max_items
-        )
-        
-        # Merge new items without duplicates
-        seen_ids = {item.tmdb_id for item in self._global_pool}
-        added_count = 0
-        for item in new_items:
-            if item.tmdb_id not in seen_ids:
-                self._global_pool.append(item)
-                seen_ids.add(item.tmdb_id)
-                added_count += 1
-        
-        print(f"✅ Global pool ready with {len(self._global_pool)} items (added {added_count} new items)")
-        self._save_content_pool()
     
     def _get_seed(self, channel_id: str, target_date: date, slot_index: int) -> int:
         """Generate deterministic seed from channel, date, and slot."""
@@ -249,6 +392,9 @@ class ScheduleEngine:
         if slot.with_people:
             slot_filters["with_people"] = slot.with_people
         
+        if slot.title_contains:
+            slot_filters["title_contains"] = slot.title_contains
+        
         # Filter pool
         eligible = [
             content for content in pool
@@ -263,14 +409,18 @@ class ScheduleEngine:
         eligible_content: List[ContentMetadata],
         slot_start: datetime,
         slot_end: datetime,
-        seed: int
+        seed: int,
+        channel_id: str  # NEW: needed for cooldown tracking
     ) -> List[Program]:
         """
         Fill a time slot with programs from eligible content.
         Uses deterministic shuffling based on seed.
+        Prevents content repetition across channels in the same hour.
+        Enforces 7-day cooldown for movies on the same channel.
         """
         programs = []
         current_time = slot_start
+        target_date = slot_start.date()
         
         # Seed random for deterministic selection
         rng = random.Random(seed)
@@ -285,9 +435,18 @@ class ScheduleEngine:
             content = shuffled[content_index]
             content_index += 1
             
+            # Check if content is in cooldown period (movies only)
+            if self._is_in_cooldown(channel_id, content.tmdb_id, content.media_type, target_date):
+                continue  # Skip, this movie was played recently on this channel
+            
+            # Check if content is already used in this hour
+            current_hour = current_time.hour
+            if self._is_content_used(target_date, current_hour, content.tmdb_id):
+                continue  # Skip this content, it's already playing on another channel
+            
             # Get runtime (use default if not available)
             runtime = content.runtime
-            if runtime is None:
+            if runtime is None or runtime <= 0:
                 runtime = 45 if content.media_type == "tv" else 90
             
             # Calculate program end time
@@ -296,6 +455,12 @@ class ScheduleEngine:
             # Skip if would overflow slot too much (allow 15 min tolerance)
             if program_end > slot_end + timedelta(minutes=15):
                 continue
+            
+            # Mark content as used for this hour
+            self._mark_content_used(target_date, current_hour, content.tmdb_id)
+            
+            # Mark as played for cooldown tracking
+            self._mark_as_played(channel_id, content.tmdb_id, target_date)
             
             # Create program
             program_id = f"{content.tmdb_id}_{current_time.isoformat()}"
@@ -379,7 +544,8 @@ class ScheduleEngine:
                 eligible_content=eligible_content,
                 slot_start=slot_start,
                 slot_end=slot_end,
-                seed=seed
+                seed=seed,
+                channel_id=channel.id  # Pass channel_id for cooldown tracking
             )
             
             all_programs.extend(programs)
@@ -389,6 +555,9 @@ class ScheduleEngine:
         
         # Cache
         self._schedule_cache[cache_key] = all_programs
+        
+        # Save cooldown data after generating schedule
+        self._save_cooldown_data()
         
         return all_programs
     
@@ -419,13 +588,6 @@ class ScheduleEngine:
             p for p in schedule
             if p.end_time > start_time and p.start_time < end_time
         ]
-    
-    def get_channel_by_day(self, day_of_week: int) -> Optional[Channel]:
-        """Get the channel for a specific day of week."""
-        for channel in self.channels:
-            if channel.day_of_week == day_of_week:
-                return channel
-        return None
     
     def get_all_channels(self, include_disabled: bool = False) -> List[Channel]:
         """Get all configured channels, optionally including disabled ones."""
