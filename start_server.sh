@@ -2,10 +2,17 @@
 # MyStreamTV Server Startup Script
 # Runs the server accessible from any device on the local network
 
-echo "🚀 Starting MyStreamTV Server..."
-echo "================================"
+echo "========================================"
+echo "  MyStreamTV - Starting Server (Linux)"
+echo "========================================"
+echo ""
+
+# Navigate to backend directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR/backend"
 
 # Activate virtual environment
+echo "Activating virtual environment..."
 source venv/bin/activate
 
 # Get local IP address
@@ -24,5 +31,4 @@ echo "================================"
 echo ""
 
 # Start uvicorn with network binding
-cd backend
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
