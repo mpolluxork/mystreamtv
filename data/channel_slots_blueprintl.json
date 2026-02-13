@@ -1,0 +1,120 @@
+{
+    "channels": [
+        {
+            "name": "Nuevo Canal",
+            "icon": "📺",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "01:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                },
+                {
+                    "start": "02:00",
+                    "end": "10:59",
+                    "label": "Series Mañana",
+                    "content_type": "tv",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                },
+                {
+                    "start": "11:00",
+                    "end": "13:59",
+                    "label": "Películas Mediodía",
+                    "content_type": "movie",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                },
+                {
+                    "start": "14:00",
+                    "end": "14:59",
+                    "label": "Series Corto Tarde",
+                    "content_type": "tv",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                },
+                {
+                    "start": "15:00",
+                    "end": "18:59",
+                    "label": "Películas Tarde",
+                    "content_type": "movie",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                },
+                {
+                    "start": "19:00",
+                    "end": "19:59",
+                    "label": "Series Corto Noche",
+                    "content_type": "tv",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                },
+                {
+                    "start": "20:00",
+                    "end": "23:59",
+                    "label": "Series Noche",
+                    "content_type": "tv",
+                    "genres": [],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [],
+                    "vote_average_min": null,
+                    "exclude_keywords": [],
+                    "original_language": null
+                }
+            ],
+            "id": "new-channel-template"
+        }
+    ]
+}

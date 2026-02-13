@@ -22,7 +22,8 @@
                     ],
                     "keywords": [],
                     "with_people": [],
-                    "universes": []
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "12:00",
@@ -36,7 +37,8 @@
                     "decade": null,
                     "keywords": [],
                     "with_people": [],
-                    "universes": []
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "18:00",
@@ -55,24 +57,25 @@
                         "aliens"
                     ],
                     "with_people": [],
-                    "universes": []
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "22:00",
                     "end": "00:00",
-                    "label": "Sci-Fi Premium",
+                    "label": "Monsters",
                     "content_type": "movie",
                     "genres": [
                         878
                     ],
-                    "decade": [
-                        1960,
-                        2030
-                    ],
+                    "decade": null,
                     "vote_average_min": 7.5,
-                    "keywords": [],
+                    "keywords": [
+                        "monsters"
+                    ],
                     "with_people": [],
-                    "universes": []
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "00:00",
@@ -87,7 +90,8 @@
                         "time travel"
                     ],
                     "with_people": [],
-                    "universes": []
+                    "universes": [],
+                    "title_contains": []
                 }
             ],
             "id": "scifi-channel"
@@ -96,7 +100,6 @@
             "id": "action-channel",
             "name": "💥 Acción",
             "icon": "💥",
-            "day_of_week": 1,
             "slots": [
                 {
                     "start": "06:00",
@@ -164,7 +167,6 @@
             "id": "comedy-channel",
             "name": "😂 Comedia",
             "icon": "😂",
-            "day_of_week": 2,
             "slots": [
                 {
                     "start": "06:00",
@@ -226,7 +228,6 @@
             "id": "horror-channel",
             "name": "👻 Terror",
             "icon": "👻",
-            "day_of_week": 3,
             "slots": [
                 {
                     "start": "06:00",
@@ -289,7 +290,6 @@
             "id": "family-channel",
             "name": "🎬 Familiar",
             "icon": "🎬",
-            "day_of_week": 4,
             "slots": [
                 {
                     "start": "06:00",
@@ -356,7 +356,6 @@
             "id": "drama-channel",
             "name": "🏆 Drama",
             "icon": "🏆",
-            "day_of_week": 5,
             "slots": [
                 {
                     "start": "06:00",
@@ -415,7 +414,6 @@
             "id": "thriller-channel",
             "name": "🕵️ Thriller",
             "icon": "🕵️",
-            "day_of_week": 6,
             "slots": [
                 {
                     "start": "06:00",
@@ -477,7 +475,7 @@
         {
             "name": "⭐ Star Wars",
             "icon": "⭐",
-            "priority": 50,
+            "priority": 80,
             "description": "",
             "day_of_week": 0,
             "enabled": true,
@@ -487,32 +485,39 @@
                     "end": "08:00",
                     "label": "Star Wars Series",
                     "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
                     "universes": [
-                        "Mandalorian",
-                        "Boba Fett",
-                        "Asohka",
-                        "Accolyte",
-                        "Clone Wars"
-                    ]
+                        "Star Wars"
+                    ],
+                    "title_contains": []
                 },
                 {
                     "start": "08:00",
                     "end": "18:00",
                     "label": "Skywalker Saga & Spinoffs",
                     "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
                     "universes": [
-                        "Star Wars",
-                        "Rogue One"
-                    ]
+                        "Star Wars"
+                    ],
+                    "title_contains": []
                 },
                 {
                     "start": "18:00",
                     "end": "00:00",
                     "label": "Star Wars Prime Time",
                     "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
                     "universes": [
-                        "Star Wars Episode"
-                    ]
+                        "Star Wars"
+                    ],
+                    "title_contains": []
                 }
             ],
             "id": "star-wars-universe"
@@ -521,7 +526,6 @@
             "id": "marvel-universe",
             "name": "🦸 Marvel",
             "icon": "🦸",
-            "day_of_week": 1,
             "slots": [
                 {
                     "start": "00:00",
@@ -573,7 +577,6 @@
             "id": "life-lessons",
             "name": "🎓 Life Lessons",
             "icon": "🎓",
-            "day_of_week": 2,
             "slots": [
                 {
                     "start": "00:00",
@@ -643,7 +646,6 @@
             "id": "to-the-stars",
             "name": "🌌 To The Stars",
             "icon": "🌌",
-            "day_of_week": 3,
             "slots": [
                 {
                     "start": "00:00",
@@ -703,7 +705,6 @@
             "id": "broadway-beyond",
             "name": "🎵 Broadway & Beyond",
             "icon": "🎵",
-            "day_of_week": 4,
             "slots": [
                 {
                     "start": "00:00",
@@ -767,7 +768,6 @@
             "id": "vintage-vibes",
             "name": "📼 Vintage Vibes",
             "icon": "📼",
-            "day_of_week": 5,
             "slots": [
                 {
                     "start": "00:00",
@@ -820,7 +820,6 @@
             "id": "cult-classics",
             "name": "🍿 Cult Classics",
             "icon": "🍿",
-            "day_of_week": 6,
             "slots": [
                 {
                     "start": "00:00",
@@ -867,7 +866,6 @@
             "id": "mood-match",
             "name": "🎭 Mood Match",
             "icon": "🎭",
-            "day_of_week": 0,
             "slots": [
                 {
                     "start": "00:00",
@@ -930,7 +928,6 @@
             "id": "epoca-oro",
             "name": "🇲🇽 Época de Oro",
             "icon": "🇲🇽",
-            "day_of_week": 1,
             "slots": [
                 {
                     "start": "00:00",
@@ -986,7 +983,6 @@
             "id": "epic-maximalism",
             "name": "🔥 Epic Maximalism",
             "icon": "🔥",
-            "day_of_week": 2,
             "slots": [
                 {
                     "start": "00:00",
@@ -1043,73 +1039,151 @@
         {
             "name": "🦸‍♂️ SUPERMAN",
             "icon": "🦸‍♂️",
-            "priority": 20,
+            "priority": 100,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "20:00",
+                    "end": "23:59",
+                    "label": "Superpelículas",
+                    "content_type": "movie",
+                    "decade": null,
+                    "vote_average_min": 6,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "superman",
+                        "supergirl",
+                        "smallville",
+                        "lois lane",
+                        "justice league"
+                    ]
+                },
+                {
+                    "start": "00:00",
+                    "end": "19:59",
+                    "label": "Super Series",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "superman",
+                        "supergirl",
+                        "smallville",
+                        "lois lane",
+                        "justice league"
+                    ]
+                }
+            ],
+            "id": "🦸‍♂️-superman"
+        },
+        {
+            "name": "👨‍⚕ Drama Médico",
+            "icon": "👨‍⚕",
+            "priority": 50,
             "description": "",
             "day_of_week": 0,
             "enabled": true,
             "slots": [
                 {
                     "start": "00:00",
-                    "end": "04:00",
-                    "label": "Donnerverse",
-                    "content_type": "movie",
-                    "decade": [
-                        1978,
-                        2030
-                    ],
-                    "keywords": [
-                        "Superman",
-                        "Supergirl"
-                    ],
-                    "with_people": [
-                        "Richard Donner",
-                        "Christopher Reeve",
-                        "Helen Slater",
-                        "Brandon Routh"
-                    ],
-                    "universes": [
-                        "DC"
-                    ]
-                },
-                {
-                    "start": "10:00",
-                    "end": "17:00",
-                    "label": "DC Series",
+                    "end": "23:59",
+                    "label": "Series Medicas",
                     "content_type": "tv",
                     "genres": [
-                        28,
-                        12,
-                        16,
-                        10751,
-                        878
+                        18,
+                        10751
                     ],
                     "decade": null,
                     "keywords": [
-                        "Superman",
-                        "Supergirl",
-                        "Smallville"
+                        "Medical",
+                        "Hospital",
+                        "Doctor"
                     ],
                     "with_people": [],
                     "universes": []
+                }
+            ],
+            "id": "👨‍⚕-drama-médico"
+        },
+        {
+            "name": "Star Trek",
+            "icon": "",
+            "priority": 60,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "15:59",
+                    "label": "Star Trek TV",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "star trek"
+                    ]
                 },
                 {
-                    "start": "17:00",
-                    "end": "23:00",
-                    "label": "SnyderVerse",
+                    "start": "16:00",
+                    "end": "23:59",
+                    "label": "Star Trek Movies",
                     "content_type": "movie",
                     "decade": null,
-                    "keywords": [
-                        "Man of Steel",
-                        "Zack Snyder Justice League",
-                        "Wonder Woman"
-                    ],
+                    "keywords": [],
                     "with_people": [],
-                    "universes": [
-                        "DCEU"
+                    "universes": [],
+                    "title_contains": [
+                        "strar trek"
                     ]
                 }
             ],
-            "id": "🦸‍♂️-superman"
+            "id": "star-trek"
+        },
+        {
+            "name": "Batman",
+            "icon": "",
+            "priority": 70,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "11:59",
+                    "label": "Bat Movies",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Batman"
+                    ]
+                },
+                {
+                    "start": "12:00",
+                    "end": "23:59",
+                    "label": "Bat Series",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Batman"
+                    ]
+                }
+            ],
+            "id": "batman"
         }
     ]
 }

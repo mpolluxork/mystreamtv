@@ -3,7 +3,7 @@ Write-Host "  MyStreamTV - Starting Server (Windows)" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-Set-Location backend
+Push-Location backend
 
 Write-Host "Activating virtual environment..." -ForegroundColor Yellow
 & .\venv\Scripts\Activate.ps1
@@ -17,3 +17,5 @@ Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Yellow
 Write-Host ""
 
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+Pop-Location
