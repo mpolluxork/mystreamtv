@@ -27,7 +27,15 @@ UNIVERSE_RULES = {
     "DC Extended Universe": {
         "keywords": ["dc extended universe", "dceu"],
         "companies": [9993, 429],  # DC Entertainment, DC Comics
-        "title_patterns": ["Batman", "Superman", "Wonder Woman", "Justice League", "Aquaman"],
+        "title_patterns": ["Justice League", "Suicide Squad", "Black Adam", "Shazam", "The Flash"],
+    },
+    "Batman": {
+        "keywords": ["batman", "gotham", "joker", "caped crusader", "dark knight"],
+        "title_patterns": ["Batman", "Gotham", "Joker", "Batgirl", "Nightwing", "Penguin", "Batwoman"],
+    },
+    "Superman": {
+        "keywords": ["superman", "clark kent", "metropolis", "krypton", "man of steel"],
+        "title_patterns": ["Superman", "Supergirl", "Smallville", "Lois & Clark", "Man of Steel"],
     },
     "James Bond": {
         "collection_ids": [645],  # James Bond Collection
@@ -121,9 +129,16 @@ async def detect_universes(
     title = (content_data.get("title") or content_data.get("name", "")).lower()
     original_title = (content_data.get("original_title") or content_data.get("original_name", "")).lower()
     
-    # Collection membership (movies only)
+    # Collection membership (movies only) - DYNAMIC TAGGING
     belongs_to_collection = detailed_data.get("belongs_to_collection")
-    collection_id = belongs_to_collection["id"] if belongs_to_collection else None
+    collection_id = belongs_to_collection.get("id") if belongs_to_collection else None
+    
+    if belongs_to_collection:
+        collection_name = belongs_to_collection.get("name", "")
+        # Clean up name: "Iron Man Collection" -> "Iron Man"
+        clean_name = collection_name.replace(" - Colección", "").replace(" Collection", "").replace(" - Serie", "").replace(" Series", "").replace(" (Saga)", "").strip()
+        if clean_name and clean_name not in detected_universes:
+            detected_universes.append(clean_name)
     
     # Production companies
     production_companies = detailed_data.get("production_companies", [])

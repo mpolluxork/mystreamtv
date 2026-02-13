@@ -33,6 +33,7 @@ class ContentMetadata:
     # Discovery attributes
     keywords: List[str] = field(default_factory=list)
     universes: List[str] = field(default_factory=list)  # ["Star Wars", "Marvel"]
+    origin_channels: List[str] = field(default_factory=list)  # Channels that discovered this
     
     # People
     director_id: Optional[int] = None
@@ -63,6 +64,34 @@ class ContentMetadata:
         Returns:
             True if content matches all filters, False otherwise
         """
+        # Attribution check (If this channel discovered it, it's a match!)
+        # CRITICAL: Even if attributed, if the slot has explicit universe or title requirements, 
+        # we check those first to avoid "leaks" (e.g. Smallville in Star Trek)
+        is_attributed = False
+        if slot_filters.get("channel_id"):
+            if slot_filters["channel_id"] in self.origin_channels:
+                is_attributed = True
+        
+        # If attributed, we still check high-intent filters (universes, title_contains) 
+        # if they are defined in the slot. If they match, we return True early.
+        # If they DON'T match, we don't return True early (attribution doesn't override them).
+        if is_attributed:
+            # Check for universe conflict
+            if slot_filters.get("universes"):
+                required_universes = set(slot_filters["universes"])
+                content_universes = set(self.universes)
+                if not required_universes.intersection(content_universes):
+                    is_attributed = False # Conflict!
+            
+            # Check for title conflict
+            if is_attributed and slot_filters.get("title_contains"):
+                patterns = [p.lower() for p in slot_filters["title_contains"]]
+                if not any(p in self.title.lower() or p in self.overview.lower() for p in patterns):
+                    is_attributed = False # Conflict!
+            
+            if is_attributed:
+                return True # No conflict, or no filters to conflict with. Match!
+                
         # Content type filter
         if slot_filters.get("content_type"):
             if self.media_type != slot_filters["content_type"]:
@@ -173,6 +202,7 @@ class ContentMetadata:
             "is_premium": self.is_premium,
             "keywords": self.keywords,
             "universes": self.universes,
+            "origin_channels": self.origin_channels,
             "director_id": self.director_id,
             "director_name": self.director_name,
             "origin_countries": self.origin_countries,
@@ -201,6 +231,7 @@ class ContentMetadata:
             is_premium=data.get("is_premium", False),
             keywords=data.get("keywords", []),
             universes=data.get("universes", []),
+            origin_channels=data.get("origin_channels", []),
             director_id=data.get("director_id"),
             director_name=data.get("director_name"),
             origin_countries=data.get("origin_countries", []),

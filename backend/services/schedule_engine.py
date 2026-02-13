@@ -131,10 +131,15 @@ class ScheduleEngine:
                 }
                 
                 # Perform discovery
-                results = await discover_content_for_filters(self.tmdb, filters)
+                results = await discover_content_for_filters(self.tmdb, filters, max_results=50, origin_channel_id=channel.id)
                 for metadata in results:
                     cid = (metadata.tmdb_id, metadata.media_type)
-                    if cid not in seen_ids:
+                    # Find if it already exists to merge attribution
+                    existing = next((m for m in self._global_pool if (m.tmdb_id, m.media_type) == cid), None)
+                    if existing:
+                        if channel.id not in existing.origin_channels:
+                            existing.origin_channels.append(channel.id)
+                    elif cid not in seen_ids:
                         self._global_pool.append(metadata)
                         seen_ids.add(cid)
                         new_items_count += 1
@@ -175,10 +180,15 @@ class ScheduleEngine:
             }
             
             # Perform discovery with smaller batch size for single channel
-            results = await discover_content_for_filters(self.tmdb, filters, max_results=30)
+            results = await discover_content_for_filters(self.tmdb, filters, max_results=30, origin_channel_id=channel_id)
             for metadata in results:
                 cid = (metadata.tmdb_id, metadata.media_type)
-                if cid not in seen_ids:
+                # Find if it already exists to merge attribution
+                existing = next((m for m in self._global_pool if (m.tmdb_id, m.media_type) == cid), None)
+                if existing:
+                    if channel_id not in existing.origin_channels:
+                        existing.origin_channels.append(channel_id)
+                elif cid not in seen_ids:
                     self._global_pool.append(metadata)
                     seen_ids.add(cid)
                     new_items_count += 1
@@ -352,14 +362,15 @@ class ScheduleEngine:
     def _filter_pool_by_slot(
         self,
         pool: List[ContentMetadata],
-        slot: TimeSlot
+        slot: TimeSlot,
+        channel_id: Optional[str] = None
     ) -> List[ContentMetadata]:
         """
         Filter the global pool to get content eligible for a specific slot.
         Uses ContentMetadata.matches_slot_filters() for multi-dimensional matching.
         """
         # Build filter dictionary from slot
-        slot_filters = {}
+        slot_filters = {"channel_id": channel_id}
         
         # Only filter by content type if explicitly set (to avoid default MOVIE filter on custom slots)
         if slot.content_type:
@@ -532,7 +543,7 @@ class ScheduleEngine:
                 slot_end += timedelta(days=1)
             
             # Filter pool for this slot
-            eligible_content = self._filter_pool_by_slot(self._global_pool, slot)
+            eligible_content = self._filter_pool_by_slot(self._global_pool, slot, channel_id=channel.id)
             
             if not eligible_content:
                 print(f"⚠️ No eligible content for {channel.name} - {slot.label}")

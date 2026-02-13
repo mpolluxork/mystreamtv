@@ -1053,14 +1053,10 @@
                     "vote_average_min": 6,
                     "keywords": [],
                     "with_people": [],
-                    "universes": [],
-                    "title_contains": [
-                        "superman",
-                        "supergirl",
-                        "smallville",
-                        "lois lane",
-                        "justice league"
-                    ]
+                    "universes": [
+                        "Superman"
+                    ],
+                    "title_contains": []
                 },
                 {
                     "start": "00:00",
@@ -1070,17 +1066,21 @@
                     "decade": null,
                     "keywords": [],
                     "with_people": [],
-                    "universes": [],
+                    "universes": [
+                        "Superman"
+                    ],
                     "title_contains": [
-                        "superman",
-                        "supergirl",
-                        "smallville",
-                        "lois lane",
-                        "justice league"
+                        "Superman",
+                        "Supergirl",
+                        "Justice League",
+                        "Smallville",
+                        "Krypton",
+                        "Man of Steel",
+                        "Lois & Clark"
                     ]
                 }
             ],
-            "id": "🦸‍♂️-superman"
+            "id": "superman"
         },
         {
             "name": "👨‍⚕ Drama Médico",
@@ -1095,10 +1095,6 @@
                     "end": "23:59",
                     "label": "Series Medicas",
                     "content_type": "tv",
-                    "genres": [
-                        18,
-                        10751
-                    ],
                     "decade": null,
                     "keywords": [
                         "Medical",
@@ -1106,10 +1102,17 @@
                         "Doctor"
                     ],
                     "with_people": [],
-                    "universes": []
+                    "universes": [],
+                    "title_contains": [
+                        "ER",
+                        "grays anatomy",
+                        "scrubs",
+                        "the good doctor",
+                        "chicago med"
+                    ]
                 }
             ],
-            "id": "👨‍⚕-drama-médico"
+            "id": "drama-medico"
         },
         {
             "name": "Star Trek",
@@ -1140,9 +1143,11 @@
                     "decade": null,
                     "keywords": [],
                     "with_people": [],
-                    "universes": [],
+                    "universes": [
+                        "Star Trek"
+                    ],
                     "title_contains": [
-                        "strar trek"
+                        "star trek"
                     ]
                 }
             ],
@@ -1160,11 +1165,13 @@
                     "start": "00:00",
                     "end": "11:59",
                     "label": "Bat Movies",
-                    "content_type": "tv",
+                    "content_type": "movie",
                     "decade": null,
                     "keywords": [],
                     "with_people": [],
-                    "universes": [],
+                    "universes": [
+                        "Batman"
+                    ],
                     "title_contains": [
                         "Batman"
                     ]
@@ -1173,11 +1180,13 @@
                     "start": "12:00",
                     "end": "23:59",
                     "label": "Bat Series",
-                    "content_type": "movie",
+                    "content_type": "tv",
                     "decade": null,
                     "keywords": [],
                     "with_people": [],
-                    "universes": [],
+                    "universes": [
+                        "Batman"
+                    ],
                     "title_contains": [
                         "Batman"
                     ]

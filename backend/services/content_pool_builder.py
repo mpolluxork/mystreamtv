@@ -90,7 +90,8 @@ async def build_content_pool(
 async def discover_content_for_filters(
     tmdb_client, 
     filters: Dict[str, Any], 
-    max_results: int = 50
+    max_results: int = 50,
+    origin_channel_id: Optional[str] = None
 ) -> List[ContentMetadata]:
     """
     Perform targeted discovery on TMDB based on specific criteria.
@@ -136,7 +137,7 @@ async def discover_content_for_filters(
                         continue
                     
                     # Enriquecer metadata
-                    metadata = await _process_item(tmdb_client, item, media_type, providers)
+                    metadata = await _process_item(tmdb_client, item, media_type, providers, origin_channel_id=origin_channel_id)
                     
                     # Validar que el keyword realmente esté en overview o título
                     keyword_lower = keyword.lower()
@@ -150,6 +151,46 @@ async def discover_content_for_filters(
                 
             except Exception as e:
                 print(f"      ⚠️ Error searching '{keyword}': {e}")
+
+    # --- NUEVA LÓGICA: Búsqueda por title_contains ---
+    title_contains = filters.get("title_contains", [])
+    if title_contains:
+        print(f"   🔎 Searching by title patterns: {title_contains}")
+        for pattern in title_contains:
+            if len(results) >= max_results:
+                break
+            
+            try:
+                search_endpoint = f"/search/{media_type}"
+                response = await tmdb_client._request("GET", search_endpoint, {"query": pattern})
+                
+                items = response.get("results", [])
+                print(f"      '{pattern}' → {len(items)} resultados")
+                
+                for item in items[:40]:  # Aumentamos a 40 para capturar más variedad de la franquicia
+                    if len(results) >= max_results:
+                        break
+                    
+                    if item["id"] in seen_ids:
+                        continue
+                    
+                    providers = await _get_providers(tmdb_client, item["id"], media_type)
+                    if not providers:
+                        continue
+                    
+                    metadata = await _process_item(tmdb_client, item, media_type, providers, origin_channel_id=origin_channel_id)
+                    
+                    # Para title_contains somos más flexibles: si está en el título o es del universo relevante
+                    pattern_lower = pattern.lower()
+                    if (pattern_lower in metadata.title.lower() or 
+                        pattern_lower in metadata.original_title.lower() or
+                        any(pattern_lower in u.lower() for u in metadata.universes)):
+                        results.append(metadata)
+                        seen_ids.add(item["id"])
+                
+                await asyncio.sleep(0.1)
+            except Exception as e:
+                print(f"      ⚠️ Error searching title pattern '{pattern}': {e}")
     
     # --- BÚSQUEDA POR UNIVERSOS (si están especificados) ---
     if filters.get("universes"):
@@ -161,43 +202,66 @@ async def discover_content_for_filters(
             if len(results) >= max_results:
                 break
             
-            if universe_name not in UNIVERSE_RULES:
-                continue
+            # --- 1. INTENTAR BÚSQUEDA POR REGLAS (SI EXISTEN) ---
+            if universe_name in UNIVERSE_RULES:
+                rule = UNIVERSE_RULES[universe_name]
+                if "title_patterns" in rule:
+                    for pattern in rule["title_patterns"][:3]:
+                        if len(results) >= max_results:
+                            break
+                        
+                        try:
+                            search_endpoint = f"/search/{media_type}"
+                            response = await tmdb_client._request("GET", search_endpoint, {"query": pattern})
+                            
+                            for item in response.get("results", [])[:10]:
+                                if len(results) >= max_results:
+                                    break
+                                
+                                if item["id"] in seen_ids:
+                                    continue
+                                
+                                providers = await _get_providers(tmdb_client, item["id"], media_type)
+                                if not providers:
+                                    continue
+                                
+                                metadata = await _process_item(tmdb_client, item, media_type, providers, origin_channel_id=origin_channel_id)
+                                
+                                if universe_name in metadata.universes:
+                                    results.append(metadata)
+                                    seen_ids.add(item["id"])
+                            await asyncio.sleep(0.05)
+                        except Exception as e:
+                            print(f"      ⚠️ Error searching universe '{universe_name}': {e}")
             
-            rule = UNIVERSE_RULES[universe_name]
-            
-            # Usar title_patterns si existen
-            if "title_patterns" in rule:
-                for pattern in rule["title_patterns"][:3]:
-                    if len(results) >= max_results:
-                        break
+            # --- 2. SI NO HAY REGLAS O QUEREMOS MÁS, BUSCAR POR NOMBRE DEL UNIVERSO (GENERALIZADO) ---
+            if len(results) < max_results:
+                try:
+                    # Búsqueda fuzzy por el nombre del universo
+                    search_endpoint = f"/search/{media_type}"
+                    response = await tmdb_client._request("GET", search_endpoint, {"query": universe_name})
                     
-                    try:
-                        search_endpoint = f"/search/{media_type}"
-                        response = await tmdb_client._request("GET", search_endpoint, {"query": pattern})
+                    for item in response.get("results", [])[:15]:
+                        if len(results) >= max_results:
+                            break
                         
-                        for item in response.get("results", [])[:10]:
-                            if len(results) >= max_results:
-                                break
-                            
-                            if item["id"] in seen_ids:
-                                continue
-                            
-                            providers = await _get_providers(tmdb_client, item["id"], media_type)
-                            if not providers:
-                                continue
-                            
-                            metadata = await _process_item(tmdb_client, item, media_type, providers)
-                            
-                            # Verificar que pertenezca al universo
-                            if universe_name in metadata.universes:
-                                results.append(metadata)
-                                seen_ids.add(item["id"])
+                        if item["id"] in seen_ids:
+                            continue
                         
-                        await asyncio.sleep(0.1)
+                        providers = await _get_providers(tmdb_client, item["id"], media_type)
+                        if not providers:
+                            continue
                         
-                    except Exception as e:
-                        print(f"      ⚠️ Error searching universe '{universe_name}': {e}")
+                        metadata = await _process_item(tmdb_client, item, media_type, providers, origin_channel_id=origin_channel_id)
+                        
+                        # Si coincide con el universo (vía colección) o el título contiene el nombre
+                        if (universe_name.lower() in metadata.title.lower() or 
+                            universe_name in metadata.universes):
+                            results.append(metadata)
+                            seen_ids.add(item["id"])
+                    await asyncio.sleep(0.05)
+                except Exception as e:
+                    print(f"      ⚠️ Error in generalized universe search for '{universe_name}': {e}")
     
     # --- BÚSQUEDA ESTÁNDAR POR DISCOVER (géneros, década, rating, etc.) ---
     try:
@@ -267,8 +331,8 @@ async def discover_content_for_filters(
                 if not providers:
                     continue
                 
-                # Enriquecer metadata
-                metadata = await _process_item(tmdb_client, item, media_type, providers)
+                # Enriquecer metadata - NOTE: No atribuimos en búsqueda estándar para evitar polución
+                metadata = await _process_item(tmdb_client, item, media_type, providers, origin_channel_id=None)
                 results.append(metadata)
                 seen_ids.add(item["id"])
             
@@ -281,7 +345,13 @@ async def discover_content_for_filters(
     return results
 
 
-async def _process_item(tmdb_client, item: Dict, media_type: str, providers: List) -> ContentMetadata:
+async def _process_item(
+    tmdb_client, 
+    item: Dict[str, Any], 
+    media_type: str, 
+    providers: List[Dict[str, Any]],
+    origin_channel_id: Optional[str] = None
+) -> ContentMetadata:
     """
     Process raw TMDB item results into ContentMetadata.
     
@@ -333,7 +403,8 @@ async def _process_item(tmdb_client, item: Dict, media_type: str, providers: Lis
         providers=filtered_providers,
         poster_path=item.get("poster_path"),
         backdrop_path=item.get("backdrop_path"),
-        runtime=details.get("runtime") if media_type == "movie" else (details.get("episode_run_time") or [None])[0]
+        runtime=details.get("runtime") if media_type == "movie" else (details.get("episode_run_time") or [None])[0],
+        origin_channels=[origin_channel_id] if origin_channel_id else []
     )
 
 
