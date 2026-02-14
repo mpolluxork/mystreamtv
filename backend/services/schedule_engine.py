@@ -2,9 +2,9 @@
 Schedule Engine for MyStreamTV.
 Refactored to use global content pool for multi-channel content discovery.
 """
+import random
 import json
 import hashlib
-import random
 from datetime import datetime, date, time, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional, Any
@@ -137,8 +137,25 @@ class ScheduleEngine:
                     # Find if it already exists to merge attribution
                     existing = next((m for m in self._global_pool if (m.tmdb_id, m.media_type) == cid), None)
                     if existing:
-                        if channel.id not in existing.origin_channels:
-                            existing.origin_channels.append(channel.id)
+                        # VALIDATION: Only attribute if it really matches at least ONE slot's thematic filters
+                        if metadata.origin_channels and channel.id not in existing.origin_channels:
+                            is_valid = any(existing.matches_slot_filters({
+                                **{
+                                    "content_type": s.content_type.value if s.content_type else None,
+                                    "decade": s.decade,
+                                    "vote_average_min": s.vote_average_min,
+                                    "with_people": s.with_people,
+                                    "exclude_keywords": s.exclude_keywords,
+                                    "universes": s.universes,
+                                    "keywords": s.keywords,
+                                    "title_contains": s.title_contains,
+                                    "genres": s.genre_ids
+                                },
+                                "channel_id": None # Avoid circular attribution check
+                            }) for s in channel.slots)
+                            
+                            if is_valid:
+                                existing.origin_channels.append(channel.id)
                     elif cid not in seen_ids:
                         self._global_pool.append(metadata)
                         seen_ids.add(cid)
@@ -186,8 +203,25 @@ class ScheduleEngine:
                 # Find if it already exists to merge attribution
                 existing = next((m for m in self._global_pool if (m.tmdb_id, m.media_type) == cid), None)
                 if existing:
-                    if channel_id not in existing.origin_channels:
-                        existing.origin_channels.append(channel_id)
+                    # VALIDATION: Only attribute if it really matches
+                    if metadata.origin_channels and channel_id not in existing.origin_channels:
+                        is_valid = any(existing.matches_slot_filters({
+                            **{
+                                "content_type": s.content_type.value if s.content_type else None,
+                                "decade": s.decade,
+                                "vote_average_min": s.vote_average_min,
+                                "with_people": s.with_people,
+                                "exclude_keywords": s.exclude_keywords,
+                                "universes": s.universes,
+                                "keywords": s.keywords,
+                                "title_contains": s.title_contains,
+                                "genres": s.genre_ids
+                            },
+                            "channel_id": None
+                        }) for s in channel.slots)
+                        
+                        if is_valid:
+                            existing.origin_channels.append(channel_id)
                 elif cid not in seen_ids:
                     self._global_pool.append(metadata)
                     seen_ids.add(cid)
@@ -198,17 +232,23 @@ class ScheduleEngine:
             self._save_content_pool()
 
     
-    def _mark_content_used(self, target_date: date, hour: int, tmdb_id: int):
-        """Mark content as used for a specific date and hour."""
+    def _mark_content_used(self, target_date: date, hour: int, tmdb_id: int, channel_id: str):
+        """Mark content as used for a specific date, hour and channel."""
         key = f"{target_date.isoformat()}_{hour:02d}"
         if key not in self._content_usage:
-            self._content_usage[key] = set()
-        self._content_usage[key].add(tmdb_id)
+            self._content_usage[key] = {}
+        self._content_usage[key][tmdb_id] = channel_id
     
-    def _is_content_used(self, target_date: date, hour: int, tmdb_id: int) -> bool:
-        """Check if content is already used in this time slot."""
+    def _is_content_used(self, target_date: date, hour: int, tmdb_id: int, channel_id: str) -> bool:
+        """
+        Check if content is already used in this hour by a DIFFERENT channel.
+        Allows repetition on the same channel (back-to-back episodes).
+        """
         key = f"{target_date.isoformat()}_{hour:02d}"
-        return tmdb_id in self._content_usage.get(key, set())
+        usage = self._content_usage.get(key, {})
+        if tmdb_id in usage:
+            return usage[tmdb_id] != channel_id
+        return False
     
     def _clear_usage_for_date(self, target_date: date):
         """Clear usage tracking for a specific date (for regeneration)."""
@@ -254,12 +294,14 @@ class ScheduleEngine:
             print(f"⚠️ Error saving cooldown data: {e}")
     
     def _is_in_cooldown(self, channel_id: str, tmdb_id: int, media_type: str, current_date: date) -> bool:
-        """Check if content is in cooldown period."""
-        # TV shows NO tienen cooldown (tienen replay value)
+        """
+        Check if content is in cooldown period.
+        Movies: 7 days default, 1 day for specialized (universe) channels.
+        TV: No cooldown.
+        """
         if media_type == "tv":
             return False
         
-        # Películas tienen 7 días de cooldown
         if channel_id not in self._recently_played:
             return False
         
@@ -267,8 +309,12 @@ class ScheduleEngine:
         if not last_played:
             return False
         
+        # Specialized channels have limited libraries, allow more frequent repeats
+        is_specialized = any(tag in channel_id.lower() for tag in ["universe", "superman", "batman", "trek", "chicago"])
+        cooldown_period = 1 if is_specialized else 7
+        
         days_since = (current_date - last_played).days
-        return days_since < 7
+        return days_since < cooldown_period
     
     def _mark_as_played(self, channel_id: str, tmdb_id: int, play_date: date):
         """Mark content as played on a specific date."""
@@ -339,6 +385,7 @@ class ScheduleEngine:
                     universes=slot_data.get("universes", []),
                     exclude_keywords=slot_data.get("exclude_keywords", []),
                     title_contains=slot_data.get("title_contains", []),
+                    is_favorites_only=slot_data.get("is_favorites_only", False),
                 )
                 slots.append(slot)
             
@@ -420,8 +467,9 @@ class ScheduleEngine:
         eligible_content: List[ContentMetadata],
         slot_start: datetime,
         slot_end: datetime,
-        seed: int,
-        channel_id: str  # NEW: needed for cooldown tracking
+        seed: float,
+        channel_id: str,
+        last_content_id: Optional[int] = None
     ) -> List[Program]:
         """
         Fill a time slot with programs from eligible content.
@@ -440,20 +488,44 @@ class ScheduleEngine:
         shuffled = eligible_content.copy()
         rng.shuffle(shuffled)
         
+        attempts = 0
         content_index = 0
+        max_attempts = 100 # Safety break
         
-        while current_time < slot_end and content_index < len(shuffled):
+        
+        while current_time < slot_end and shuffled:
+            if content_index >= len(shuffled):
+                content_index = 0 # Loop back to beginning if we still have time
+                attempts += 1
+                if attempts > 20: # Allow more loops for very long slots with few items
+                    break
+            
             content = shuffled[content_index]
             content_index += 1
             
-            # Check if content is in cooldown period (movies only)
-            if self._is_in_cooldown(channel_id, content.tmdb_id, content.media_type, target_date):
-                continue  # Skip, this movie was played recently on this channel
+            # Prevent immediate back-to-back repetition
+            if last_content_id and content.tmdb_id == last_content_id:
+                if len(shuffled) > 1 and attempts < 20: # Increased threshold
+                     continue
             
-            # Check if content is already used in this hour
+            # Check if content is in cooldown period
+            is_cooldown = self._is_in_cooldown(channel_id, content.tmdb_id, content.media_type, target_date)
+            if is_cooldown:
+                # EMERGENCY FALLBACK: Only break cooldown if we are VERY desperate
+                if attempts >= 10: # Increased threshold
+                    pass # Ignore cooldown 
+                else:
+                    continue
+            
+            # Check if content is already used in this hour on ANOTHER channel
             current_hour = current_time.hour
-            if self._is_content_used(target_date, current_hour, content.tmdb_id):
-                continue  # Skip this content, it's already playing on another channel
+            is_cross_channel = self._is_content_used(target_date, current_hour, content.tmdb_id, channel_id)
+            if is_cross_channel:
+                 # Only allow cross-channel if we are EXTREMELY desperate
+                if attempts >= 20: # Increased threshold
+                    pass
+                else:
+                    continue
             
             # Get runtime (use default if not available)
             runtime = content.runtime
@@ -463,15 +535,21 @@ class ScheduleEngine:
             # Calculate program end time
             program_end = current_time + timedelta(minutes=runtime)
             
-            # Skip if would overflow slot too much (allow 15 min tolerance)
-            if program_end > slot_end + timedelta(minutes=15):
+            # Skip if would overflow slot too much
+            # INCREASED TOLERANCE: for specialized channels with long movies, allow up to 60 min overflow
+            is_specialized = any(tag in channel_id.lower() for tag in ["universe", "superman", "batman", "trek", "chicago"])
+            tolerance = 60 if is_specialized else 15
+            
+            if program_end > slot_end + timedelta(minutes=tolerance):
                 continue
             
-            # Mark content as used for this hour
-            self._mark_content_used(target_date, current_hour, content.tmdb_id)
+            # Mark content as used for this hour on this channel
+            self._mark_content_used(target_date, current_hour, content.tmdb_id, channel_id)
             
             # Mark as played for cooldown tracking
             self._mark_as_played(channel_id, content.tmdb_id, target_date)
+            
+            last_content_id = content.tmdb_id # Update for next iteration in loop
             
             # Create program
             program_id = f"{content.tmdb_id}_{current_time.isoformat()}"
@@ -530,6 +608,8 @@ class ScheduleEngine:
             return self._schedule_cache[cache_key]
         
         all_programs = []
+        last_end_time = datetime.combine(target_date, time(0, 0))
+        last_program_id = None
         
         for slot_index, slot in enumerate(channel.slots):
             seed = self._get_seed(channel.id, target_date, slot_index)
@@ -549,17 +629,29 @@ class ScheduleEngine:
                 print(f"⚠️ No eligible content for {channel.name} - {slot.label}")
                 continue
             
+            # IMPORTANT: Slot filling must start from where the previous one ended
+            # or the slot start, whichever is later, to avoid overlaps.
+            actual_start = max(slot_start, last_end_time)
+            
+            # If we are already past this slot, skip it
+            if actual_start >= slot_end:
+                continue
+
             # Fill slot with programs
             programs = self._fill_slot_with_content(
                 slot=slot,
                 eligible_content=eligible_content,
-                slot_start=slot_start,
+                slot_start=actual_start,
                 slot_end=slot_end,
                 seed=seed,
-                channel_id=channel.id  # Pass channel_id for cooldown tracking
+                channel_id=channel.id,
+                last_content_id=last_program_id
             )
             
-            all_programs.extend(programs)
+            if programs:
+                last_end_time = programs[-1].end_time
+                last_program_id = programs[-1].tmdb_id
+                all_programs.extend(programs)
         
         # Sort by start time
         all_programs.sort(key=lambda p: p.start_time)

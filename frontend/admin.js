@@ -6,10 +6,7 @@
 const API_BASE = '/api/channels';
 let currentChannels = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadChannels();
-    setupEventListeners();
-});
+// Initial load moved to the bottom of the file
 
 function setupEventListeners() {
     // Add Channel
@@ -91,7 +88,7 @@ function createChannelCard(channel) {
     return card;
 }
 
-function openEditor(channel = null) {
+async function openEditor(channel = null) {
     const overlay = document.getElementById('editor-overlay');
     const form = document.getElementById('channel-form');
     const title = document.getElementById('editor-title');
@@ -111,7 +108,25 @@ function openEditor(channel = null) {
     } else {
         title.textContent = 'CREATE_NEW_CHANNEL';
         document.getElementById('field-id').value = '';
-        addSlotRow(); // Start with one empty slot
+
+        try {
+            const res = await fetch(`${API_BASE}/blueprint`);
+            if (res.ok) {
+                const blueprint = await res.json();
+                const template = blueprint.channels?.[0];
+                if (template && template.slots && template.slots.length > 0) {
+                    template.slots.forEach(slot => addSlotRow(slot));
+                } else {
+                    addSlotRow();
+                }
+            } else {
+                console.error("Failed to fetch blueprint:", res.status);
+                addSlotRow();
+            }
+        } catch (e) {
+            console.error("Blueprint load error:", e);
+            addSlotRow();
+        }
     }
 
     overlay.style.display = 'block';

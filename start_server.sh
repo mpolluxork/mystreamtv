@@ -13,7 +13,7 @@ cd "$SCRIPT_DIR/backend"
 
 # Activate virtual environment
 echo "Activating virtual environment..."
-source venv/bin/activate
+source "$SCRIPT_DIR/venv/bin/activate"
 
 # Get local IP address
 LOCAL_IP=$(hostname -I | awk '{print $1}')

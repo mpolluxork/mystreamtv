@@ -491,7 +491,15 @@
                     "universes": [
                         "Star Wars"
                     ],
-                    "title_contains": []
+                    "title_contains": [
+                        "star wars",
+                        "mandalorian",
+                        "boba fett",
+                        "acolitye",
+                        "asohka",
+                        "andor",
+                        "jedi"
+                    ]
                 },
                 {
                     "start": "08:00",
@@ -504,7 +512,9 @@
                     "universes": [
                         "Star Wars"
                     ],
-                    "title_contains": []
+                    "title_contains": [
+                        "star wars episode"
+                    ]
                 },
                 {
                     "start": "18:00",
@@ -523,55 +533,74 @@
             "id": "star-wars-universe"
         },
         {
-            "id": "marvel-universe",
             "name": "🦸 Marvel",
             "icon": "🦸",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
             "slots": [
                 {
                     "start": "00:00",
                     "end": "08:00",
                     "label": "Marvel Series",
                     "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
                     "universes": [
                         "Marvel Cinematic Universe"
-                    ]
+                    ],
+                    "title_contains": []
                 },
                 {
                     "start": "08:00",
                     "end": "14:00",
                     "label": "MCU Origins",
                     "content_type": "movie",
-                    "universes": [
-                        "Marvel Cinematic Universe"
-                    ],
                     "decade": [
                         2008,
                         2015
-                    ]
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [
+                        "Marvel Cinematic Universe"
+                    ],
+                    "title_contains": []
                 },
                 {
                     "start": "14:00",
                     "end": "20:00",
                     "label": "MCU Modern",
                     "content_type": "movie",
-                    "universes": [
-                        "Marvel Cinematic Universe"
-                    ],
                     "decade": [
                         2016,
                         2030
-                    ]
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [
+                        "Marvel Cinematic Universe"
+                    ],
+                    "title_contains": []
                 },
                 {
                     "start": "20:00",
                     "end": "00:00",
                     "label": "MCU Premium",
+                    "content_type": "movie",
+                    "decade": null,
+                    "vote_average_min": 7.5,
+                    "keywords": [],
+                    "with_people": [],
                     "universes": [
                         "Marvel Cinematic Universe"
                     ],
-                    "vote_average_min": 7.5
+                    "title_contains": []
                 }
-            ]
+            ],
+            "id": "marvel-universe"
         },
         {
             "id": "life-lessons",
@@ -925,59 +954,98 @@
             ]
         },
         {
-            "id": "epoca-oro",
-            "name": "🇲🇽 Época de Oro",
+            "name": "🇲🇽 Cine Mexicano",
             "icon": "🇲🇽",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
             "slots": [
                 {
                     "start": "00:00",
                     "end": "10:00",
-                    "label": "Pedro Infante & Clásicos",
-                    "original_language": "es",
+                    "label": "Clásicos",
+                    "content_type": "movie",
                     "decade": [
                         1940,
                         1959
                     ],
-                    "content_type": "movie"
+                    "keywords": [
+                        "Mexico"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Mexico",
+                        "ismael rodriguez",
+                        "indio fernandez",
+                        "pedro infante",
+                        "jorge negrete"
+                    ]
                 },
                 {
                     "start": "10:00",
                     "end": "14:00",
-                    "label": "Cantinflas & Comedia",
-                    "original_language": "es",
+                    "label": "Comedia",
+                    "content_type": "movie",
                     "genres": [
                         35
                     ],
                     "decade": [
                         1940,
-                        1969
+                        1977
                     ],
-                    "content_type": "movie"
+                    "keywords": [
+                        "Mexico"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Mexico"
+                    ]
                 },
                 {
                     "start": "14:00",
                     "end": "18:00",
                     "label": "Época de Oro General",
-                    "original_language": "es",
+                    "content_type": "movie",
                     "decade": [
                         1940,
                         1969
                     ],
-                    "vote_average_min": 6.0,
-                    "content_type": "movie"
+                    "vote_average_min": 6,
+                    "keywords": [
+                        "Mexico",
+                        "Mexican Cinema"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Mexico"
+                    ]
                 },
                 {
                     "start": "18:00",
                     "end": "00:00",
                     "label": "Cine Mexicano Moderno",
-                    "original_language": "es",
-                    "decade": [
-                        2000,
-                        2030
+                    "content_type": "movie",
+                    "decade": null,
+                    "vote_average_min": 6.5,
+                    "keywords": [
+                        "new mexican cinema"
                     ],
-                    "vote_average_min": 6.5
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Mexico",
+                        "solo con tu pareja",
+                        "amores perros",
+                        "sexo pudor y lagrimas",
+                        "caifanes"
+                    ]
                 }
-            ]
+            ],
+            "id": "epoca-oro"
         },
         {
             "id": "epic-maximalism",
@@ -1045,38 +1113,63 @@
             "enabled": true,
             "slots": [
                 {
-                    "start": "20:00",
-                    "end": "23:59",
-                    "label": "Superpelículas",
-                    "content_type": "movie",
-                    "decade": null,
-                    "vote_average_min": 6,
-                    "keywords": [],
-                    "with_people": [],
-                    "universes": [
-                        "Superman"
-                    ],
-                    "title_contains": []
-                },
-                {
                     "start": "00:00",
-                    "end": "19:59",
+                    "end": "09:59",
                     "label": "Super Series",
                     "content_type": "tv",
                     "decade": null,
-                    "keywords": [],
-                    "with_people": [],
+                    "universes": [
+                        "Superman",
+                        "DC Extended Universe"
+                    ],
+                    "title_contains": [
+                        "Superman",
+                        "Smallville",
+                        "Krypton"
+                    ]
+                },
+                {
+                    "start": "10:00",
+                    "end": "16:00",
+                    "label": "Super Classics",
+                    "content_type": "movie",
+                    "universes": [
+                        "Superman"
+                    ],
+                    "keywords": [
+                        "superhero",
+                        "superman"
+                    ],
+                    "title_contains": [
+                        "Superman",
+                        "Man of Steel"
+                    ]
+                },
+                {
+                    "start": "16:00",
+                    "end": "17:59",
+                    "label": "Super Afternoon",
+                    "content_type": "movie",
+                    "universes": [
+                        "Superman"
+                    ],
+                    "title_contains": [
+                        "Superman"
+                    ]
+                },
+                {
+                    "start": "18:00",
+                    "end": "23:59",
+                    "label": "Superpelículas",
+                    "content_type": "movie",
+                    "vote_average_min": 5,
                     "universes": [
                         "Superman"
                     ],
                     "title_contains": [
                         "Superman",
-                        "Supergirl",
-                        "Justice League",
-                        "Smallville",
-                        "Krypton",
                         "Man of Steel",
-                        "Lois & Clark"
+                        "Justice League"
                     ]
                 }
             ],
@@ -1193,6 +1286,204 @@
                 }
             ],
             "id": "batman"
+        },
+        {
+            "name": "Chicago",
+            "icon": "",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "23:59",
+                    "label": "",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "chicago"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "chicago"
+                    ]
+                }
+            ],
+            "id": "chicago"
+        },
+        {
+            "name": "💣 Caricaturas ",
+            "icon": "💣",
+            "priority": 100,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "14:59",
+                    "label": "Caricaturas Clásicas",
+                    "content_type": "tv",
+                    "genres": [
+                        16
+                    ],
+                    "decade": [
+                        1930,
+                        1979
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "15:00",
+                    "end": "19:59",
+                    "label": "Caricaturas ochenteras",
+                    "content_type": "tv",
+                    "genres": [
+                        16
+                    ],
+                    "decade": [
+                        1980,
+                        1989
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "20:00",
+                    "end": "23:59",
+                    "label": "Caricaturas Modernas",
+                    "content_type": "tv",
+                    "genres": [
+                        16
+                    ],
+                    "decade": [
+                        1990,
+                        2030
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "💣-caricaturas-"
+        },
+        {
+            "name": "Series Clásicas",
+            "icon": "",
+            "priority": 75,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "11:59",
+                    "label": "Series Clásicas",
+                    "content_type": "tv",
+                    "genres": [
+                        35,
+                        18,
+                        10751
+                    ],
+                    "decade": [
+                        1950,
+                        1969
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "12:00",
+                    "end": "15:59",
+                    "label": "Series Contempo",
+                    "content_type": "tv",
+                    "genres": [
+                        35,
+                        18,
+                        10751
+                    ],
+                    "decade": [
+                        1970,
+                        1989
+                    ],
+                    "keywords": [
+                        "sitcom"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "16:00",
+                    "end": "19:59",
+                    "label": "Series Accion",
+                    "content_type": "tv",
+                    "genres": [
+                        10759
+                    ],
+                    "decade": [
+                        1950,
+                        1999
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "20:00",
+                    "end": "23:59",
+                    "label": "Series Prime",
+                    "content_type": "tv",
+                    "decade": [
+                        2000,
+                        2026
+                    ],
+                    "vote_average_min": 9,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "series-clásicas"
+        },
+        {
+            "name": "Rocky, Bond, Karate Kid, Bourne",
+            "icon": "",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "23:59",
+                    "label": "",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Rocky Balboa",
+                        "James Bond",
+                        "Karate Kid",
+                        "Jason Bourne"
+                    ]
+                }
+            ],
+            "id": "rocky,-bond,-karate-kid,-bourne"
         }
     ]
 }

@@ -2,6 +2,7 @@
 Content Metadata Layer for MyStreamTV.
 Enriched metadata for movies and TV shows with multi-dimensional attributes.
 """
+import re
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict, Any
 from datetime import datetime
@@ -56,134 +57,128 @@ class ContentMetadata:
     
     def matches_slot_filters(self, slot_filters: Dict[str, Any]) -> bool:
         """
-        Check if this content matches ALL filters defined in a slot.
-        
-        Args:
-            slot_filters: Dictionary of filter criteria from TimeSlot
-            
-        Returns:
-            True if content matches all filters, False otherwise
+        Check if this content matches the criteria for a specific time slot.
+        Robust logic: 
+        1. Structural filters MUST match (Type, Era, Rating, People, Blacklist).
+        2. Thematic filters (Universe, Keywords, Search) are checked.
+        3. If already attributed to the channel, we allow bypassing thematic checks 
+           if structural ones pass (Trusted attribution).
         """
-        # Attribution check (If this channel discovered it, it's a match!)
-        # CRITICAL: Even if attributed, if the slot has explicit universe or title requirements, 
-        # we check those first to avoid "leaks" (e.g. Smallville in Star Trek)
-        is_attributed = False
-        if slot_filters.get("channel_id"):
-            if slot_filters["channel_id"] in self.origin_channels:
-                is_attributed = True
+        channel_id = slot_filters.get("channel_id")
+        is_attributed = channel_id is not None and channel_id in self.origin_channels
+
+        # --- PHASE 1: Structural Filters (Mandatory) ---
         
-        # If attributed, we still check high-intent filters (universes, title_contains) 
-        # if they are defined in the slot. If they match, we return True early.
-        # If they DON'T match, we don't return True early (attribution doesn't override them).
-        if is_attributed:
-            # Check for universe conflict
-            if slot_filters.get("universes"):
-                required_universes = set(slot_filters["universes"])
-                content_universes = set(self.universes)
-                if not required_universes.intersection(content_universes):
-                    is_attributed = False # Conflict!
-            
-            # Check for title conflict
-            if is_attributed and slot_filters.get("title_contains"):
-                patterns = [p.lower() for p in slot_filters["title_contains"]]
-                if not any(p in self.title.lower() or p in self.overview.lower() for p in patterns):
-                    is_attributed = False # Conflict!
-            
-            if is_attributed:
-                return True # No conflict, or no filters to conflict with. Match!
-                
-        # Content type filter
+        # 1. Content type (movie vs tv)
         if slot_filters.get("content_type"):
             if self.media_type != slot_filters["content_type"]:
                 return False
-        
-        # Genre filter (content must have at least one matching genre)
+
+        # 2. Decade/Year
+        if slot_filters.get("decade"):
+            start_year, end_year = slot_filters["decade"]
+            if not self.year or not (start_year <= self.year <= end_year):
+                return False
+
+        # 3. Quality (Vote average)
+        if slot_filters.get("vote_average_min"):
+            if (self.vote_average or 0) < slot_filters["vote_average_min"]:
+                return False
+
+        # 4. Blacklist (Exclude keywords)
+        if slot_filters.get("exclude_keywords"):
+            excluded = [k.lower() for k in slot_filters["exclude_keywords"]]
+            content_keywords = [k.lower() for k in self.keywords]
+            if any(k in content_keywords for k in excluded):
+                return False
+
+        # 5. People filter (Director/Actors)
+        if slot_filters.get("with_people"):
+            has_person_match = False
+            for person in slot_filters["with_people"]:
+                if isinstance(person, int):
+                    if self.director_id == person:
+                        has_person_match = True
+                        break
+                elif isinstance(person, str):
+                    if self.director_name and person.lower() in self.director_name.lower():
+                        has_person_match = True
+                        break
+            if not has_person_match:
+                return False
+
+        # --- PHASE 2: Attribution Trust ---
+        # If it passed structural filters and is already attributed to this channel,
+        # we skip the more fragile thematic/textual checks.
+        if is_attributed:
+            return True
+
+        # --- PHASE 3: Thematic Filters (Theme must Match) ---
+
+        # 1. Universe filter
+        if slot_filters.get("universes"):
+            required_universes = set(slot_filters["universes"])
+            content_universes = set(self.universes)
+            if not required_universes.intersection(content_universes):
+                # Flexible check: "Batman" matches "The Batman"
+                match_found = False
+                for req in required_universes:
+                    if any(req.lower() in c.lower() or c.lower() in req.lower() for c in content_universes):
+                        match_found = True
+                        break
+                if not match_found:
+                    return False
+
+        # 2. Keywords filter
+        if slot_filters.get("keywords"):
+            required_keywords = [k.lower().strip() for k in slot_filters["keywords"]]
+            content_keywords = [k.lower().strip() for k in self.keywords]
+            
+            # Flexible match: any required keyword is a substring of any content keyword
+            found = False
+            for req in required_keywords:
+                if any(req in ck or ck in req for ck in content_keywords):
+                    found = True
+                    break
+            if not found:
+                return False
+
+        # 3. Title/Overview search (Fuzzy / Linguistic awareness)
+        if slot_filters.get("title_contains"):
+            patterns = [p.lower() for p in slot_filters["title_contains"]]
+            # Normalize text: remove non-alphanumeric to bridge "Star Wars:" and "Star Wars "
+            text_to_search = re.sub(r'[^a-zA-Z0-9\s]', ' ', (self.title + " " + self.overview).lower())
+            
+            # Special case mapping for common translation/spelling variations
+            flexible_patterns = []
+            for p in patterns:
+                p_norm = re.sub(r'[^a-zA-Z0-9\s]', ' ', p)
+                flexible_patterns.append(p_norm)
+                if "episode" in p_norm: flexible_patterns.append(p_norm.replace("episode", "episodio"))
+                if "series" in p_norm: flexible_patterns.append(p_norm.replace("series", "serie"))
+            
+            if not any(pattern in text_to_search for pattern in flexible_patterns):
+                return False
+
+        # 4. Genre IDs filter
         if slot_filters.get("genres"):
             required_genres = set(slot_filters["genres"])
             content_genres = set(self.genres)
             if not required_genres.intersection(content_genres):
                 return False
-        
-        # Decade filter
-        if slot_filters.get("decade"):
-            decade_start, decade_end = slot_filters["decade"]
-            if not self.year or not (decade_start <= self.year <= decade_end):
+
+        # 5. Production Countries
+        if slot_filters.get("production_countries"):
+            required_countries = set(slot_filters["production_countries"])
+            content_countries = set(self.origin_countries)
+            if not any(c in required_countries for c in content_countries):
                 return False
-        
-        # Rating filter
-        if slot_filters.get("vote_average_min"):
-            if self.vote_average < slot_filters["vote_average_min"]:
-                return False
-        
-        # Universe filter (content must belong to at least one required universe)
-        if slot_filters.get("universes"):
-            required_universes = set(slot_filters["universes"])
-            content_universes = set(self.universes)
-            if not required_universes.intersection(content_universes):
-                return False
-        
-        # Keywords filter (flexible matching - content must have at least one keyword)
-        if slot_filters.get("keywords"):
-            required_keywords = [kw.lower() for kw in slot_filters["keywords"]]
-            content_keywords = [kw.lower() for kw in self.keywords]
-            
-            # Check if any required keyword is substring of any content keyword
-            has_match = False
-            for req_kw in required_keywords:
-                for cont_kw in content_keywords:
-                    if req_kw in cont_kw or cont_kw in req_kw:
-                        has_match = True
-                        break
-                if has_match:
-                    break
-            
-            if not has_match:
-                return False
-        
-        # Exclude keywords (blacklist)
-        if slot_filters.get("exclude_keywords"):
-            exclude_keywords = [kw.lower() for kw in slot_filters["exclude_keywords"]]
-            content_keywords = [kw.lower() for kw in self.keywords]
-            
-            for excl_kw in exclude_keywords:
-                for cont_kw in content_keywords:
-                    if excl_kw in cont_kw or cont_kw in excl_kw:
-                        return False
-        
-        # Language filter
+
+        # 6. Original Language
         if slot_filters.get("original_language"):
             if self.original_language != slot_filters["original_language"]:
                 return False
-        
-        # Country filter
-        if slot_filters.get("production_countries"):
-            required_country = slot_filters["production_countries"]
-            if required_country not in self.origin_countries:
-                return False
-        
-        # Director filter
-        if slot_filters.get("with_people"):
-            if self.director_id not in slot_filters["with_people"]:
-                return False
-        
-        # Title/Overview search filter (search in title and synopsis)
-        if slot_filters.get("title_contains"):
-            search_terms = [term.lower() for term in slot_filters["title_contains"]]
-            
-            # Combine title and overview for searching
-            searchable_text = f"{self.title} {self.overview}".lower()
-            
-            # Check if ANY search term appears in title or overview
-            has_match = False
-            for term in search_terms:
-                if term in searchable_text:
-                    has_match = True
-                    break
-            
-            if not has_match:
-                return False
-        
-        # All filters passed
+
         return True
     
     def to_dict(self) -> Dict[str, Any]:

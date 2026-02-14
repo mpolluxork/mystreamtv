@@ -22,11 +22,20 @@
             --admin-success: #00ffaa;
         }
 
+        html {
+            overflow: auto !important;
+            height: auto !important;
+        }
+
         body.admin-mode {
             background-color: var(--admin-bg);
             color: #e0e0e0;
             font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            height: auto !important;
+            width: auto !important;
+            min-height: 100vh;
         }
 
         .admin-container {
@@ -258,7 +267,7 @@
                     <textarea id="field-description" rows="2"></textarea>
                 </div>
 
-                    <div class="slots-container">
+                <div class="slots-container">
                     <h3 style="font-family: 'Space Mono', monospace; font-size: 1rem;">TIME_SLOTS</h3>
                     <div id="slots-list">
                         <!-- Slots will be added here via JS -->
@@ -278,7 +287,7 @@
         </div>
     </div>
 
-    <script src="admin.js"></script>
+    <script src="admin.js?v=2.0"></script>
 </body>
 
 </html>

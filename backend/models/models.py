@@ -149,6 +149,8 @@ class Channel:
                     "production_countries": s.production_countries,
                     "vote_average_min": s.vote_average_min,
                     "with_people": s.with_people,
+                    "title_contains": s.title_contains,
+                    "is_favorites_only": s.is_favorites_only,
                 }
                 for s in self.slots
             ],

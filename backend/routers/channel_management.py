@@ -11,6 +11,7 @@ router = APIRouter(prefix="/api/channels", tags=["Channel Management"])
 
 # Helper to get the absolute path to templates
 TEMPLATES_PATH = Path(__file__).parent.parent.parent / "data" / "channel_templates.json"
+BLUEPRINT_PATH = Path(__file__).parent.parent.parent / "data" / "channel_slots_blueprint.json"
 
 def get_engine():
     # In a real app, this would be a dependency injected singleton
@@ -99,6 +100,17 @@ async def reload_all(background_tasks: BackgroundTasks, engine: ScheduleEngine =
     """Force a reload and discovery for all channels."""
     background_tasks.add_task(engine.reload_and_discover)
     return {"status": "reload-started"}
+
+@router.get("/blueprint")
+async def get_blueprint():
+    """Get the default channel blueprint for creating new channels."""
+    try:
+        if not BLUEPRINT_PATH.exists():
+            return {"channels": []}
+        with open(BLUEPRINT_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/tmdb/genres")
 async def get_genres(engine: ScheduleEngine = Depends(get_engine)):
