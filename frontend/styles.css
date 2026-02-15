@@ -670,38 +670,6 @@ body {
     font-weight: bold;
 }
 
-/* ======================== KEYBOARD HINTS ======================== */
-
-.keyboard-hints {
-    position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 24px;
-    padding: 12px 24px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    border: 1px solid var(--epg-grid-bg);
-    z-index: 50;
-}
-
-.hint {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.75rem;
-    color: var(--epg-text-secondary);
-}
-
-.key {
-    padding: 4px 8px;
-    background: var(--epg-bg-light);
-    border: 1px solid var(--epg-text-dim);
-    border-radius: 4px;
-    font-family: 'Share Tech Mono', monospace;
-    color: var(--epg-text-primary);
-}
 
 /* ======================== RESPONSIVE ======================== */
 
@@ -735,8 +703,93 @@ body {
     .program-title {
         font-size: 0.75rem;
     }
+}
 
-    .keyboard-hints {
-        display: none;
+/* ======================== FOOTER & DISCLAIMER ======================== */
+
+.app-footer {
+    padding: 20px 24px;
+    background: linear-gradient(0deg, var(--epg-bg-dark) 0%, transparent 100%);
+    border-top: 1px solid rgba(0, 217, 255, 0.1);
+    z-index: 5;
+}
+
+.disclaimer {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--epg-text-dim);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.disclaimer p {
+    margin-bottom: 0;
+}
+
+.attribution-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.attribution-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.attribution-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 217, 255, 0.05);
+}
+
+.attribution-link:hover {
+    background: rgba(0, 217, 255, 0.05);
+    border-color: var(--epg-accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.attribution-logo {
+    height: 20px;
+    width: auto;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+.jw-logo {
+    height: 18px;
+}
+
+.attribution-text {
+    color: var(--epg-accent-cyan);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .app-footer {
+        padding: 15px 16px;
+    }
+
+    .disclaimer {
+        font-size: 0.65rem;
     }
 }

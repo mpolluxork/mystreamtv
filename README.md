@@ -1,243 +1,112 @@
-# MyStreamTV - Personal EPG for Streaming Platforms
+# 📺 MyStreamTV: Tu Guía de Canales Personalizada
 
-A personalized Electronic Program Guide (EPG) that creates themed TV channels from your streaming services (Netflix, Disney+, HBO Max, Prime Video).
-
-## 🎯 What is MyStreamTV?
-
-MyStreamTV transforms your streaming content into a traditional TV experience with themed channels and scheduled programming. Instead of endless browsing, you get curated channels like "🚀 Sci-Fi Channel", "🎭 Drama Channel", or "😂 Comedy Channel" with content automatically scheduled throughout the day.
-
-## ✨ Features
-
-### Core Functionality
-- **18 Themed Channels**: Pre-configured channels covering genres, decades, and special themes
-- **Multi-Channel EPG**: All channels visible simultaneously (no day-specific restrictions)
-- **Smart Content Discovery**: Automatic content pool building from TMDB API
-- **Streaming Integration**: Direct links to Netflix, Disney+, HBO Max, Prime Video
-- **Responsive Design**: Works on desktop, tablet, and mobile
-
-### Advanced Features (Recently Implemented)
-- **Content Deduplication**: Same content won't appear on multiple channels at the same time
-- **7-Day Cooldown System**: Movies won't repeat on the same channel for 7 days (TV shows exempt)
-- **Optimized Pool Updates**: Editing one channel only updates that channel's content pool
-- **Persistent Cooldown Tracking**: Cooldown data saved to `data/cooldown.json`
-
-### Admin Features
-- **Channel Management**: Create, edit, and delete channels via web UI
-- **Time Slot Configuration**: Define custom time slots with genre/decade/keyword filters
-- **Priority System**: Control channel ordering in the EPG
-- **Enable/Disable Channels**: Toggle channels without deleting them
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.10+
-- TMDB API Key ([Get one here](https://www.themoviedb.org/settings/api))
-
-### Installation
-
-1. **Clone and navigate to project**:
-   ```bash
-   cd /home/mpollux/antigravity/mystreamtv
-   ```
-
-2. **Create virtual environment and install dependencies**:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r backend/requirements.txt
-   ```
-
-3. **Configure TMDB API**:
-   Create `secrets.ini` in the project root:
-   ```ini
-   [tmdb]
-   api_key = YOUR_TMDB_API_KEY_HERE
-   ```
-
-4. **Start the server**:
-   ```bash
-   ./start_server.sh
-   ```
-   
-   Or manually:
-   ```bash
-   source venv/bin/activate
-   cd backend
-   uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-   ```
-
-### Access the Application
-
-- **EPG Interface**: `http://localhost:8000`
-- **Admin Console**: `http://localhost:8000/admin.html`
-- **From other devices on your network**: `http://YOUR_LOCAL_IP:8000`
-
-## 📁 Project Structure
-
-```
-mystreamtv/
-├── backend/
-│   ├── main.py                 # FastAPI application entry point
-│   ├── config.py               # Configuration and settings
-│   ├── models/
-│   │   └── models.py           # Data models (Channel, TimeSlot, Program)
-│   ├── services/
-│   │   ├── schedule_engine.py  # Core scheduling logic with cooldown
-│   │   ├── tmdb_client.py      # TMDB API client
-│   │   ├── content_metadata.py # Content metadata structures
-│   │   └── content_pool_builder.py # Content discovery
-│   ├── routers/
-│   │   ├── epg.py              # EPG endpoints
-│   │   └── channel_management.py # Admin endpoints
-│   └── migrations/
-│       └── remove_day_of_week.py # Migration script
-├── frontend/
-│   ├── index.html              # EPG interface
-│   ├── admin.html              # Channel management UI
-│   ├── styles.css              # EPG styles
-│   └── admin.js                # Admin functionality
-├── data/
-│   ├── channel_templates.json  # Channel configurations
-│   ├── content_pool.json       # Cached content metadata
-│   └── cooldown.json           # Cooldown tracking (auto-generated)
-├── start_server.sh             # Server startup script
-└── secrets.ini                 # API keys (create this)
-```
-
-## 🎨 Channel Examples
-
-- **🚀 Sci-Fi Channel**: Science fiction movies and series
-- **🎭 Drama Médico**: Medical dramas
-- **😂 Comedia**: Comedy movies and sitcoms
-- **🕵️ Detectives**: Crime and mystery content
-- **🎬 Cine de los 80s**: 1980s movies
-- **🏆 Premiados**: Oscar-nominated and award-winning content
-- **And 12 more...**
-
-## 🔧 Configuration
-
-### Channel Template Structure
-
-Channels are defined in `data/channel_templates.json`:
-
-```json
-{
-  "id": "scifi-channel",
-  "name": "🚀 Sci-Fi Channel",
-  "icon": "🚀",
-  "priority": 50,
-  "enabled": true,
-  "slots": [
-    {
-      "start_time": "20:00",
-      "end_time": "23:00",
-      "label": "Prime Time Sci-Fi",
-      "genre_ids": [878],
-      "content_type": "movie"
-    }
-  ]
-}
-```
-
-### Time Slot Filters
-
-Available filters for time slots:
-- `genre_ids`: TMDB genre IDs
-- `decade`: Tuple like `[1980, 1989]`
-- `keywords`: Search keywords
-- `content_type`: `"movie"` or `"tv"`
-- `original_language`: Language code (e.g., `"en"`)
-- `vote_average_min`: Minimum rating
-- `with_people`: Director/actor TMDB IDs
-- `universes`: Franchises like `["Star Wars", "Marvel"]`
-- `exclude_keywords`: Blacklist keywords
-- `is_favorites_only`: Only show content from favorites lists
-
-## 🛠️ API Endpoints
-
-### EPG Endpoints
-- `GET /channels` - List all channels
-- `GET /guide?hours=6` - Get EPG guide for all channels
-- `GET /now-playing` - What's currently playing on all channels
-- `GET /channel/{id}/schedule` - Full day schedule for a channel
-
-### Admin Endpoints
-- `GET /admin/channels` - Get all channels with full config
-- `POST /admin/channels` - Create new channel
-- `PUT /admin/channels/{id}` - Update channel
-- `DELETE /admin/channels/{id}` - Delete channel
-- `POST /admin/reload` - Force pool regeneration
-
-## 🧪 Recent Changes (Feb 2026)
-
-### ✅ Completed Refactoring
-1. **Removed `day_of_week` Logic**: All channels now show simultaneously
-2. **Optimized Pool Regeneration**: Only updates affected channel when editing
-3. **Content Deduplication**: Prevents same content on multiple channels at once
-4. **7-Day Cooldown System**: Movies won't repeat on same channel for a week
-
-### 🔄 Pending Features
-- Auto-generation of time slots in admin UI
-- Favorites channel from text lists (`peliculas.txt`, `series.txt`)
-
-## 📊 Performance
-
-- **Initial Pool Build**: ~30-60 seconds (depends on API rate limits)
-- **Single Channel Update**: ~5-10 seconds
-- **Schedule Generation**: <1 second (cached)
-- **Content Pool Size**: ~2000-5000 items (varies by channel configuration)
-
-## 🐛 Troubleshooting
-
-### Server won't start
-```bash
-# Check if port 8000 is in use
-lsof -i :8000
-# Kill the process if needed
-kill -9 <PID>
-```
-
-### Empty slots in EPG
-- Check TMDB API key in `secrets.ini`
-- Verify content pool has items: `cat data/content_pool.json | jq length`
-- Check server logs for discovery errors
-
-### Can't access from other devices
-```bash
-# Allow port 8000 through firewall
-sudo ufw allow 8000/tcp
-# Verify your local IP
-hostname -I
-```
-
-## 📝 Development
-
-### Running Tests
-```bash
-source venv/bin/activate
-pytest backend/tests/
-```
-
-### Code Style
-- Follow PEP 8 for Python code
-- Use type hints for function signatures
-- Document complex logic with comments
-
-## 🤝 Contributing
-
-This is a personal project, but suggestions and improvements are welcome!
-
-## 📄 License
-
-MIT License - Feel free to use and modify for personal use.
-
-## 🙏 Credits
-
-- **TMDB API**: Content metadata and images
-- **FastAPI**: Backend framework
-- **Streaming Providers**: Netflix, Disney+, HBO Max, Prime Video
+MyStreamTV transforma tus plataformas de streaming en una experiencia de televisión tradicional. Crea una Guía de Programación Electrónica (EPG) con canales temáticos personalizados que seleccionan automáticamente contenido de tus servicios favoritos (Netflix, Disney+, HBO Max, Prime Video, etc.).
 
 ---
 
-**Last Updated**: February 2026  
-**Version**: 2.0 (Post-Refactoring)
+## 🎯 ¿Qué es MyStreamTV?
+
+¿Cansado de pasar 30 minutos eligiendo qué ver? MyStreamTV lo hace por ti. El sistema organiza el catálogo de las plataformas en canales temáticos como "🚀 Sci-Fi", "🎭 Drama Médico" o "🎬 Cine de los 80s", con una programación continua las 24 horas del día.
+
+## 📸 Previsualización
+
+### Guía de Programación (EPG)
+````carousel
+![Interfaz Principal de EPG](docs/screenshots/epg_main.png)
+<!-- slide -->
+![Variedad de Canales Temáticos](docs/screenshots/epg_variety.png)
+<!-- slide -->
+![Canales de Comedia y Terror](docs/screenshots/epg_comedy_terror.png)
+<!-- slide -->
+![Franquicias: Star Wars, Batman, Star Trek](docs/screenshots/epg_starwars_batman.png)
+````
+
+### Panel de Administración
+````carousel
+![Consola de Gestión de Canales](docs/screenshots/admin_dashboard.png)
+<!-- slide -->
+![Editor de Canales (Filtros y Slots)](docs/screenshots/admin_edit_channel_top.png)
+<!-- slide -->
+![Configuración Avanzada de Tiempo](docs/screenshots/admin_edit_channel_bottom.png)
+````
+
+## ✨ Características Principales
+
+### 📺 Experiencia de TV Real
+- **Canales Temáticos Ilimitados**: Configura canales por género, década, palabras clave o franquicias.
+- **EPG Multi-Canal**: Visualiza toda la programación en una interfaz fluida y moderna.
+- **Sintonización Directa**: Haz clic en cualquier programa para abrirlo directamente en la plataforma de streaming correspondiente.
+
+### 🧠 Motor de Programación Inteligente (v2.0)
+- **Deduplicación de Contenido**: El mismo contenido no aparecerá en dos canales al mismo tiempo.
+- **Sistema de Cooldown (7 días)**: Las películas no se repiten en el mismo canal durante una semana (las series están exentas para permitir maratones).
+- **Actualización Optimizada**: Al editar un canal, solo se regenera el "pool" de ese canal específico, ahorrando tiempo y peticiones API.
+
+### 🛠️ Herramientas de Administración
+- **Panel de Control Web**: Gestiona tus canales, slots de tiempo y filtros sin tocar código.
+- **Filtros Avanzados**: Configura slots por nota mínima, actores, directores, idiomas o "universos" (ej. Marvel, Star Wars).
+
+---
+
+## 🚀 Inicio Rápido
+
+### Requisitos Previos
+- **Python 3.10+**
+- **Clave API de TMDB** ([Obtenla aquí](https://www.themoviedb.org/settings/api))
+
+### Instalación y Ejecución
+
+1. **Clona el repositorio**:
+   ```bash
+   git clone https://github.com/tu-usuario/mystreamtv.git
+   cd mystreamtv
+   ```
+
+2. **Prepara el entorno (Linux/macOS)**:
+   ```bash
+   ./start_server.sh
+   ```
+   *(El script creará el entorno virtual e instalará las dependencias automáticamente la primera vez).*
+
+3. **Configura tu API Key**:
+   Crea un archivo `secrets.ini` en la raíz del proyecto:
+   ```ini
+   [tmdb]
+   api_key = TU_API_KEY_AQUÍ
+   ```
+
+### Acceso
+- **Guía de TV (EPG)**: `http://localhost:8000`
+- **Consola de Administración**: `http://localhost:8000/admin.html`
+
+---
+
+## 📦 Tecnologías y Versiones
+
+Este proyecto utiliza las últimas versiones estables para garantizar rendimiento y seguridad:
+
+- **Backend**: FastAPI 0.109+, Uvicorn 0.27+, Pydantic 2.5+
+- **Frontend**: Vanilla JS (ES6+), CSS3 Moderno (Glassmorphism, Flexbox/Grid)
+- **Datos**: TMDB API v3
+
+---
+
+## ⚖️ Disclaimer y Atribución
+
+Este proyecto utiliza la API de **The Movie Database (TMDB)** pero no está endosado ni certificado por TMDB.
+
+<p align="center">
+  <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" width="100" alt="TMDB Logo">
+</p>
+
+- **Metadatos e Imágenes**: Toda la información de películas, series y posters proviene de [TMDB](https://www.themoviedb.org/).
+- **Disponibilidad en Streaming**: La información sobre en qué plataformas está disponible el contenido (Netflix, Disney+, etc.) es proporcionada por **JustWatch** a través de la integración oficial en la API de TMDB.
+
+---
+
+## 📝 Licencia
+
+Este proyecto es de código abierto bajo la licencia MIT. Siéntete libre de usarlo, modificarlo y compartirlo para uso personal.
+
+**Última actualización**: Febrero 2026  
+**Versión**: 2.1.0-stable

@@ -56,3 +56,6 @@ Desktop.ini
 # User specified exclusions (NOT ignoring data/json as requested)
 # explicitly tracking example config
 !secrets.ini.example
+
+# Cleanup folder
+attic/

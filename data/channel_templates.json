@@ -18,7 +18,7 @@
                     ],
                     "decade": [
                         1930,
-                        2030
+                        1999
                     ],
                     "keywords": [],
                     "with_people": [],
@@ -1048,61 +1048,86 @@
             "id": "epoca-oro"
         },
         {
-            "id": "epic-maximalism",
             "name": "🔥 Epic Maximalism",
             "icon": "🔥",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
             "slots": [
                 {
                     "start": "00:00",
                     "end": "10:00",
                     "label": "Visual Epics",
+                    "content_type": "movie",
+                    "decade": null,
+                    "vote_average_min": 7,
                     "keywords": [
                         "epic",
-                        "spectacle"
+                        "spectacle",
+                        "powerful"
                     ],
-                    "vote_average_min": 7.0,
-                    "content_type": "movie"
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "10:00",
                     "end": "16:00",
                     "label": "Bromance Action",
+                    "content_type": "movie",
+                    "genres": [
+                        28
+                    ],
+                    "decade": null,
                     "keywords": [
                         "buddy",
                         "friendship",
                         "partnership"
                     ],
-                    "genres": [
-                        28
-                    ],
-                    "content_type": "movie"
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "16:00",
                     "end": "20:00",
                     "label": "Musical Combat",
+                    "content_type": "movie",
+                    "genres": [
+                        28,
+                        10402
+                    ],
+                    "decade": null,
                     "keywords": [
                         "dance",
                         "battle",
                         "choreography"
                     ],
-                    "genres": [
-                        28,
-                        10402
-                    ],
-                    "content_type": "movie"
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
                 },
                 {
                     "start": "20:00",
                     "end": "00:00",
                     "label": "Sincere Maximalism",
+                    "content_type": "movie",
                     "genres": [
                         28,
                         12
                     ],
-                    "vote_average_min": 6.5
+                    "decade": null,
+                    "vote_average_min": 6.5,
+                    "keywords": [
+                        "powerful"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
                 }
-            ]
+            ],
+            "id": "epic-maximalism"
         },
         {
             "name": "🦸‍♂️ SUPERMAN",
@@ -1479,11 +1504,402 @@
                         "Rocky Balboa",
                         "James Bond",
                         "Karate Kid",
-                        "Jason Bourne"
+                        "Bourne"
                     ]
                 }
             ],
             "id": "rocky,-bond,-karate-kid,-bourne"
+        },
+        {
+            "name": "Classic Movies",
+            "icon": "",
+            "priority": 83,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "23:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "decade": [
+                        1940,
+                        2005
+                    ],
+                    "vote_average_min": 8,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "classic-movies"
+        },
+        {
+            "name": "The Cold War",
+            "icon": "",
+            "priority": 77,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "01:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "02:00",
+                    "end": "10:59",
+                    "label": "Series Mañana",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "11:00",
+                    "end": "13:59",
+                    "label": "Películas Mediodía",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "14:00",
+                    "end": "14:59",
+                    "label": "Series Corto Tarde",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "15:00",
+                    "end": "18:59",
+                    "label": "Películas Tarde",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "19:00",
+                    "end": "19:59",
+                    "label": "Series Corto Noche",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "20:00",
+                    "end": "23:59",
+                    "label": "Series Noche",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "\"cold war\""
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "the-cold-war"
+        },
+        {
+            "name": "Godzilla, Kaiju, Kong",
+            "icon": "",
+            "priority": 78,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "01:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Godzilla"
+                    ]
+                },
+                {
+                    "start": "02:00",
+                    "end": "10:59",
+                    "label": "Series Mañana",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "kaiju"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "11:00",
+                    "end": "13:59",
+                    "label": "Películas Mediodía",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "kong",
+                        "godzilla"
+                    ]
+                },
+                {
+                    "start": "14:00",
+                    "end": "14:59",
+                    "label": "Series Corto Tarde",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "kaiju"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "15:00",
+                    "end": "18:59",
+                    "label": "Películas Tarde",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "kaiju"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "kong",
+                        "godzilla"
+                    ]
+                },
+                {
+                    "start": "19:00",
+                    "end": "19:59",
+                    "label": "Series Corto Noche",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "20:00",
+                    "end": "23:59",
+                    "label": "Series Noche",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "godzilla,-kaiju,-kong"
+        },
+        {
+            "name": "CURRENT HITS",
+            "icon": "",
+            "priority": 89,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "23:59",
+                    "label": "Últimos Estrenos",
+                    "content_type": "movie",
+                    "decade": [
+                        2024,
+                        2027
+                    ],
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "tron",
+                        "jurassic park",
+                        "predator",
+                        "apes",
+                        "frankenstein",
+                        "f1"
+                    ]
+                }
+            ],
+            "id": "current-hits"
+        },
+        {
+            "name": "SITCOMS",
+            "icon": "",
+            "priority": 88,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "15:59",
+                    "label": "ALL TIME SITCOMS",
+                    "content_type": "tv",
+                    "decade": null,
+                    "vote_average_min": 8,
+                    "keywords": [
+                        "sitcom"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "16:00",
+                    "end": "23:59",
+                    "label": "PRIME SERIES",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "sitcom",
+                        "comedy",
+                        "dark comedy"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "the big bang theory",
+                        "friends",
+                        "the office",
+                        "Brooklyn Nine-Nine",
+                        "the good place",
+                        "modern family",
+                        "dead like me"
+                    ]
+                }
+            ],
+            "id": "sitcoms"
+        },
+        {
+            "name": "The Muppets",
+            "icon": "",
+            "priority": 93,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "01:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Muppet",
+                        "Muppets"
+                    ]
+                },
+                {
+                    "start": "02:00",
+                    "end": "10:59",
+                    "label": "Series Mañana",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Muppet",
+                        "Muppets"
+                    ]
+                },
+                {
+                    "start": "11:00",
+                    "end": "17:59",
+                    "label": "",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Muppet",
+                        "Muppets"
+                    ]
+                },
+                {
+                    "start": "18:00",
+                    "end": "21:59",
+                    "label": "",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Muppet",
+                        "Muppets"
+                    ]
+                },
+                {
+                    "start": "22:00",
+                    "end": "23:59",
+                    "label": "",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": [
+                        "Muppet",
+                        "Muppets"
+                    ]
+                }
+            ],
+            "id": "the-muppets"
         }
     ]
 }
