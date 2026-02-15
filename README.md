@@ -84,7 +84,15 @@ MyStreamTV transforma tus plataformas de streaming en una experiencia de televis
 
 ---
 
-## 📦 Tecnologías y Versiones
+## � Próximos Pasos (TO-DO)
+
+- [ ] **Búsqueda por personas**: Implementar la funcionalidad para buscar contenido por actores, directores y otros miembros del equipo (actualmente no disponible).
+- [ ] **Filtro por país de producción**: Agregar la capacidad de filtrar el catálogo basándose en el país de origen.
+- [ ] **Deep-linking optimizado**: Generar enlaces directos y profundos a las aplicaciones oficiales de streaming (actualmente los enlaces son genéricos o basados en IDs de TMDB).
+
+---
+
+## �📦 Tecnologías y Versiones
 
 Este proyecto utiliza las últimas versiones estables para garantizar rendimiento y seguridad:
 
