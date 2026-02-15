@@ -11,24 +11,27 @@ MyStreamTV transforma tus plataformas de streaming en una experiencia de televis
 ## 📸 Previsualización
 
 ### Guía de Programación (EPG)
-````carousel
+
 ![Interfaz Principal de EPG](docs/screenshots/epg_main.png)
-<!-- slide -->
+
 ![Variedad de Canales Temáticos](docs/screenshots/epg_variety.png)
-<!-- slide -->
+
 ![Canales de Comedia y Terror](docs/screenshots/epg_comedy_terror.png)
-<!-- slide -->
+
 ![Franquicias: Star Wars, Batman, Star Trek](docs/screenshots/epg_starwars_batman.png)
-````
+
+---
 
 ### Panel de Administración
-````carousel
+
 ![Consola de Gestión de Canales](docs/screenshots/admin_dashboard.png)
-<!-- slide -->
+
 ![Editor de Canales (Filtros y Slots)](docs/screenshots/admin_edit_channel_top.png)
-<!-- slide -->
+
 ![Configuración Avanzada de Tiempo](docs/screenshots/admin_edit_channel_bottom.png)
-````
+
+---
+
 
 ## ✨ Características Principales
 
