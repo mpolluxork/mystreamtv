@@ -22,6 +22,20 @@ MyStreamTV transforma tus plataformas de streaming en una experiencia de televis
 
 ---
 
+### Fichas de Contenido y Sintonización
+
+Al seleccionar cualquier programa, se despliega una ficha detallada con la sinopsis y los botones de sintonización directa a las plataformas donde está disponible el contenido.
+
+![Detalles: Superman (HBO Max)](docs/screenshots/epg_details_superman.png)
+
+![Detalles: Top Gun (Multi-plataforma)](docs/screenshots/epg_details_topgun.png)
+
+![Detalles: Shin Godzilla (Prime Video)](docs/screenshots/epg_details_godzilla.png)
+
+![Detalles: Amores Perros (Netflix y Mubi)](docs/screenshots/epg_details_amoresperros.png)
+
+---
+
 ### Panel de Administración
 
 ![Consola de Gestión de Canales](docs/screenshots/admin_dashboard.png)
