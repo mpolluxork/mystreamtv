@@ -175,10 +175,11 @@ async def get_channel_schedule(
 
 
 @router.get("/program/{tmdb_id}/providers")
-async def get_program_providers(tmdb_id: int, content_type: str = "movie"):
+async def get_program_providers(tmdb_id: int, content_type: str = "movie", title: str = ""):
     """
     Get streaming providers and deep links for a specific program.
     Only returns providers from the user's platform list.
+    Uses JustWatch links from TMDB as the primary URL.
     """
     tmdb = get_tmdb_client()
     
@@ -186,6 +187,9 @@ async def get_program_providers(tmdb_id: int, content_type: str = "movie"):
     
     # Get user's provider IDs
     user_provider_ids = set(tmdb.providers.values())
+    
+    # The 'link' field is the JustWatch URL for this content — valid for all providers
+    justwatch_link = providers.get("link")
     
     # Collect providers from all "watchable" categories (no buy/rent)
     flatrate = providers.get("flatrate", [])
@@ -207,17 +211,18 @@ async def get_program_providers(tmdb_id: int, content_type: str = "movie"):
     links = []
     for provider in all_watch_providers:
         provider_name = provider["provider_name"]
-        deep_link = generate_deep_link(provider_name, tmdb_id)
+        # Use platform search URL first (direct to platform), fall back to TMDB link
+        link = generate_deep_link(provider_name, tmdb_id, title) or justwatch_link
         
         links.append({
             "provider_name": provider_name,
             "logo_path": provider.get("logo_path"),
-            "deep_link": deep_link,
+            "deep_link": link,
         })
     
     return {
         "tmdb_id": tmdb_id,
         "content_type": content_type,
         "providers": links,
-        "tmdb_link": providers.get("link"),
+        "tmdb_link": justwatch_link,  # JustWatch URL as general fallback
     }

@@ -409,11 +409,17 @@ async def _process_item(
 
 
 async def _get_providers(tmdb_client, content_id: int, content_type: str) -> List[Dict[str, Any]]:
-    """Get available providers for content, filtered by user subscriptions."""
+    """Get available providers for content, filtered by user subscriptions.
+    
+    Saves the JustWatch 'link' field from TMDB so we have a valid URL to redirect users.
+    """
     try:
         providers_data = await tmdb_client.get_watch_providers(content_id, content_type)
         if not providers_data:
             return []
+        
+        # The 'link' field is the JustWatch URL for this content (valid, always works)
+        justwatch_link = providers_data.get("link")
         
         user_provider_ids = set(tmdb_client.providers.values())
         providers = []
@@ -428,6 +434,7 @@ async def _get_providers(tmdb_client, content_id: int, content_type: str) -> Lis
                             "provider_id": p_id,
                             "provider_name": provider.get("provider_name"),
                             "logo_path": provider.get("logo_path"),
+                            "link": justwatch_link,  # JustWatch URL — valid for all providers
                         })
                         seen_ids.add(p_id)
         return providers

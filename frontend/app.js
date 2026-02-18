@@ -98,14 +98,15 @@ async function loadGuide() {
     }
 }
 
-async function loadProviders(tmdbId, contentType = 'movie') {
+async function loadProviders(tmdbId, contentType = 'movie', title = '') {
     try {
-        const response = await fetch(`${API_BASE}/program/${tmdbId}/providers?content_type=${contentType}`);
+        const encodedTitle = encodeURIComponent(title);
+        const response = await fetch(`${API_BASE}/program/${tmdbId}/providers?content_type=${contentType}&title=${encodedTitle}`);
         if (!response.ok) throw new Error('Failed to load providers');
         return await response.json();
     } catch (err) {
         console.error('Failed to load providers:', err);
-        return { providers: [] };
+        return { providers: [], tmdb_link: null };
     }
 }
 
@@ -395,18 +396,30 @@ async function openModal(program) {
     // Load providers
     elements.modalProviders.innerHTML = '<span style="color: var(--epg-text-dim)">Cargando plataformas...</span>';
 
-    const data = await loadProviders(program.tmdb_id, program.content_type);
+    const searchTitle = program.original_title || program.title;
+    const data = await loadProviders(program.tmdb_id, program.content_type, searchTitle);
 
     if (data.providers && data.providers.length > 0) {
-        elements.modalProviders.innerHTML = data.providers.map(provider => `
-            <a href="${provider.deep_link || '#'}" 
-               target="_blank" 
-               class="btn-tune"
-               ${!provider.deep_link ? 'onclick="event.preventDefault()"' : ''}>
-                ${provider.logo_path ? `<img src="${TMDB_IMAGE_BASE}/w45${provider.logo_path}" alt="">` : ''}
-                Sintonizar en ${provider.provider_name}
+        elements.modalProviders.innerHTML = data.providers.map(provider => {
+            const url = provider.deep_link || data.tmdb_link || '#';
+            const disabled = url === '#' ? 'onclick="event.preventDefault()"' : '';
+            return `
+                <a href="${url}" 
+                   target="_blank" 
+                   class="btn-tune"
+                   ${disabled}>
+                    ${provider.logo_path ? `<img src="${TMDB_IMAGE_BASE}/w45${provider.logo_path}" alt="">` : ''}
+                    Sintonizar en ${provider.provider_name}
+                </a>
+            `;
+        }).join('');
+    } else if (data.tmdb_link) {
+        // Fallback: show a single JustWatch button if no specific providers matched
+        elements.modalProviders.innerHTML = `
+            <a href="${data.tmdb_link}" target="_blank" class="btn-tune">
+                🎬 Ver opciones en JustWatch
             </a>
-        `).join('');
+        `;
     } else {
         elements.modalProviders.innerHTML = '<span style="color: var(--epg-text-dim)">No hay plataformas de streaming disponibles para este título en México.</span>';
     }

@@ -127,7 +127,8 @@ class ScheduleEngine:
                     "vote_average_min": slot.vote_average_min,
                     "with_people": slot.with_people,
                     "keywords": slot.keywords,
-                    "universes": slot.universes
+                    "universes": slot.universes,
+                    "title_contains": slot.title_contains
                 }
                 
                 # Perform discovery
@@ -193,7 +194,8 @@ class ScheduleEngine:
                 "vote_average_min": slot.vote_average_min,
                 "with_people": slot.with_people,
                 "keywords": slot.keywords,
-                "universes": slot.universes
+                "universes": slot.universes,
+                "title_contains": slot.title_contains
             }
             
             # Perform discovery with smaller batch size for single channel
@@ -562,7 +564,9 @@ class ScheduleEngine:
                 first_provider = content.providers[0]
                 provider_name = first_provider.get("provider_name")
                 provider_logo = first_provider.get("logo_path")
-                deep_link = generate_deep_link(provider_name, content.tmdb_id)
+                # Use stored JustWatch link first, then fall back to generated URL
+                stored_link = first_provider.get("link")
+                deep_link = stored_link or generate_deep_link(provider_name, content.tmdb_id, content.title)
             
             program = Program(
                 id=program_id,
@@ -698,30 +702,49 @@ class ScheduleEngine:
             return sorted(self.channels, key=lambda x: x.priority, reverse=True)
         return sorted([c for c in self.channels if c.enabled], key=lambda x: x.priority, reverse=True)
 
+def _load_provider_urls() -> dict:
+    """Load platform search URL templates from data/provider_urls.json."""
+    import json
+    import os
+    # Look for the file relative to the backend root
+    candidates = [
+        os.path.join(os.path.dirname(__file__), "..", "..", "data", "provider_urls.json"),
+        os.path.join(os.getcwd(), "data", "provider_urls.json"),
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            # Remove comment keys (starting with _)
+            return {k: v for k, v in data.items() if not k.startswith("_")}
+    return {}
 
-# Deep link URL generators
-DEEP_LINK_TEMPLATES = {
-    "netflix": "https://www.netflix.com/title/{id}",
-    "disney": "https://www.disneyplus.com/video/{id}",
-    "hbo_max": "https://play.max.com/movie/{id}",
-    "prime": "https://www.primevideo.com/detail/{id}",
-}
+# Loaded once at module import; restart server after editing provider_urls.json
+PLATFORM_SEARCH_URLS = _load_provider_urls()
 
 
-def generate_deep_link(provider_name: str, content_id: int) -> Optional[str]:
-    """Generate deep link URL for a streaming provider."""
+def generate_deep_link(provider_name: str, content_id: int, title: str = "") -> Optional[str]:
+    """
+    Generate a search URL for a streaming provider.
+    
+    Looks up provider_name against keys in data/provider_urls.json (substring match).
+    If the URL template contains {title}, it's filled with the URL-encoded title.
+    If no {title} placeholder, the URL is used as-is (for client-side search platforms).
+    """
     if not provider_name:
         return None
     
-    provider_key = provider_name.lower().replace(" ", "_").replace("+", "")
+    import urllib.parse
+    provider_key = provider_name.lower()
+    encoded_title = urllib.parse.quote(title) if title else ""
     
-    if "netflix" in provider_key:
-        return DEEP_LINK_TEMPLATES["netflix"].format(id=content_id)
-    elif "disney" in provider_key:
-        return DEEP_LINK_TEMPLATES["disney"].format(id=content_id)
-    elif "max" in provider_key or "hbo" in provider_key:
-        return DEEP_LINK_TEMPLATES["hbo_max"].format(id=content_id)
-    elif "prime" in provider_key or "amazon" in provider_key:
-        return DEEP_LINK_TEMPLATES["prime"].format(id=content_id)
+    # Find the first key that appears in the provider name
+    for key, url_template in PLATFORM_SEARCH_URLS.items():
+        if key in provider_key:
+            if "{title}" in url_template:
+                return url_template.format(title=encoded_title) if encoded_title else url_template.split("?")[0].split("{")[0].rstrip("/")
+            else:
+                return url_template  # Static URL (client-side search, e.g. Disney+)
     
     return None
+

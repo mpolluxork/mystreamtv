@@ -1,0 +1,23 @@
+{
+    "_instrucciones": "Agrega aquí las URLs de búsqueda de cada plataforma. Usa {title} donde va el término de búsqueda. Si la plataforma no soporta búsqueda por URL (ej. Disney+), omite {title} y pon solo la URL de la página de búsqueda.",
+    "_keywords": "La clave es cualquier fragmento del nombre del proveedor tal como lo devuelve TMDB (en minúsculas). Se evalúa si el nombre del proveedor CONTIENE la clave.",
+    "netflix": "https://www.netflix.com/search?q={title}",
+    "disney": "https://www.disneyplus.com/es-419/browse/search",
+    "max": "https://play.max.com/search?q={title}",
+    "hbo": "https://play.max.com/search?q={title}",
+    "prime": "https://www.primevideo.com/search/ref=atv_nb_sr?phrase={title}",
+    "amazon": "https://www.primevideo.com/search/ref=atv_nb_sr?phrase={title}",
+    "apple": "https://tv.apple.com/search?term={title}",
+    "paramount": "https://www.paramountplus.com/search/",
+    "tubi": "https://tubitv.com/search/{title}",
+    "pluto": "https://pluto.tv/search/{title}",
+    "mubi": "https://mubi.com/search/{title}",
+    "vix": "https://www.vix.com/search?q={title}",
+    "mercado": "https://play.mercadolibre.com.mx/buscar/{title}",
+    "star+": "https://www.starplus.com/en-us/search?q={title}",
+    "claro": "https://clarovideo.com/search?q={title}",
+    "blim": "https://www.blim.com/search/{title}",
+    "universal": "https://www.universalplus.com/search?q={title}",
+    "mgm": "https://www.mgmplus.com/search?q={title}",
+    "crunchyroll": "https://www.crunchyroll.com/search?q={title}"
+}
