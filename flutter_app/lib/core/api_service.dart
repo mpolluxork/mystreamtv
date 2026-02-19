@@ -4,7 +4,13 @@ import 'server_config.dart';
 
 /// Central HTTP client for the MyStreamTV API.
 class ApiService {
-  static String get _base => ServerConfig.baseUrl ?? 'http://localhost:8000';
+  static String get _base {
+    final url = ServerConfig.baseUrl;
+    if (url == null) {
+      throw Exception('Server URL not configured. App should be showing SetupScreen.');
+    }
+    return url;
+  }
 
   static Map<String, String> get _headers => {
         'Content-Type': 'application/json',

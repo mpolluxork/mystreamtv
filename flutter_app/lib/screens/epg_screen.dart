@@ -40,7 +40,8 @@ class _EpgScreenState extends State<EpgScreen> {
     // Load guide on first frame
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<EpgProvider>().loadGuide();
-      _focusNode.requestFocus();
+      // Request focus via FocusScope so the scope owns the focus anchor.
+      FocusScope.of(context).requestFocus(_focusNode);
     });
   }
 
@@ -124,26 +125,29 @@ class _EpgScreenState extends State<EpgScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardListener(
-      focusNode: _focusNode,
-      onKeyEvent: _handleKey,
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                _buildTopBar(context),
-                Expanded(child: _buildBody(context)),
-              ],
-            ),
-            // Detail overlay
-            if (_detailOpen && _selectedProgram != null)
-              ProgramDetailOverlay(
-                program: _selectedProgram!,
-                onClose: _closeDetail,
+    return FocusScope(
+      autofocus: true,
+      child: KeyboardListener(
+        focusNode: _focusNode,
+        onKeyEvent: _handleKey,
+        child: Scaffold(
+          backgroundColor: kBackgroundColor,
+          body: Stack(
+            children: [
+              Column(
+                children: [
+                  _buildTopBar(context),
+                  Expanded(child: _buildBody(context)),
+                ],
               ),
-          ],
+              // Detail overlay
+              if (_detailOpen && _selectedProgram != null)
+                ProgramDetailOverlay(
+                  program: _selectedProgram!,
+                  onClose: _closeDetail,
+                ),
+            ],
+          ),
         ),
       ),
     );

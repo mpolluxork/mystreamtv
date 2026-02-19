@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/server_config.dart';
+import 'core/device_info.dart';
 import 'providers/epg_provider.dart';
 import 'providers/focus_provider.dart';
 import 'screens/server_setup_screen.dart';
@@ -12,6 +13,7 @@ import 'core/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ServerConfig.init();
+  await DeviceInfo.init(); // detect TV vs phone/tablet via native UiModeManager
   runApp(const MyStreamTVApp());
 }
 

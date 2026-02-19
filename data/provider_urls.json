@@ -19,5 +19,6 @@
     "blim": "https://www.blim.com/search/{title}",
     "universal": "https://www.universalplus.com/search?q={title}",
     "mgm": "https://www.mgmplus.com/search?q={title}",
-    "crunchyroll": "https://www.crunchyroll.com/search?q={title}"
+    "crunchyroll": "https://www.crunchyroll.com/search?q={title}",
+    "plex": "https://watch.plex.tv/search?q={title}"
 }

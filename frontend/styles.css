@@ -772,7 +772,8 @@ body {
 }
 
 .jw-logo {
-    height: 18px;
+    height: 64px;
+    mix-blend-mode: screen;
 }
 
 .attribution-text {

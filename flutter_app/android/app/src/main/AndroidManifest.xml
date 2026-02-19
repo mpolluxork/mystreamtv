@@ -17,7 +17,7 @@
         android:label="MyStreamTV"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:banner="@mipmap/ic_launcher"
+        android:banner="@drawable/tv_banner"
         android:theme="@style/LaunchTheme">
 
         <!-- Main activity: works on both TV and phone -->

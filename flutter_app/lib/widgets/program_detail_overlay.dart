@@ -29,12 +29,24 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
   late Animation<double> _fade;
   late Animation<Offset> _slide;
 
+  // GAP-4 fix: named FocusNode with proper lifecycle (replaces the previous
+  // anonymous `FocusNode()..requestFocus()` that was never disposed).
+  late FocusNode _overlayFocusNode;
+
   ProvidersResponse? _providers;
   bool _loadingProviders = true;
+
+  // GAP-2: one FocusNode per provider button for D-pad navigation.
+  List<FocusNode> _providerFocusNodes = [];
+  int _focusedProviderIndex = 0;
 
   @override
   void initState() {
     super.initState();
+
+    // GAP-4: proper lifecycle
+    _overlayFocusNode = FocusNode();
+
     _anim = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 250),
@@ -45,7 +57,25 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _anim, curve: Curves.easeOut));
     _anim.forward();
+
     _loadProviders();
+
+    // Capture keyboard focus when the overlay appears.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _overlayFocusNode.requestFocus();
+    });
+  }
+
+  @override
+  void dispose() {
+    _anim.dispose();
+    // GAP-4: properly release overlay focus node
+    _overlayFocusNode.dispose();
+    // GAP-2: release all per-provider focus nodes
+    for (final fn in _providerFocusNodes) {
+      fn.dispose();
+    }
+    super.dispose();
   }
 
   Future<void> _loadProviders() async {
@@ -53,18 +83,28 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
           widget.program.tmdbId,
           widget.program.contentType,
         );
-    if (mounted) {
-      setState(() {
-        _providers = result;
-        _loadingProviders = false;
+    if (!mounted) return;
+
+    // GAP-2: build one FocusNode per returned provider
+    final newNodes = List.generate(
+      result?.providers.length ?? 0,
+      (_) => FocusNode(),
+    );
+
+    setState(() {
+      _providers = result;
+      _loadingProviders = false;
+      for (final fn in _providerFocusNodes) fn.dispose();
+      _providerFocusNodes = newNodes;
+      _focusedProviderIndex = 0;
+    });
+
+    // Auto-focus first provider button on TV
+    if (newNodes.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) newNodes[0].requestFocus();
       });
     }
-  }
-
-  @override
-  void dispose() {
-    _anim.dispose();
-    super.dispose();
   }
 
   Future<void> _close() async {
@@ -79,20 +119,43 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
     }
   }
 
+  // GAP-2: D-pad handler for the overlay keyboard events.
+  void _handleKey(KeyEvent event) {
+    if (event is! KeyDownEvent && event is! KeyRepeatEvent) return;
+    final key = event.logicalKey;
+
+    // Close overlay
+    if (key == LogicalKeyboardKey.escape || key == LogicalKeyboardKey.goBack) {
+      _close();
+      return;
+    }
+
+    final providers = _providers?.providers ?? [];
+    if (providers.isEmpty) return;
+
+    if (key == LogicalKeyboardKey.arrowLeft) {
+      final next = (_focusedProviderIndex - 1).clamp(0, providers.length - 1);
+      setState(() => _focusedProviderIndex = next);
+      _providerFocusNodes[next].requestFocus();
+    } else if (key == LogicalKeyboardKey.arrowRight) {
+      final next = (_focusedProviderIndex + 1).clamp(0, providers.length - 1);
+      setState(() => _focusedProviderIndex = next);
+      _providerFocusNodes[next].requestFocus();
+    } else if (key == LogicalKeyboardKey.enter ||
+        key == LogicalKeyboardKey.select) {
+      final deepLink = providers[_focusedProviderIndex].deepLink;
+      if (deepLink != null) _openLink(deepLink);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final tv = isTV(context);
     final p = widget.program;
 
     return KeyboardListener(
-      focusNode: FocusNode()..requestFocus(),
-      onKeyEvent: (event) {
-        if (event is KeyDownEvent &&
-            (event.logicalKey == LogicalKeyboardKey.escape ||
-                event.logicalKey == LogicalKeyboardKey.goBack)) {
-          _close();
-        }
-      },
+      focusNode: _overlayFocusNode, // GAP-4: named node, properly disposed
+      onKeyEvent: _handleKey,
       child: FadeTransition(
         opacity: _fade,
         child: GestureDetector(
@@ -145,7 +208,6 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
   Widget _buildBackdrop(Program p, bool tv) {
     return Stack(
       children: [
-        // Backdrop image
         SizedBox(
           height: tv ? 280 : 180,
           width: double.infinity,
@@ -158,7 +220,6 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
                 )
               : Container(color: kCardColor),
         ),
-        // Gradient overlay
         Positioned.fill(
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -175,19 +236,15 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
             ),
           ),
         ),
-        // Close button
         Positioned(
           top: 12,
           right: 12,
           child: IconButton(
             icon: const Icon(Icons.close_rounded, color: Colors.white),
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.black45,
-            ),
+            style: IconButton.styleFrom(backgroundColor: Colors.black45),
             onPressed: _close,
           ),
         ),
-        // Title overlay at bottom of backdrop
         Positioned(
           bottom: 16,
           left: 20,
@@ -198,7 +255,8 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
               if (p.slotLabel.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.only(bottom: 6),
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: kAccentColor,
                     borderRadius: BorderRadius.circular(4),
@@ -219,7 +277,7 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
                   color: Colors.white,
                   fontSize: tv ? 28 : 20,
                   fontWeight: FontWeight.bold,
-                  shadows: [Shadow(color: Colors.black, blurRadius: 8)],
+                  shadows: [const Shadow(color: Colors.black, blurRadius: 8)],
                 ),
               ),
             ],
@@ -235,7 +293,6 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Meta row
           Wrap(
             spacing: 12,
             runSpacing: 6,
@@ -251,10 +308,7 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
                 _metaChip(Icons.label_rounded, p.genres.take(2).join(', ')),
             ],
           ),
-
           const SizedBox(height: 16),
-
-          // Overview
           if (p.overview.isNotEmpty) ...[
             Text(
               p.overview,
@@ -266,8 +320,6 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
             ),
             const SizedBox(height: 20),
           ],
-
-          // Providers section
           Text(
             'DISPONIBLE EN',
             style: TextStyle(
@@ -278,7 +330,6 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
             ),
           ),
           const SizedBox(height: 12),
-
           if (_loadingProviders)
             const Center(
               child: Padding(
@@ -292,17 +343,20 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
               style: TextStyle(color: kTextDim, fontSize: tv ? 14 : 12),
             )
           else
+            // GAP-2: each button gets its own managed FocusNode
             Wrap(
               spacing: 12,
               runSpacing: 12,
-              children: _providers!.providers
-                  .map((prov) => _ProviderButton(
-                        provider: prov,
-                        onTap: prov.deepLink != null
-                            ? () => _openLink(prov.deepLink!)
-                            : null,
-                      ))
-                  .toList(),
+              children: [
+                for (int i = 0; i < _providers!.providers.length; i++)
+                  _ProviderButton(
+                    provider: _providers!.providers[i],
+                    focusNode: _providerFocusNodes[i],
+                    onTap: _providers!.providers[i].deepLink != null
+                        ? () => _openLink(_providers!.providers[i].deepLink!)
+                        : null,
+                  ),
+              ],
             ),
         ],
       ),
@@ -324,68 +378,92 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
   }
 }
 
-class _ProviderButton extends StatefulWidget {
+// ── Provider Button ────────────────────────────────────────────────────────────
+
+/// GAP-2: Accepts an external [focusNode] managed by the overlay so the parent
+/// can drive D-pad navigation with left/right arrows.
+/// GAP-2: Visual feedback uses [Focus.of(context).hasFocus] instead of the
+/// previous mouse-only [MouseRegion] — works with both remote and pointer.
+class _ProviderButton extends StatelessWidget {
   final ProviderInfo provider;
+  final FocusNode focusNode;
   final VoidCallback? onTap;
 
-  const _ProviderButton({required this.provider, this.onTap});
-
-  @override
-  State<_ProviderButton> createState() => _ProviderButtonState();
-}
-
-class _ProviderButtonState extends State<_ProviderButton> {
-  bool _hovered = false;
+  const _ProviderButton({
+    required this.provider,
+    required this.focusNode,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            color: _hovered ? kAccentColor : kCardColor,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: _hovered ? kAccentColor : kBorderColor,
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (widget.provider.logoPath != null)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: CachedNetworkImage(
-                    imageUrl: tmdbLogo(widget.provider.logoPath),
-                    width: 28,
-                    height: 28,
-                    fit: BoxFit.contain,
-                    errorWidget: (_, __, ___) => const SizedBox.shrink(),
+    return Focus(
+      focusNode: focusNode,
+      child: Builder(
+        builder: (ctx) {
+          final focused = Focus.of(ctx).hasFocus;
+          return MouseRegion(
+            // Keep mouse hover working for desktop/mobile
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: onTap,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                decoration: BoxDecoration(
+                  color: focused ? kAccentColor : kCardColor,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: focused ? kAccentColor : kBorderColor,
+                    width: focused ? 2 : 1,
                   ),
+                  boxShadow: focused
+                      ? [
+                          BoxShadow(
+                            color: kAccentGlow,
+                            blurRadius: 10,
+                            spreadRadius: 1,
+                          )
+                        ]
+                      : null,
                 ),
-              if (widget.provider.logoPath != null) const SizedBox(width: 8),
-              Text(
-                'Ver en ${widget.provider.providerName}',
-                style: TextStyle(
-                  color: _hovered ? Colors.white : kTextPrimary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (provider.logoPath != null)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: CachedNetworkImage(
+                          imageUrl: tmdbLogo(provider.logoPath),
+                          width: 28,
+                          height: 28,
+                          fit: BoxFit.contain,
+                          errorWidget: (_, __, ___) =>
+                              const SizedBox.shrink(),
+                        ),
+                      ),
+                    if (provider.logoPath != null) const SizedBox(width: 8),
+                    Text(
+                      'Ver en ${provider.providerName}',
+                      style: TextStyle(
+                        color: focused ? Colors.white : kTextPrimary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Icon(
+                      Icons.open_in_new_rounded,
+                      size: 14,
+                      color: focused ? Colors.white70 : kTextDim,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 6),
-              Icon(
-                Icons.open_in_new_rounded,
-                size: 14,
-                color: _hovered ? Colors.white70 : kTextDim,
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

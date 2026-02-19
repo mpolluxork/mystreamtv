@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'device_info.dart';
 
 // ── TMDB ──────────────────────────────────────────────────────────────────────
 const String kTmdbImageBase = 'https://image.tmdb.org/t/p';
@@ -41,8 +42,13 @@ const double kMinuteWidth = 5.0;
 const double kMinCardWidth = 120.0;
 
 // ── TV vs MOBILE ──────────────────────────────────────────────────────────────
+/// Returns true when the app is running on an Android TV / Google TV device.
+/// Detection is two-layered:
+///   1. Native: UiModeManager reports UI_MODE_TYPE_TELEVISION (see DeviceInfo).
+///   2. Fallback: screen width ≥ 1280 px (raised from 1200 to reduce
+///      false-positives on large tablets in landscape).
 bool isTV(BuildContext context) =>
-    MediaQuery.of(context).size.width >= 1200;
+    DeviceInfo.isTV || MediaQuery.of(context).size.width >= 1280;
 
 bool isTablet(BuildContext context) {
   final w = MediaQuery.of(context).size.width;

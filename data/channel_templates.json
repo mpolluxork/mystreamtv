@@ -1029,19 +1029,18 @@
                     "end": "00:00",
                     "label": "Cine Mexicano Moderno",
                     "content_type": "movie",
-                    "decade": null,
+                    "decade": [
+                        1988,
+                        2030
+                    ],
                     "vote_average_min": 6.5,
                     "keywords": [
-                        "new mexican cinema"
+                        "Mexico"
                     ],
                     "with_people": [],
                     "universes": [],
                     "title_contains": [
-                        "Mexico",
-                        "solo con tu pareja",
-                        "amores perros",
-                        "sexo pudor y lagrimas",
-                        "caifanes"
+                        "mexico"
                     ]
                 }
             ],
