@@ -14,14 +14,14 @@ __pycache__/
 *.bak
 
 # Distribution / Packaging
-build/
+/build/
 develop-eggs/
-dist/
+/dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+/lib/
+/lib64/
 parts/
 sdist/
 var/
@@ -59,3 +59,14 @@ Desktop.ini
 
 # Cleanup folder
 attic/
+
+# Flutter/Dart specific (if not at root)
+**/build/
+**/.dart_tool/
+**/.packages
+**/.pub/
+**/*.pwp
+**/*.log
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/generated/
