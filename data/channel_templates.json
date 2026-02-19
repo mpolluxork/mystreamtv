@@ -1988,6 +1988,56 @@
                 }
             ],
             "id": "robin-"
+        },
+        {
+            "name": "Vampires",
+            "icon": "",
+            "priority": 50,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "10:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "vampire"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "11:00",
+                    "end": "13:59",
+                    "label": "Series Mediodía",
+                    "content_type": "tv",
+                    "decade": null,
+                    "keywords": [
+                        "vampire"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                },
+                {
+                    "start": "14:00",
+                    "end": "23:59",
+                    "label": "Peliculas",
+                    "content_type": "movie",
+                    "decade": null,
+                    "keywords": [
+                        "vampire"
+                    ],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "vampires"
         }
     ]
 }

@@ -18226,7 +18226,9 @@
       "based on young adult novel"
     ],
     "universes": [],
-    "origin_channels": [],
+    "origin_channels": [
+      "vampires"
+    ],
     "director_id": null,
     "director_name": null,
     "origin_countries": [
@@ -19464,7 +19466,9 @@
       "fighting supernatural"
     ],
     "universes": [],
-    "origin_channels": [],
+    "origin_channels": [
+      "vampires"
+    ],
     "director_id": null,
     "director_name": null,
     "origin_countries": [
@@ -107732,5 +107736,2479 @@
     ],
     "poster_path": "/3teWChNzKJdbfen46IdeKTygdZa.jpg",
     "backdrop_path": "/uoIOfRNmu47P2fET2KnrYHt3TH.jpg"
+  },
+  {
+    "tmdb_id": 628,
+    "title": "Entrevista con el Vampiro",
+    "original_title": "Interview with the Vampire",
+    "media_type": "movie",
+    "overview": "Cuando lo desea, el vampiro Lestat convierte a sus víctimas en vampiros, concediéndoles así el don de la inmortalidad. A finales del siglo XVIII, Lestat convierte en vampiro a Louis de Pointe, un hombre desolado por la pérdida de su esposa y de su pequeña hija. Doscientos años más tarde, a finales del siglo XX, en San Francisco, Louis decide contar su historia, la historia de amor, terror y éxtasis de un vampiro, a un joven reportero,",
+    "genres": [
+      27,
+      18,
+      14
+    ],
+    "year": 1994,
+    "decade": 1990,
+    "vote_average": 7.385,
+    "vote_count": 6300,
+    "is_premium": false,
+    "keywords": [
+      "paris, france",
+      "based on novel or book",
+      "san francisco, california",
+      "vampire",
+      "bite",
+      "new orleans, louisiana",
+      "plantation",
+      "louisiana",
+      "pity",
+      "child vampire",
+      "gothic horror",
+      "18th century",
+      "plague",
+      "19th century",
+      "urban gothic",
+      "reluctant vampire"
+    ],
+    "universes": [
+      "Las Crónicas vampíricas"
+    ],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": 17016,
+    "director_name": "Neil Jordan",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 117,
+    "release_date": "1994-11-11",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/628-interview-with-the-vampire/watch?locale=MX"
+      },
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/628-interview-with-the-vampire/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/921DrRqvdnX90grWPkuRnOoko5l.jpg",
+    "backdrop_path": "/3fChciF2G1wXHsyTfJD9y7uN6Il.jpg"
+  },
+  {
+    "tmdb_id": 72331,
+    "title": "Abraham Lincoln: Cazador De Vampiros",
+    "original_title": "Abraham Lincoln: Vampire Hunter",
+    "media_type": "movie",
+    "overview": "Abraham Lincoln, además de ser Presidente de los Estados Unidos, también fue un cazador de vampiros tras enterarse de que su madre murió asesinada a garras de una de esas criaturas sobrenaturales, dando pie así a una visión fresca y visceral de las sangrientas tradiciones vampíricas, imaginando a Lincoln como el más grande cazador de no-muertos de la Historia.",
+    "genres": [
+      28,
+      14,
+      27
+    ],
+    "year": 2012,
+    "decade": 2010,
+    "vote_average": 5.764,
+    "vote_count": 3500,
+    "is_premium": false,
+    "keywords": [
+      "usa president",
+      "vampire",
+      "supernatural",
+      "steam locomotive",
+      "american civil war",
+      "slave owner",
+      "19th century",
+      "abraham lincoln",
+      "axe",
+      "ヴァンパイア",
+      "リンカーン",
+      "ヴァンパイアハンター"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": 23430,
+    "director_name": "Timur Bekmambetov",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 105,
+    "release_date": "2012-06-20",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/movie/72331-abraham-lincoln-vampire-hunter/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/ki40e5GpfvTk2Vnsy3AZi2UgTMu.jpg",
+    "backdrop_path": "/ei4bXNp4hBrfUEvWkp7usnQeGQP.jpg"
+  },
+  {
+    "tmdb_id": 988402,
+    "title": "Vampira humanista busca suicida",
+    "original_title": "Vampire humaniste cherche suicidaire consentant",
+    "media_type": "movie",
+    "overview": "Sasha es una joven vampiro con un grave problema: es demasiado sensible para matar. Cuando sus padres dejan de alimentarla, su vida corre peligro. Por suerte, Sasha conoce a Paul, un adolescente solitario con tendencias suicidas que está dispuesto a dar su vida para salvar a su nueva amiga. Pronto su acuerdo se convierte en una búsqueda nocturna para cumplir, antes de que amanezca, los últimos deseos de Paul.",
+    "genres": [
+      10749,
+      35,
+      14,
+      27
+    ],
+    "year": 2023,
+    "decade": 2020,
+    "vote_average": 7.397,
+    "vote_count": 360,
+    "is_premium": false,
+    "keywords": [
+      "friendship",
+      "suicide",
+      "suicide attempt",
+      "vampire",
+      "bite",
+      "hunger",
+      "bloodthirstiness",
+      "quebec",
+      "moral conflict",
+      "bullying",
+      "montreal, canada",
+      "coming of age",
+      "bully",
+      "revenge",
+      "relationship",
+      "compassion",
+      "will",
+      "teeth",
+      "macabre",
+      "suicide thoughts",
+      "forced",
+      "unlikely friendship",
+      "teen suicide",
+      "blood sucking",
+      "starving",
+      "woman director",
+      "bullied",
+      "revenge killing",
+      "moral dilemma",
+      "humanity",
+      "canine",
+      "improbable friendship",
+      "drinking blood",
+      "boy meets girl",
+      "humanism",
+      "consent",
+      "forced to kill",
+      "human vampire relationship",
+      "boy girl relationship",
+      "playful",
+      "french canadian",
+      "night",
+      "reluctant vampire",
+      "blood",
+      "teenager",
+      "absurd",
+      "revenge for bullying",
+      "take revenge",
+      "whimsical",
+      "compassionate",
+      "earnest"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": 1453110,
+    "director_name": "Ariane Louis-Seize",
+    "origin_countries": [],
+    "original_language": "fr",
+    "runtime": 91,
+    "release_date": "2023-10-13",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/988402-vampire-humaniste-cherche-suicidaire-consentant/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/vQNOB42MJNi2655nMaLsQa8XaiK.jpg",
+    "backdrop_path": "/7t7IQhdA5rO8jhinE3ig258hqlf.jpg"
+  },
+  {
+    "tmdb_id": 40264,
+    "title": "Una loca película de vampiros",
+    "original_title": "Vampires Suck",
+    "media_type": "movie",
+    "overview": "'Vampires Suck' es una comedia sobre la ansiedad adolescente. Becca es una adolescente no vampiro que se debate entre dos chicos. Antes de que pueda elegir, Becca debe sortear a su padre, quien avergüenza a su hija por tratarla como si fuera una niña. Mientras tanto, los amigos de Becca deberán lidiar con sus propios problemas amorosos, chocando todos ellos en el baile de graduación. Parodia de la creciente moda de las películas vampíricas, tomando \"Crepúsculo\" como eje.",
+    "genres": [
+      35,
+      14
+    ],
+    "year": 2010,
+    "decade": 2010,
+    "vote_average": 4.394,
+    "vote_count": 1375,
+    "is_premium": false,
+    "keywords": [
+      "high school",
+      "vampire",
+      "parody",
+      "spoof",
+      "prom",
+      "horror spoof",
+      "duringcreditsstinger"
+    ],
+    "universes": [
+      "Una loca película de vampiros"
+    ],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": 35694,
+    "director_name": "Jason Friedberg",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 82,
+    "release_date": "2010-08-18",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/movie/40264-vampires-suck/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/m3RvsysFahSo2BI8aeywjYhzcn5.jpg",
+    "backdrop_path": "/uACr2UntrZNqlFpQYFlqbVAb1eW.jpg"
+  },
+  {
+    "tmdb_id": 1243341,
+    "title": "Z-O-M-B-I-E-S 4: El origen de los vampiros",
+    "original_title": "Z-O-M-B-I-E-S 4: Dawn of the Vampires",
+    "media_type": "movie",
+    "overview": "En esta nueva entrega de la saga Zombies, el zombi Zed y la animadora Addison, junto con Eliza y el hombre lobo Willa, conocen a Victor (un vampiro nocturno) y a Nova (una vampira diurna), enemigos mortales procedentes de las caras opuestas del monte Rayburn que deben aprender a mantener la paz entre sus comunidades si quieren sobrevivir.",
+    "genres": [
+      14,
+      10402,
+      10749,
+      12,
+      10751,
+      35,
+      10770
+    ],
+    "year": 2025,
+    "decade": 2020,
+    "vote_average": 6.926,
+    "vote_count": 136,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "college",
+      "musical",
+      "road trip",
+      "sequel",
+      "zombie",
+      "summer vacation",
+      "teenage romance",
+      "interspecies romance"
+    ],
+    "universes": [
+      "Z-O-M-B-I-E-S"
+    ],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": 38692,
+    "director_name": "Paul Hoen",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 86,
+    "release_date": "2025-07-10",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/movie/1243341-z-o-m-b-i-e-s-4-dawn-of-the-vampires/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/6EHx7lOm1jvNTr6lqRxiqmnFFDt.jpg",
+    "backdrop_path": "/68TGPnvmZ21NBOoV5IUZ4fQDyvZ.jpg"
+  },
+  {
+    "tmdb_id": 567971,
+    "title": "Vampiros vs. el Bronx",
+    "original_title": "Vampires vs. the Bronx",
+    "media_type": "movie",
+    "overview": "En un barrio del Bronx que se aburguesa aceleradamente, tres valientes chicos descubren un complot siniestro para dejar a su querida comunidad sin una gota de vida.",
+    "genres": [
+      35,
+      27
+    ],
+    "year": 2020,
+    "decade": 2020,
+    "vote_average": 5.74,
+    "vote_count": 313,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "bronx, new york city"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": 1087686,
+    "director_name": "Oz Rodríguez",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 86,
+    "release_date": "2020-10-02",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/567971-vampires-vs-the-bronx/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/r55WHmiXzryJA0v5MlrwyFQXRTF.jpg",
+    "backdrop_path": "/onpWnO4mJsHSFBXYRBf48t9tipk.jpg"
+  },
+  {
+    "tmdb_id": 50620,
+    "title": "Crepúsculo:  Amanecer - Parte 2",
+    "original_title": "The Twilight Saga: Breaking Dawn - Part 2",
+    "media_type": "movie",
+    "overview": "Quinta y última pelicula de la saga Crepúsculo.\r Tras convertirse en vampiro, Bella debe adaptarse a su nueva naturaleza. Cuando nace Renesmee, la familia Cullen tendrá que protegerse de la amenaza de los Volturi, pues existe una ley que prohíbe transformar a los niños en vampiros, ya que son difíciles de controlar y pueden provocar desastres que pongan en peligro la secreta existencia de los vampiros. Segunda parte de \"Amanecer\" y quinta entrega de la franquicia cinematográfica Crepúsculo, basada en las novelas de Stephenie Meyer",
+    "genres": [
+      12,
+      14,
+      18,
+      10749
+    ],
+    "year": 2012,
+    "decade": 2010,
+    "vote_average": 6.459,
+    "vote_count": 9278,
+    "is_premium": false,
+    "keywords": [
+      "based on novel or book",
+      "vampire",
+      "villainess",
+      "affectation",
+      "romance",
+      "teen movie",
+      "werewolf",
+      "supernatural creature",
+      "super strength",
+      "imprinting",
+      "cross breed",
+      "bloodsucker",
+      "grudge",
+      "chief of police",
+      "wolf pack",
+      "misinformation",
+      "seeing the future",
+      "based on young adult novel"
+    ],
+    "universes": [
+      "Crepúsculo"
+    ],
+    "origin_channels": [],
+    "director_id": 15557,
+    "director_name": "Bill Condon",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 115,
+    "release_date": "2012-11-13",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/50620-the-twilight-saga-breaking-dawn-part-2/watch?locale=MX"
+      },
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/50620-the-twilight-saga-breaking-dawn-part-2/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/pPB3rQx0oBOmj5CHZxLWgexo5nS.jpg",
+    "backdrop_path": "/qkl57wzSFrpi2sRpoc2mZJbMuLP.jpg"
+  },
+  {
+    "tmdb_id": 76492,
+    "title": "Hotel Transylvania",
+    "original_title": "Hotel Transylvania",
+    "media_type": "movie",
+    "overview": "Cuando Mavis está a punto de cumplir 118 años, su padre, el conde Drácula, le prepara una fiesta a la que acuden los mejores amigos de la familia, Frankenstein, Hombre Invisible y la Momia; pero cuando un humano llamado Johnny, un tipo común y corriente, aparece en el hotel de monstruos... lo cambia todo.",
+    "genres": [
+      16,
+      35,
+      10751,
+      14
+    ],
+    "year": 2012,
+    "decade": 2010,
+    "vote_average": 6.964,
+    "vote_count": 9042,
+    "is_premium": false,
+    "keywords": [
+      "hotel",
+      "witch",
+      "vampire",
+      "romance",
+      "love",
+      "zombie",
+      "invisible person",
+      "duringcreditsstinger",
+      "nosferatu",
+      "protective father",
+      "magical creature",
+      "philosophical",
+      "father daughter relationship",
+      "3d animation",
+      "joyful"
+    ],
+    "universes": [
+      "Hotel Transylvania"
+    ],
+    "origin_channels": [],
+    "director_id": 185438,
+    "director_name": "Genndy Tartakovsky",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 91,
+    "release_date": "2012-09-20",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/76492-hotel-transylvania/watch?locale=MX"
+      },
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/76492-hotel-transylvania/watch?locale=MX"
+      },
+      {
+        "provider_id": 1889,
+        "provider_name": "Universal+ Amazon Channel",
+        "logo_path": "/4ABGBjAMtRrYUrr0w3QfanuiaoB.jpg",
+        "link": "https://www.themoviedb.org/movie/76492-hotel-transylvania/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/zvWlwBGQWuJ0wog65q1uS37BApC.jpg",
+    "backdrop_path": "/5rARlA8beRAVXPYzSaF2NoS8Ry5.jpg"
+  },
+  {
+    "tmdb_id": 585083,
+    "title": "Hotel Transylvania 4: Transformanía",
+    "original_title": "Hotel Transylvania: Transformania",
+    "media_type": "movie",
+    "overview": "Al sentirse que no pertenece en el hotel lleno de monstruos, Johnny se cruza con Van Helsing y su nuevo invento, el \"Rayo Monstruificante\", permitiendo que Johnny se convierta en un monstruo, pero con la consecuencia de que Drácula y sus amigos monstruosos se transforman en humanos.",
+    "genres": [
+      16,
+      35,
+      10751,
+      12,
+      14
+    ],
+    "year": 2022,
+    "decade": 2020,
+    "vote_average": 7.045,
+    "vote_count": 2968,
+    "is_premium": false,
+    "keywords": [
+      "monster",
+      "vampire",
+      "transformation",
+      "aftercreditsstinger",
+      "duringcreditsstinger",
+      "human"
+    ],
+    "universes": [
+      "Hotel Transylvania"
+    ],
+    "origin_channels": [],
+    "director_id": 70652,
+    "director_name": "Derek Drymon",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 87,
+    "release_date": "2022-01-31",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/585083-hotel-transylvania-transformania/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/xNF8AxJc966FWk4SYqXxGHaZLHZ.jpg",
+    "backdrop_path": "/qBLEWvJNVsehJkEJqIigPsWyBse.jpg"
+  },
+  {
+    "tmdb_id": 50619,
+    "title": "Crepúsculo:  Amanecer - Parte 1",
+    "original_title": "The Twilight Saga: Breaking Dawn - Part 1",
+    "media_type": "movie",
+    "overview": "El amor que Edward y Bella sienten el uno por el otro se sella con la celebración de una gran ceremonia organizada por Alice. Durante la luna de miel, los recién casados tienen relaciones sexuales y Bella queda embarazada. El rápido crecimiento del feto, mitad humano mitad vampiro, afecta gravemente a su salud, llevándola al borde de la muerte... Primera parte de la adaptación de \"Amanecer\" que supone la cuarta entrega de la saga cinematográfica Crepúsculo, basada en las novelas de Stephenie Meyer.",
+    "genres": [
+      12,
+      14,
+      10749
+    ],
+    "year": 2011,
+    "decade": 2010,
+    "vote_average": 6.192,
+    "vote_count": 9166,
+    "is_premium": false,
+    "keywords": [
+      "based on novel or book",
+      "vampire",
+      "hybrid",
+      "teen movie",
+      "werewolf",
+      "supernatural creature",
+      "dead",
+      "duringcreditsstinger",
+      "based on young adult novel"
+    ],
+    "universes": [
+      "Crepúsculo"
+    ],
+    "origin_channels": [],
+    "director_id": 15557,
+    "director_name": "Bill Condon",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 117,
+    "release_date": "2011-11-16",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/50619-the-twilight-saga-breaking-dawn-part-1/watch?locale=MX"
+      },
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/50619-the-twilight-saga-breaking-dawn-part-1/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/27WlKKz9f3vMr6JvSf0LDBVdtaZ.jpg",
+    "backdrop_path": "/hBwDYiOPwXHuwiYGP82ekFNSeBr.jpg"
+  },
+  {
+    "tmdb_id": 18239,
+    "title": "Crepúsculo: Luna nueva",
+    "original_title": "The Twilight Saga: New Moon",
+    "media_type": "movie",
+    "overview": "En esta segunda entrega de la Saga Crepúsculo, Edward Cullen (Robert Pattinson) decide abandonar a Bella Swan (Kristen Stewart) para mantenerla alejada de los peligros del mundo vampírico. Con la ayuda de Jacob Black (Taylor Lautner), su amigo de la infancia y miembro de la misteriosa tribu quileute, Bella intentará superar el abandono de Edward, que la ha dejado sumida en el mayor de los desconsuelos. Pero los peligros siguen acechando a la joven; nuevas y asombrosas criaturas sobrenaturales se cruzarán en su camino, y Bella sólo contará con el apoyo del cada vez más cercano e irresistible Jacob. Repentinamente, Bella se encuentra inmersa en el mundo de los hombres lobo, ancestrales enemigos de los vampiros, y su lealtad es puesta a prueba.",
+    "genres": [
+      12,
+      14,
+      18,
+      10749
+    ],
+    "year": 2009,
+    "decade": 2000,
+    "vote_average": 5.992,
+    "vote_count": 9636,
+    "is_premium": false,
+    "keywords": [
+      "moon",
+      "based on novel or book",
+      "vampire",
+      "teen movie",
+      "werewolf",
+      "interspecies romance",
+      "based on young adult novel",
+      "supernatural power",
+      "good versus evil",
+      "vampire human love"
+    ],
+    "universes": [
+      "Crepúsculo"
+    ],
+    "origin_channels": [],
+    "director_id": 3288,
+    "director_name": "Chris Weitz",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 131,
+    "release_date": "2009-11-18",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/18239-the-twilight-saga-new-moon/watch?locale=MX"
+      },
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/18239-the-twilight-saga-new-moon/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/l5lF8VHTO5QKObAKE3Wp2QQfGZJ.jpg",
+    "backdrop_path": "/dF2c20sRDgySZLaLS2OUerL07sz.jpg"
+  },
+  {
+    "tmdb_id": 24021,
+    "title": "Crepúsculo: Eclipse",
+    "original_title": "The Twilight Saga: Eclipse",
+    "media_type": "movie",
+    "overview": "Tercera entrega de la popular saga de vampiros basada en las novelas de Stephenie Meyer. Bella (Kristen Stewart) tendrá que elegir entre Edward (Robert Pattinson) y Jacob (Taylor Lautner). La ciudad de Seattle es devastada por una serie de misteriosos asesinatos que va en aumento, mientras una vampiresa busca venganza. Bella debe escoger entre su amor por Edward y su amistad con Jacob, consciente de que su decisión puede originar una batalla entre vampiros y licántropos. Rodeada de peligros y con su graduación acercándose, ahora se enfrenta a la decisión más importante de su vida... Dirige David Slade (30 Days of Night, Hard Candy).",
+    "genres": [
+      12,
+      14,
+      18,
+      10749
+    ],
+    "year": 2010,
+    "decade": 2010,
+    "vote_average": 6.197,
+    "vote_count": 9148,
+    "is_premium": false,
+    "keywords": [
+      "based on novel or book",
+      "immortality",
+      "vampire",
+      "bite",
+      "graduation",
+      "teen movie",
+      "werewolf",
+      "based on young adult novel",
+      "supernatural power",
+      "vampire human love"
+    ],
+    "universes": [
+      "Crepúsculo"
+    ],
+    "origin_channels": [],
+    "director_id": 27571,
+    "director_name": "David Slade",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 124,
+    "release_date": "2010-06-23",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/24021-the-twilight-saga-eclipse/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/mckJPxNAQ51beBQw82evAa9a2Wd.jpg",
+    "backdrop_path": "/oguoQWtQJcqIkmmUNbe3CmLx6AP.jpg"
+  },
+  {
+    "tmdb_id": 277,
+    "title": "Inframundo",
+    "original_title": "Underworld",
+    "media_type": "movie",
+    "overview": "Durante siglos, dos razas han ido evolucionando en las profundidades de la Tierra: los aristocráticos y sofisticados vampiros y los brutales hombres-lobo (Lycans), cuya existencia siempre había formado parte del mundo de los mitos y las leyendas. Estas razas nocturnas son enemigas mortales y están condenadas a vivir en perpetua guerra hasta que sólo una de ellas sobreviva. En medio de este conflicto ancestral, una Guerrera Vampiro, Selene, descubre una conspiración de los Lycan para secuestrar a Michael, un joven médico. Después de seguirlo por toda la ciudad, Selene entabla una insólita relación con él, y cuando los Lycans se deciden a atacar, se interpone entre ellos y el médico. Mientras intenta salvar a Michael, descubre un plan de los Lycans para crear nuevas criaturas que combinen los poderes de ambas razas y carezcan de sus debilidades. Este proyecto, de hacerse realidad, favorecería a los Hombres-lobo.",
+    "genres": [
+      14,
+      28,
+      53
+    ],
+    "year": 2003,
+    "decade": 2000,
+    "vote_average": 6.846,
+    "vote_count": 6486,
+    "is_premium": false,
+    "keywords": [
+      "budapest, hungary",
+      "love of one's life",
+      "vampire",
+      "subway",
+      "hostility",
+      "bite",
+      "descendant",
+      "hybrid",
+      "rivalry",
+      "shootout",
+      "werewolf",
+      "gothic",
+      "dark fantasy",
+      "lycanthrope",
+      "urban gothic",
+      "supernatural power"
+    ],
+    "universes": [
+      "Inframundo"
+    ],
+    "origin_channels": [],
+    "director_id": 3950,
+    "director_name": "Len Wiseman",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 121,
+    "release_date": "2003-09-19",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/277-underworld/watch?locale=MX"
+      },
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/277-underworld/watch?locale=MX"
+      },
+      {
+        "provider_id": 300,
+        "provider_name": "Pluto TV",
+        "logo_path": "/dB8G41Q6tSL5NBisrIeqByfepBc.jpg",
+        "link": "https://www.themoviedb.org/movie/277-underworld/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/6mq3OSMsmcTtoRLXiYOp8VZGOdw.jpg",
+    "backdrop_path": "/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg"
+  },
+  {
+    "tmdb_id": 400155,
+    "title": "Hotel Transylvania 3: Monstruos de vacaciones",
+    "original_title": "Hotel Transylvania 3: Summer Vacation",
+    "media_type": "movie",
+    "overview": "Mavis y Johnny planean ir con Drácula y sus amigos a unas vacaciones en un crucero de monstruos de lujo, donde Drácula se enamora de la capitana del barco, Ericka, sin que sepan que ella es descendiente de Abraham Van Helsing, el famoso cazador de monstruos.",
+    "genres": [
+      16,
+      35,
+      10751,
+      14
+    ],
+    "year": 2018,
+    "decade": 2010,
+    "vote_average": 6.853,
+    "vote_count": 4642,
+    "is_premium": false,
+    "keywords": [
+      "monster",
+      "vampire",
+      "vacation",
+      "romance",
+      "cruise ship",
+      "summer vacation",
+      "dracula"
+    ],
+    "universes": [
+      "Hotel Transylvania"
+    ],
+    "origin_channels": [],
+    "director_id": 185438,
+    "director_name": "Genndy Tartakovsky",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 97,
+    "release_date": "2018-06-28",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/400155-hotel-transylvania-3-summer-vacation/watch?locale=MX"
+      },
+      {
+        "provider_id": 1889,
+        "provider_name": "Universal+ Amazon Channel",
+        "logo_path": "/4ABGBjAMtRrYUrr0w3QfanuiaoB.jpg",
+        "link": "https://www.themoviedb.org/movie/400155-hotel-transylvania-3-summer-vacation/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/ak1pkaurFMgLlwdD3eCYc6ThM97.jpg",
+    "backdrop_path": "/m03jul0YdVEOFXEQVUv6pOVQYGL.jpg"
+  },
+  {
+    "tmdb_id": 36586,
+    "title": "Blade II",
+    "original_title": "Blade II",
+    "media_type": "movie",
+    "overview": "Una nueva raza de vampiros, los Reapers, surge para atacar tanto a los humanos como a los de su propia raza, causando el terror. El Consejo de la Sombra, un grupo de vampiros que teme por su supervivencia y que tiene su sede en Praga, contacta con Blade para que acabe con ellos.",
+    "genres": [
+      14,
+      27,
+      28,
+      53
+    ],
+    "year": 2002,
+    "decade": 2000,
+    "vote_average": 6.556,
+    "vote_count": 5100,
+    "is_premium": false,
+    "keywords": [
+      "martial arts",
+      "mutation",
+      "vampire",
+      "lasersight",
+      "superhero",
+      "katana",
+      "supernatural",
+      "based on comic",
+      "vampire hunter (slayer)",
+      "revenge",
+      "tragic villain",
+      "super power",
+      "reaper",
+      "sword duel",
+      "urban gothic",
+      "anxious",
+      "good versus evil"
+    ],
+    "universes": [
+      "Blade"
+    ],
+    "origin_channels": [],
+    "director_id": 10828,
+    "director_name": "Guillermo del Toro",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 116,
+    "release_date": "2002-03-22",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/36586-blade-ii/watch?locale=MX"
+      },
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/36586-blade-ii/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/h6zm5DOu6Fm146nU0iqYkhkG6DO.jpg",
+    "backdrop_path": "/86b0NGY1i0bt3ckhkcHxiCSMxk1.jpg"
+  },
+  {
+    "tmdb_id": 62213,
+    "title": "Sombras Tenebrosas",
+    "original_title": "Dark Shadows",
+    "media_type": "movie",
+    "overview": "El vampiro Barnabas Collins es liberado inadvertidamente de su tumba y emerge en el mundo muy cambiado de 1972. Él vuelve a la mansión de Collinwood para encontrar que su estado una vez grande y la familia han caído en la ruina.",
+    "genres": [
+      35,
+      14
+    ],
+    "year": 2012,
+    "decade": 2010,
+    "vote_average": 6.097,
+    "vote_count": 7532,
+    "is_premium": false,
+    "keywords": [
+      "witch",
+      "vampire",
+      "imprisonment",
+      "curse",
+      "fish out of water",
+      "chains",
+      "gothic",
+      "madness",
+      "old house",
+      "lost love",
+      "angry mob",
+      "18th century",
+      "ghost",
+      "hidden room",
+      "old mansion",
+      "absurd",
+      "hilarious"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": 510,
+    "director_name": "Tim Burton",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 113,
+    "release_date": "2012-05-09",
+    "providers": [
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/62213-dark-shadows/watch?locale=MX"
+      },
+      {
+        "provider_id": 1889,
+        "provider_name": "Universal+ Amazon Channel",
+        "logo_path": "/4ABGBjAMtRrYUrr0w3QfanuiaoB.jpg",
+        "link": "https://www.themoviedb.org/movie/62213-dark-shadows/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/4MVwKquR2GgLXWAR4cyvKUBBYP2.jpg",
+    "backdrop_path": "/cJYerfZVf2rNwfGMK3MQ8lTbMnY.jpg"
+  },
+  {
+    "tmdb_id": 346672,
+    "title": "Inframundo 5: Guerras de sangre",
+    "original_title": "Underworld: Blood Wars",
+    "media_type": "movie",
+    "overview": "En esta nueva historia, Selene tendrá que luchar tanto con el clan de los Lycans como contra los vampiros que la traicionaron. Con David y su padre Thomas como sus únicos aliados, deberá detener la eterna guerra entre lycans y vampiros, aunque esto signifique que tenga que hacer el último sacrificio.",
+    "genres": [
+      14,
+      28,
+      53,
+      878,
+      27
+    ],
+    "year": 2016,
+    "decade": 2010,
+    "vote_average": 5.913,
+    "vote_count": 3876,
+    "is_premium": false,
+    "keywords": [
+      "martial arts",
+      "sword",
+      "vampire",
+      "hybrid",
+      "ambition",
+      "sequel",
+      "betrayal",
+      "conspiracy",
+      "werewolf",
+      "gothic",
+      "uzi",
+      "dark fantasy",
+      "woman director",
+      "urban gothic",
+      "assertive",
+      "ominous"
+    ],
+    "universes": [
+      "Inframundo"
+    ],
+    "origin_channels": [],
+    "director_id": 402272,
+    "director_name": "Anna Foerster",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 91,
+    "release_date": "2016-11-24",
+    "providers": [
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/346672-underworld-blood-wars/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/a6GaGaIktgTaqsLozRs9wimIR1y.jpg",
+    "backdrop_path": "/b5QnSrjDRHUFg3hpjmwBwsJfzyP.jpg"
+  },
+  {
+    "tmdb_id": 52520,
+    "title": "Inframundo 4: El despertar",
+    "original_title": "Underworld: Awakening",
+    "media_type": "movie",
+    "overview": "Quince años han pasado desde que Selene y su amante Michael, híbrido entre humano y licántropo, derrotaran al Vampiro Mayor Marcus en Underworld Evolution. En esos años la humanidad ha descubierto la existencia tanto del clan de los vampiros como del de los licántropos y se ha lanzado a una lucha encarnizada para erradicar ambas especies. Selene, capturada durante el genocidio, se despierta después de más de una década y se da cuenta de que se encuentra cautiva en un laboratorio herméticamente cerrado en Antigen, una poderosa corporación biotecnológica que se dedica a desarrollar la vacuna en contra de los virus que han creado a vampiros y licántropos. Selene se siente destrozada cuando descubre que Michael está muerto, pero su dolor es eclipsado por el descubrimiento de que mientras se hallaba en estado de criogenización ha dado a luz a la hija de ambos, Eve.",
+    "genres": [
+      14,
+      28,
+      27
+    ],
+    "year": 2012,
+    "decade": 2010,
+    "vote_average": 6.332,
+    "vote_count": 4282,
+    "is_premium": false,
+    "keywords": [
+      "daughter",
+      "experiment",
+      "vampire",
+      "hybrid",
+      "child vampire",
+      "conspiracy",
+      "werewolf",
+      "fictional war",
+      "gothic",
+      "dark fantasy",
+      "werewolf child",
+      "urban gothic",
+      "good versus evil"
+    ],
+    "universes": [
+      "Inframundo"
+    ],
+    "origin_channels": [],
+    "director_id": 80923,
+    "director_name": "Måns Mårlind",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 88,
+    "release_date": "2012-01-19",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/52520-underworld-awakening/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/8qh7I05jfRlDpk5GLvBZjINGxk2.jpg",
+    "backdrop_path": "/wJJJS5ey53DqJ3cTuu7GFJsRsWu.jpg"
+  },
+  {
+    "tmdb_id": 138,
+    "title": "Drácula",
+    "original_title": "Dracula",
+    "media_type": "movie",
+    "overview": "Ésta es una de las primeras versiones sobre el mítico vampiro. Fue realizada por la Universal, productora especializada en el cine de terror. El conde Drácula abandona los Cárpatos y se traslada a Occidente, llevándose como sirviente a un contable. Una vez instalado, se enamora de una joven que ya está prometida. Empieza a a visitarla por las noches y va bebiendo su sangre poco a poco para convertirla así en su esposa. Pero el malestar que sufre la joven alerta a su familia, que busca la ayuda del doctor Van Helsing.",
+    "genres": [
+      27
+    ],
+    "year": 1931,
+    "decade": 1930,
+    "vote_average": 7.163,
+    "vote_count": 1346,
+    "is_premium": false,
+    "keywords": [
+      "monster",
+      "based on novel or book",
+      "transylvania",
+      "vampire",
+      "superstition",
+      "transformation",
+      "spider",
+      "halloween",
+      "castle",
+      "bat",
+      "undead",
+      "count",
+      "based on play or musical",
+      "trance",
+      "sanitarium",
+      "black and white",
+      "biting",
+      "pre-code",
+      "real estate agent",
+      "horse carriage",
+      "spider web",
+      "lunatic",
+      "web",
+      "horse drawn carriage",
+      "dracula",
+      "admiring"
+    ],
+    "universes": [
+      "Dracula (Universal)"
+    ],
+    "origin_channels": [],
+    "director_id": 1496,
+    "director_name": "Tod Browning",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 74,
+    "release_date": "1931-02-12",
+    "providers": [
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/138-dracula/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/zf7eGmr4l9whGIKzEpLvaoNtn9I.jpg",
+    "backdrop_path": "/cemjdP7HrUyJAry85vRT19Hidbi.jpg"
+  },
+  {
+    "tmdb_id": 526896,
+    "title": "Morbius",
+    "original_title": "Morbius",
+    "media_type": "movie",
+    "overview": "Gravemente enfermo con un trastorno sanguíneo poco común y decidido a salvar a otros que sufren de ese mismo destino, el Dr. Morbius hace una arriesgada apuesta. Si bien al principio, parece ser un éxito radical, una oscuridad dentro de él se desata. ¿El bien prevalecerá sobre el mal o Morbius sucumbirá a sus misteriosos nuevos impulsos?",
+    "genres": [
+      28,
+      878,
+      14
+    ],
+    "year": 2022,
+    "decade": 2020,
+    "vote_average": 5.923,
+    "vote_count": 4713,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "superhero",
+      "based on comic",
+      "duringcreditsstinger",
+      "supervillain",
+      "frustrated"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": 125738,
+    "director_name": "Daniel Espinosa",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 105,
+    "release_date": "2022-03-30",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/526896-morbius/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/4jcJHqIVsb4MFdYrDajXeEVlDvH.jpg",
+    "backdrop_path": "/jzWT0zd8U77fqWg5WgUfYaMzSFz.jpg"
+  },
+  {
+    "tmdb_id": 36648,
+    "title": "Blade: Trinity",
+    "original_title": "Blade: Trinity",
+    "media_type": "movie",
+    "overview": "Durante años, Blade ha luchado contra los vampiros sin que el mundo supiera lo que sucedía en los bajos fondos. Pero ahora, tras caer en las redes del FBI, se ve forzado a salir a la luz del día para unir sus fuerzas con un clan de humanos cazadores de vampiros que nunca supo que existían, los Nightstalkers. Junto a Abigail y Hannibal, Blade sigue la pista de una antigua criatura que lo está acechando el vampiro original: Drácula.",
+    "genres": [
+      28,
+      27,
+      878
+    ],
+    "year": 2004,
+    "decade": 2000,
+    "vote_average": 5.859,
+    "vote_count": 4218,
+    "is_premium": false,
+    "keywords": [
+      "martial arts",
+      "loss of loved one",
+      "vampire",
+      "fbi",
+      "superhero",
+      "supernatural",
+      "fistfight",
+      "based on comic",
+      "vampire hunter (slayer)",
+      "martial arts master",
+      "motorcycle",
+      "katana sword",
+      "blade",
+      "super villain",
+      "urban gothic",
+      "good versus evil",
+      "sarcastic"
+    ],
+    "universes": [
+      "Blade"
+    ],
+    "origin_channels": [],
+    "director_id": 3893,
+    "director_name": "David S. Goyer",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 122,
+    "release_date": "2004-12-08",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/movie/36648-blade-trinity/watch?locale=MX"
+      },
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/movie/36648-blade-trinity/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/8GiUVbr73cHe68d4ybpxDbeReZP.jpg",
+    "backdrop_path": "/63eAFgJtN6ZTyFFzlAOoZLhlYqc.jpg"
+  },
+  {
+    "tmdb_id": 38321,
+    "title": "Priest - El vengador",
+    "original_title": "Priest",
+    "media_type": "movie",
+    "overview": "En un mundo asolado por siglos de guerra entre el hombre y los vampiros, Paul Bettany es un legendario guerrero que destacó durante la última Guerra del Vampiro, pero ahora es sólo un sacerdote que vive en compañía de otros hombres en las amuralladas ciudades distópicas controladas por la Iglesia. Sin embargo, cuando su joven sobrina es secuestrada por un grupo de vampiros asesinos que viven en los páramos desolados del exterior, el sacerdote rompe sus sagrados votos y emprende su búsqueda decidido a vengarse de los secuestradores, especialmente de su brutal líder. En esta aventura le acompaña Hicks, el novio de la chica, un sheriff y una sacerdotisa, miembro de la legión de asesinos de vampiros y poseedora de habilidades de combate sobrenaturales.",
+    "genres": [
+      28,
+      14,
+      27
+    ],
+    "year": 2011,
+    "decade": 2010,
+    "vote_average": 5.853,
+    "vote_count": 2463,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "dystopia",
+      "post-apocalyptic future",
+      "crucifixion",
+      "vampire hunter (slayer)",
+      "disobey",
+      "niece",
+      "dark hero",
+      "dark fantasy",
+      "grim",
+      "supernatural horror",
+      "intense",
+      "vibrant"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": 116357,
+    "director_name": "Scott Stewart",
+    "origin_countries": [],
+    "original_language": "en",
+    "runtime": 87,
+    "release_date": "2011-05-05",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/movie/38321-priest/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/fBs0ScJQPb2xi0Jt9BGPcdaITvh.jpg",
+    "backdrop_path": "/srrzHjAzhYzUulBbllQCNekgnQb.jpg"
+  },
+  {
+    "tmdb_id": 128098,
+    "title": "Entrevista con el vampiro",
+    "original_title": "Interview with the Vampire",
+    "media_type": "tv",
+    "overview": "La épica historia de amor, sangre y los peligros de la inmortalidad de Louis de Pointe, contada al periodista Daniel Molloy. Irritado por las limitaciones de la vida como un hombre negro en la Nueva Orleans de 1900, a Louis le resulta imposible resistirse a la oferta del libertino Lestat De Lioncourt del último escape: unirse a él como su compañero vampiro.",
+    "genres": [
+      18,
+      10765
+    ],
+    "year": 2022,
+    "decade": 2020,
+    "vote_average": 7.4,
+    "vote_count": 327,
+    "is_premium": false,
+    "keywords": [
+      "based on novel or book",
+      "new orleans, louisiana",
+      "vampire",
+      "interview",
+      "immortality",
+      "supernatural",
+      "child vampire",
+      "lgbt",
+      "gothic romance",
+      "life story",
+      "fantasy",
+      "horror",
+      "egotistical",
+      "enraged",
+      "tragic",
+      "vampires"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2022-10-02",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/tv/128098-interview-with-the-vampire/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/4R5VmjqGZdzUnEWZquQUAavfzEt.jpg",
+    "backdrop_path": "/r5RoeEWuslP6svlZsHsCKo7TZs7.jpg"
+  },
+  {
+    "tmdb_id": 99772,
+    "title": "Vampire in the Garden",
+    "original_title": "ヴァンパイア・イン・ザ・ガーデン",
+    "media_type": "tv",
+    "overview": "A pesar de sus diferencias, una reina vampira y una chica humana se unen para ir en busca de un paraíso donde humanos y vampiros puedan convivir en paz.",
+    "genres": [
+      16,
+      18,
+      10765,
+      10759
+    ],
+    "year": 2022,
+    "decade": 2020,
+    "vote_average": 7.169,
+    "vote_count": 68,
+    "is_premium": false,
+    "keywords": [
+      "future",
+      "vampire",
+      "friendship",
+      "supernatural",
+      "psychic power",
+      "female protagonist",
+      "anime",
+      "girls' love (gl)"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "JP"
+    ],
+    "original_language": "ja",
+    "runtime": 26,
+    "release_date": "2022-05-16",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/99772/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/xFrEiJxI0PUZHC6NmfjSrOXfQ4v.jpg",
+    "backdrop_path": "/7Iorh0CtvK85oX96BdP2jXziir5.jpg"
+  },
+  {
+    "tmdb_id": 536,
+    "title": "Mona la Vampira",
+    "original_title": "Mona the Vampire",
+    "media_type": "tv",
+    "overview": "Una niña que al imaginarse historias de suspenso se cree vampira.",
+    "genres": [
+      10751,
+      16
+    ],
+    "year": 1999,
+    "decade": 1990,
+    "vote_average": 7.6,
+    "vote_count": 39,
+    "is_premium": true,
+    "keywords": [
+      "vampire",
+      "based on children's book",
+      "overflowing with imagination"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "CA"
+    ],
+    "original_language": "en",
+    "runtime": 30,
+    "release_date": "1999-09-13",
+    "providers": [
+      {
+        "provider_id": 73,
+        "provider_name": "Tubi TV",
+        "logo_path": "/zLYr7OPvpskMA4S79E3vlCi71iC.jpg",
+        "link": "https://www.themoviedb.org/tv/536-mona-the-vampire/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/ijBRu72KJ9JRTGYjyJT6yzEbaj7.jpg",
+    "backdrop_path": "/wmMuOJQK46WK19pZotUcEZV77gY.jpg"
+  },
+  {
+    "tmdb_id": 235228,
+    "title": "Me desperté vampira",
+    "original_title": "I Woke Up a Vampire",
+    "media_type": "tv",
+    "overview": "Al cumplir los 13 años, Carmie descubre que en realidad es mitad humana, mitad vampira, y que la escuela puede ser mucho más complicada si encima tienes superpoderes.",
+    "genres": [
+      35,
+      10751,
+      10765,
+      18
+    ],
+    "year": 2023,
+    "decade": 2020,
+    "vote_average": 7.1,
+    "vote_count": 38,
+    "is_premium": false,
+    "keywords": [
+      "vampire"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "CA"
+    ],
+    "original_language": "en",
+    "runtime": 25,
+    "release_date": "2023-05-05",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/235228-i-woke-up-a-vampire/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/hUIYzEqMkcQeQIDGU86t2NPRH3E.jpg",
+    "backdrop_path": "/nQQQVpEYudncIuoyD5YUzYbqulK.jpg"
+  },
+  {
+    "tmdb_id": 275722,
+    "title": "Vampirina: Una Vampirina adolescente",
+    "original_title": "Vampirina: Teenage Vampire",
+    "media_type": "tv",
+    "overview": "Vee parte de Transilvania para estudiar en el extranjero y cumplir sus sueños musicales. Mantiene en secreto su identidad vampírica, pero obstáculos inesperados amenazan con volverla hacia las sombras.",
+    "genres": [
+      10765,
+      35
+    ],
+    "year": 2025,
+    "decade": 2020,
+    "vote_average": 6.538,
+    "vote_count": 13,
+    "is_premium": false,
+    "keywords": [
+      "transylvania",
+      "based on novel or book",
+      "vampire",
+      "tween girl",
+      "music"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 25,
+    "release_date": "2025-09-12",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/tv/275722-vampirina-teenage-vampire/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/9tgB7oneaMIgvLHm7eEUKhJT6St.jpg",
+    "backdrop_path": "/m54fpF9Enq74G3liicywY1CzY2x.jpg"
+  },
+  {
+    "tmdb_id": 99935,
+    "title": "Vampiros",
+    "original_title": "Vampires",
+    "media_type": "tv",
+    "overview": "Una adolescente parisina semihumana y semivampira se enfrenta a sus poderes incipientes y dificultades familiares mientras la persigue una comunidad secreta de vampiros.",
+    "genres": [
+      10765,
+      18
+    ],
+    "year": 2020,
+    "decade": 2020,
+    "vote_average": 7.394,
+    "vote_count": 348,
+    "is_premium": false,
+    "keywords": [
+      "vampire"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "FR"
+    ],
+    "original_language": "fr",
+    "runtime": 40,
+    "release_date": "2020-03-20",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/99935-vampires/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/pXMPGNKLwlieln9cOOUzm8rWuh5.jpg",
+    "backdrop_path": "/2tNgAVye3gWttMdmudnYUBdh5YE.jpg"
+  },
+  {
+    "tmdb_id": 74323,
+    "title": "Vampirina",
+    "original_title": "Vampirina",
+    "media_type": "tv",
+    "overview": "Cuenta la historia de una joven niña vampira, que se vuelve la nueva niña en la ciudad cuando su familia se mueve de Transilvania a Pennsylvania para abrir un hotel y restaurante de Sustos para los fantasmas y duendes visitantes.",
+    "genres": [
+      16,
+      10762,
+      35
+    ],
+    "year": 2017,
+    "decade": 2010,
+    "vote_average": 6.474,
+    "vote_count": 38,
+    "is_premium": false,
+    "keywords": [
+      "pennsylvania, usa",
+      "vampire"
+    ],
+    "universes": [],
+    "origin_channels": [
+      "vampires"
+    ],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 24,
+    "release_date": "2017-10-01",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/tv/74323-vampirina/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/18Mmri8vmBKbGbiymFPlSHlg71o.jpg",
+    "backdrop_path": "/lXU4HMoNmrgPEO2meDmlv5kY8OG.jpg"
+  },
+  {
+    "tmdb_id": 10545,
+    "title": "True Blood",
+    "original_title": "True Blood",
+    "media_type": "tv",
+    "overview": "Con la creación de sangre sintética, los vampiros viven en la sociedad. La serie muestra la coexistencia de estas criaturas en un pueblo. Nueva serie de la HBO realizada por Alan Ball (\"A dos metros bajo tierra\"). Basada en la serie de novelas 'Southern vampire', de la escritora norteamericana Charlaine Harris.",
+    "genres": [
+      10765,
+      18,
+      9648
+    ],
+    "year": 2008,
+    "decade": 2000,
+    "vote_average": 7.617,
+    "vote_count": 2009,
+    "is_premium": true,
+    "keywords": [
+      "based on novel or book",
+      "small town",
+      "fairy",
+      "vampire",
+      "louisiana",
+      "undead",
+      "werewolf",
+      "ghost",
+      "dark fantasy",
+      "erotic thriller",
+      "interspecies romance"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 60,
+    "release_date": "2008-09-07",
+    "providers": [
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/tv/10545-true-blood/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/uqsvvgC6CKGoGcfyqRyQVCjML4Q.jpg",
+    "backdrop_path": "/nGhC6P0lgcrY57NRB9nweu4nWaK.jpg"
+  },
+  {
+    "tmdb_id": 2426,
+    "title": "Angel",
+    "original_title": "Angel",
+    "media_type": "tv",
+    "overview": "",
+    "genres": [
+      10765,
+      18
+    ],
+    "year": 1999,
+    "decade": 1990,
+    "vote_average": 7.9,
+    "vote_count": 976,
+    "is_premium": true,
+    "keywords": [
+      "monster",
+      "anti hero",
+      "vampire",
+      "vampire hunter (slayer)",
+      "redemption",
+      "evil corporation",
+      "spin off",
+      "dark fantasy",
+      "neo-noir",
+      "fighting supernatural",
+      "supernatural power",
+      "commanding",
+      "gloomy"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 41,
+    "release_date": "1999-10-05",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/tv/2426-angel/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/kEMZk8uVksoWScKA77x68qJEUfI.jpg",
+    "backdrop_path": "/38g8BjnbRpxdTER5guYi6ANWsjk.jpg"
+  },
+  {
+    "tmdb_id": 83631,
+    "title": "Lo que hacemos en las sombras",
+    "original_title": "What We Do in the Shadows",
+    "media_type": "tv",
+    "overview": "Una mirada al estilo documental de la vida diaria (o mejor dicho, nocturna) de un grupo de vampiros en Staten Island que han “vivido” juntos durante cientos y cientos de años.",
+    "genres": [
+      35,
+      10765
+    ],
+    "year": 2019,
+    "decade": 2010,
+    "vote_average": 7.993,
+    "vote_count": 934,
+    "is_premium": true,
+    "keywords": [
+      "vampire",
+      "mockumentary",
+      "based on movie",
+      "staten island, new york city",
+      "candid",
+      "playful",
+      "whimsical",
+      "amused",
+      "audacious",
+      "exuberant"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2019-03-27",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/tv/83631-what-we-do-in-the-shadows/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/ofvntTi2bRoJgpfpRPwudG3NPzj.jpg",
+    "backdrop_path": "/mKikck71CvVISUSTLk29fwRbH4y.jpg"
+  },
+  {
+    "tmdb_id": 79460,
+    "title": "El Legado",
+    "original_title": "Legacies",
+    "media_type": "tv",
+    "overview": "Legacies sigue a la hija de Klaus Mikaelson y Hayley Marshall, Hope Mikaelson, que desciende de linaje más poderoso de vampiros, hombres lobo y brujas. Dos años después de los eventos de The Originals, ella y las gemelas Saltzman, Lizzie y Josie, asisten a la Escuela Salvatore para Jóvenes y Dotados. La escuela ofrece un refugio donde seres como vampiros, brujas y hombres lobo pueden aprender a controlar sus habilidades e impulsos sobrenaturales.",
+    "genres": [
+      10765,
+      18
+    ],
+    "year": 2018,
+    "decade": 2010,
+    "vote_average": 8.429,
+    "vote_count": 2997,
+    "is_premium": true,
+    "keywords": [
+      "witch",
+      "vampire",
+      "supernatural",
+      "werewolf",
+      "biting",
+      "spin off",
+      "calm",
+      "wonder",
+      "admiring",
+      "amused",
+      "joyful"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 43,
+    "release_date": "2018-10-25",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/tv/79460-legacies/watch?locale=MX"
+      },
+      {
+        "provider_id": 1899,
+        "provider_name": "HBO Max",
+        "logo_path": "/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        "link": "https://www.themoviedb.org/tv/79460-legacies/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/qTZIgXrBKURBK1KrsT7fe3qwtl9.jpg",
+    "backdrop_path": "/fRYwdeNjMqC30EhofPx5PlDpdun.jpg"
+  },
+  {
+    "tmdb_id": 47640,
+    "title": "The Strain",
+    "original_title": "The Strain",
+    "media_type": "tv",
+    "overview": "Serie de TV (2014-Actualidad). Un avión Boeing 777 aterriza en el Aeropuerto Internacional JFK en Nueva York procedente de Berlín. Se detiene inerte en la pista de aterrizaje y su interior está lleno de cadáveres pálidos. Un extraño ataúd lleno de tierra es hallado en el departamento de equipaje. Así se produce la llegada de Jusef Sardu, un vampiro conocido como \"El Amo\" (Robert Maillet). El Dr. Goodweather (Corey Stoll), del CDC (Centro de Control de Enfermedades), investiga lo que a primera vista parece ser un virus que causó la muerte de los pasajeros del avión. A medida que su investigación continúa, Goodweather contacta con Abraham Setrakian (David Bradley), un viejo prestamista que parece saber mucho sobre este \"virus\" y que insinúa que podría tratarse de una plaga de vampiros.",
+    "genres": [
+      10765,
+      18,
+      9648
+    ],
+    "year": 2014,
+    "decade": 2010,
+    "vote_average": 7.466,
+    "vote_count": 1948,
+    "is_premium": false,
+    "keywords": [
+      "new york city",
+      "based on novel or book",
+      "vampire",
+      "outbreak",
+      "survival",
+      "disease",
+      "biting",
+      "vampirism",
+      "virus",
+      "horror"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 44,
+    "release_date": "2014-07-13",
+    "providers": [
+      {
+        "provider_id": 337,
+        "provider_name": "Disney Plus",
+        "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+        "link": "https://www.themoviedb.org/tv/47640-the-strain/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/2BWErT9QcADpf2G4BZ769eSnFTP.jpg",
+    "backdrop_path": "/4YnAZ1KO9goeS4c06VO7HXiO3oO.jpg"
+  },
+  {
+    "tmdb_id": 135934,
+    "title": "La leyenda de Vox Machina",
+    "original_title": "The Legend of Vox Machina",
+    "media_type": "tv",
+    "overview": "Son unos revoltosos inadaptados sociales que se vuelven mercenarios a sueldo. A Vox Machina le interesa más el dinero fácil y la cerveza barata que proteger la corona. Sin embargo, cuando el mal amenaza al reino, este escandaloso grupo se da cuenta de que solo ellos pueden restaurar la justicia. Lo que comenzó como otro día de trabajo es ahora la historia detrás de los nuevos héroes de Exandria.",
+    "genres": [
+      16,
+      10765
+    ],
+    "year": 2022,
+    "decade": 2020,
+    "vote_average": 8.207,
+    "vote_count": 580,
+    "is_premium": true,
+    "keywords": [
+      "elves",
+      "dwarf",
+      "magic",
+      "vampire",
+      "family drama",
+      "dragon",
+      "demon",
+      "unlikely friendship",
+      "myth",
+      "based on web series",
+      "elemental",
+      "talking dragon",
+      "band of misfits",
+      "drama"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2022-01-27",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/tv/135934-the-legend-of-vox-machina/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/j1wOSnBfbNwIISD7dFz9Qv5lPZj.jpg",
+    "backdrop_path": "/xRQNXmR9HG32FJqaRh8TqVUMfTA.jpg"
+  },
+  {
+    "tmdb_id": 65820,
+    "title": "Van Helsing",
+    "original_title": "Van Helsing",
+    "media_type": "tv",
+    "overview": "Tras pasar tres años en coma, Vanessa Helsing se despierta en un mundo asolado por vampiros. Ella y un variopinto grupo de amigos supervivientes luchan por seguir con vida.",
+    "genres": [
+      9648,
+      10765,
+      10759
+    ],
+    "year": 2016,
+    "decade": 2010,
+    "vote_average": 7.044,
+    "vote_count": 911,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "post-apocalyptic future",
+      "vampire hunter (slayer)",
+      "based on movie"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 42,
+    "release_date": "2016-09-23",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/65820-van-helsing/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/r8ODGmfNbZQlNhiJl2xQENE2jsk.jpg",
+    "backdrop_path": "/5VltHQJXdmbSD6gEJw3R8R1Kbmc.jpg"
+  },
+  {
+    "tmdb_id": 14009,
+    "title": "Los locos Addams",
+    "original_title": "The Addams Family",
+    "media_type": "tv",
+    "overview": "Los Addams son una familia con intereses macabros y habilidades sobrenaturales. En ningún momento de la serie se da explicación de sus poderes.\n\nEl muy rico y entusiasta Homero Addams está enamorado perdidamente de su refinada esposa Morticia. Junto con su hija Merlina, su hijo Pericles, el Tío Lucas y la Abuela, residen en la calle del cementerio nº 0001, en una ornamentada y frondosa mansión con dos sirvientes: Largo, un mayordomo y Dedos, una mano sin cuerpo que sale de una caja de madera. Algunos familiares que aparecen en algunos episodios incluyen a Tío Cosa, la hermana mayor de Morticia, Ofelia o la madre de Morticia, la Abuela.",
+    "genres": [
+      35,
+      10751
+    ],
+    "year": 1964,
+    "decade": 1960,
+    "vote_average": 7.985,
+    "vote_count": 433,
+    "is_premium": true,
+    "keywords": [
+      "parent child relationship",
+      "butler",
+      "vampire",
+      "haunted house",
+      "marriage",
+      "satire",
+      "dark comedy",
+      "family relationships",
+      "wealthy",
+      "gothic",
+      "macabre",
+      "uncle nephew relationship",
+      "dark fantasy",
+      "sitcom",
+      "eccentric family",
+      "goth girls",
+      "romantic"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 30,
+    "release_date": "1964-09-18",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/tv/14009-the-addams-family/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/twfSYEw4cp5KS9HaxSLh6Q0Bmi6.jpg",
+    "backdrop_path": "/vPWjtsNklEMYiSF0BiQ1QLHbCSC.jpg"
+  },
+  {
+    "tmdb_id": 77236,
+    "title": "El descubrimiento de las brujas",
+    "original_title": "A Discovery of Witches",
+    "media_type": "tv",
+    "overview": "Diana Bishop, una académica que huye de su condición de bruja, descubre un antiguo manuscrito de alquimia que la lleva a situarse en el centro de un peligroso misterio. En su camino se encontrará también con el genetista Matthew Clairmont, que mantiene en secreto su condición de vampiro.",
+    "genres": [
+      10765,
+      18
+    ],
+    "year": 2018,
+    "decade": 2010,
+    "vote_average": 7.834,
+    "vote_count": 827,
+    "is_premium": true,
+    "keywords": [
+      "witch",
+      "based on novel or book",
+      "magic",
+      "vampire",
+      "romance",
+      "demon",
+      "witchcraft",
+      "interspecies romance",
+      "اکتشاف جادوگران",
+      "جادوگر",
+      "جادوگران"
+    ],
+    "universes": [
+      "Star Trek"
+    ],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "GB"
+    ],
+    "original_language": "en",
+    "runtime": 45,
+    "release_date": "2018-09-14",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/77236-a-discovery-of-witches/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/sDKIDRsscYQKk8YRrSbhKkT5o8C.jpg",
+    "backdrop_path": "/mZOw5cBXPDfSv1T8IFWsWi8Wktp.jpg"
+  },
+  {
+    "tmdb_id": 138357,
+    "title": "Call of the Night",
+    "original_title": "よふかしのうた",
+    "media_type": "tv",
+    "overview": "Un joven que sufre de insomnio decide explorar el mundo de la noche y se encuentra con una vampira. Deseando convertirse en un vampiro para escapar de su aburrida vida, se aventura en el mundo de los no-muertos, un lugar lleno de peligros y romance.",
+    "genres": [
+      16,
+      35,
+      10765
+    ],
+    "year": 2022,
+    "decade": 2020,
+    "vote_average": 7.6,
+    "vote_count": 138,
+    "is_premium": true,
+    "keywords": [
+      "adolescence",
+      "vampire",
+      "romance",
+      "slice of life",
+      "based on manga",
+      "shounen",
+      "anime",
+      "joyful"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "JP"
+    ],
+    "original_language": "ja",
+    "runtime": 23,
+    "release_date": "2022-07-08",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/138357/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/dlSzlYFUqQ3baTYxM6DAZ4hLgPH.jpg",
+    "backdrop_path": "/ohgC4YPhYO4mjTW64JRK0abx6lQ.jpg"
+  },
+  {
+    "tmdb_id": 71024,
+    "title": "Castlevania",
+    "original_title": "Castlevania",
+    "media_type": "tv",
+    "overview": "Un cazavampiros lucha por salvar una ciudad asediada por un ejército de bestias controladas por Drácula.",
+    "genres": [
+      16,
+      10765,
+      18
+    ],
+    "year": 2017,
+    "decade": 2010,
+    "vote_average": 8.252,
+    "vote_count": 1494,
+    "is_premium": true,
+    "keywords": [
+      "magic",
+      "vampire",
+      "cartoon",
+      "vampire hunter (slayer)",
+      "demon",
+      "based on video game",
+      "medieval",
+      "dark fantasy",
+      "plague",
+      "corrupt church",
+      "condescending",
+      "pretentious",
+      "anime inspired"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2017-07-07",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/71024-castlevania/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/ubDtIBwdS9b29sBofAkqWz3PqkT.jpg",
+    "backdrop_path": "/jLE5bsPA9xOKzBWOaOmKbp1DWQS.jpg"
+  },
+  {
+    "tmdb_id": 54671,
+    "title": "Penny Dreadful",
+    "original_title": "Penny Dreadful",
+    "media_type": "tv",
+    "overview": "En la Inglaterra victoriana, con el telón de fondo de famosas creaciones literarias como Frankenstein, Drácula o Dorian Gray, un antiguo explorador, Sir Malcolm Murray, una vidente con secretos, Vanessa Ives, un pistolero americano, Ethan Chandler, y un prometedor cirujano se unen en Londres para combatir una amenaza sobrenatural que habita en el inframundo e intentar rescatar a una joven desaparecida.",
+    "genres": [
+      10765,
+      18,
+      9648,
+      10759
+    ],
+    "year": 2014,
+    "decade": 2010,
+    "vote_average": 7.825,
+    "vote_count": 1468,
+    "is_premium": true,
+    "keywords": [
+      "london, england",
+      "witch",
+      "monster",
+      "underground",
+      "vampire",
+      "black magic",
+      "supernatural",
+      "victorian england",
+      "possession",
+      "werewolf",
+      "devil",
+      "gothic horror",
+      "gothic",
+      "mental illness",
+      "psychotherapy",
+      "succubus",
+      "dark fantasy",
+      "19th century",
+      "supernatural power"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": 60,
+    "release_date": "2014-05-11",
+    "providers": [
+      {
+        "provider_id": 531,
+        "provider_name": "Paramount Plus",
+        "logo_path": "/h5DcR0J2EESLitnhR8xLG1QymTE.jpg",
+        "link": "https://www.themoviedb.org/tv/54671-penny-dreadful/watch?locale=MX"
+      },
+      {
+        "provider_id": 2302,
+        "provider_name": "Mercado Play",
+        "logo_path": "/60iyHW9xKBKVBf0kxiQixuLqG1f.jpg",
+        "link": "https://www.themoviedb.org/tv/54671-penny-dreadful/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/hQSdrXBYTbLGHYDIseHkBOPXTgL.jpg",
+    "backdrop_path": "/3bViM60LioKQJwsExm5oyLRYagC.jpg"
+  },
+  {
+    "tmdb_id": 256624,
+    "title": "Talamasca: La orden secreta, de Anne Rice",
+    "original_title": "Talamasca: The Secret Order",
+    "media_type": "tv",
+    "overview": "Una sociedad secreta rastrea a seres sobrenaturales como brujas, vampiros y hombres lobo.",
+    "genres": [
+      10765
+    ],
+    "year": 2025,
+    "decade": 2020,
+    "vote_average": 6.826,
+    "vote_count": 72,
+    "is_premium": false,
+    "keywords": [
+      "witch",
+      "based on novel or book",
+      "secret society",
+      "vampire",
+      "supernatural",
+      "werewolf",
+      "supernatural creature",
+      "bewildered"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2025-10-19",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/256624-talamasca-the-secret-order/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/fisbXRSdiwqDYzOdAqtCWKQwKUP.jpg",
+    "backdrop_path": "/8M0rS9KsWACnua82zmlVOjUGKXD.jpg"
+  },
+  {
+    "tmdb_id": 123548,
+    "title": "Castlevania: Nocturno",
+    "original_title": "Castlevania: Nocturne",
+    "media_type": "tv",
+    "overview": "Mientras la revolución arrasa con Francia, Richter Belmont lucha por defender el legado de su familia y evitar el ascenso de una despiadada soberana vampira sedienta de poder.",
+    "genres": [
+      16,
+      10765,
+      18
+    ],
+    "year": 2023,
+    "decade": 2020,
+    "vote_average": 7.844,
+    "vote_count": 253,
+    "is_premium": true,
+    "keywords": [
+      "vampire",
+      "french revolution",
+      "vampire hunter (slayer)",
+      "based on video game",
+      "dark fantasy",
+      "complex",
+      "monster hunter",
+      "complicated"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2023-09-28",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/123548-castlevania-nocturne/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/o8NuP8k8Pbgfhb7Su384FrJ38Zj.jpg",
+    "backdrop_path": "/1swj9HxDkjzsO3yHlSwRA38hMFN.jpg"
+  },
+  {
+    "tmdb_id": 12832,
+    "title": "The Hunger",
+    "original_title": "The Hunger",
+    "media_type": "tv",
+    "overview": "",
+    "genres": [
+      18,
+      9648,
+      10765,
+      80
+    ],
+    "year": 1997,
+    "decade": 1990,
+    "vote_average": 6.0,
+    "vote_count": 43,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "anthology",
+      "ghost"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "CA",
+      "US",
+      "GB"
+    ],
+    "original_language": "en",
+    "runtime": 24,
+    "release_date": "1997-07-20",
+    "providers": [
+      {
+        "provider_id": 538,
+        "provider_name": "Plex",
+        "logo_path": "/vLZKlXUNDcZR7ilvfY9Wr9k80FZ.jpg",
+        "link": "https://www.themoviedb.org/tv/12832-the-hunger/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/dA9LWaTVUDpl0s1UNSu5pt9Qj4e.jpg",
+    "backdrop_path": "/4gP9I7XwQxd06i3fhh2M0VXgkVW.jpg"
+  },
+  {
+    "tmdb_id": 86850,
+    "title": "Drácula",
+    "original_title": "Dracula",
+    "media_type": "tv",
+    "overview": "Miniserie de TV de 3 episodios inspirada en el personaje de Bram Stoker, el conde Drácula, que viaja de Transilvania a Londres para saciar su sed de sangre.",
+    "genres": [
+      18,
+      10759
+    ],
+    "year": 2020,
+    "decade": 2020,
+    "vote_average": 6.971,
+    "vote_count": 796,
+    "is_premium": false,
+    "keywords": [
+      "london, england",
+      "transylvania",
+      "nun",
+      "based on novel or book",
+      "vampire",
+      "miniseries",
+      "haunted castle",
+      "mysterious",
+      "haunted ship",
+      "dracula",
+      "gloomy"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "GB"
+    ],
+    "original_language": "en",
+    "runtime": 90,
+    "release_date": "2020-01-01",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/86850-dracula/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/o9SsvAoUJg7oJPwFkVYrJNASbta.jpg",
+    "backdrop_path": "/v3cpyhytwXXbAr7Wycn5LEwonuL.jpg"
+  },
+  {
+    "tmdb_id": 126118,
+    "title": "Chapelwaite",
+    "original_title": "Chapelwaite",
+    "media_type": "tv",
+    "overview": "En la década de 1850, el capitán Charles Boone traslada a su familia de tres hijos a su hogar ancestral en la pequeña y aparentemente tranquila ciudad de Preacher's Corners, Maine, después de que su esposa muere en el mar. Charles pronto tendrá que enfrentarse a los secretos de la sórdida historia de su familia y luchar para acabar con la oscuridad que ha plagado a los Boone durante generaciones.",
+    "genres": [
+      18,
+      9648
+    ],
+    "year": 2021,
+    "decade": 2020,
+    "vote_average": 7.312,
+    "vote_count": 255,
+    "is_premium": false,
+    "keywords": [
+      "vampire",
+      "based on short story",
+      "family curse"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2021-08-22",
+    "providers": [
+      {
+        "provider_id": 119,
+        "provider_name": "Amazon Prime Video",
+        "logo_path": "/pvske1MyAoymrs5bguRfVqYiM9a.jpg",
+        "link": "https://www.themoviedb.org/tv/126118-chapelwaite/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/v7Oix3Zkhg3ftRxmLmyDBJc9ycp.jpg",
+    "backdrop_path": "/25yTJaPYBTPitytxvwQbSSJwSOf.jpg"
+  },
+  {
+    "tmdb_id": 97400,
+    "title": "Misa de medianoche",
+    "original_title": "Midnight Mass",
+    "media_type": "tv",
+    "overview": "La llegada de un carismático sacerdote a una comunidad en decadencia trae consigo una serie de milagros, presagios misteriosos y un renovado fervor religioso.",
+    "genres": [
+      9648,
+      18
+    ],
+    "year": 2021,
+    "decade": 2020,
+    "vote_average": 7.535,
+    "vote_count": 1136,
+    "is_premium": true,
+    "keywords": [
+      "sheriff",
+      "island",
+      "drug dealer",
+      "vampire",
+      "addiction",
+      "alcoholism",
+      "priest",
+      "mysterious man",
+      "religion",
+      "church",
+      "ex-con",
+      "catholicism",
+      "fishing boat",
+      "complex",
+      "miracles",
+      "horror",
+      "intense"
+    ],
+    "universes": [],
+    "origin_channels": [],
+    "director_id": null,
+    "director_name": null,
+    "origin_countries": [
+      "US"
+    ],
+    "original_language": "en",
+    "runtime": null,
+    "release_date": "2021-09-24",
+    "providers": [
+      {
+        "provider_id": 8,
+        "provider_name": "Netflix",
+        "logo_path": "/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        "link": "https://www.themoviedb.org/tv/97400-midnight-mass/watch?locale=MX"
+      }
+    ],
+    "poster_path": "/4ZQiVDFQgGO791f9pAcsPUeOtFe.jpg",
+    "backdrop_path": "/YauN3gyvgqktYhze4gXPWuoZBY.jpg"
   }
 ]

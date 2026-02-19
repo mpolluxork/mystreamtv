@@ -11,7 +11,7 @@
     "paramount": "https://www.paramountplus.com/search/",
     "tubi": "https://tubitv.com/search/{title}",
     "pluto": "https://pluto.tv/search/{title}",
-    "mubi": "https://mubi.com/search/{title}",
+    "mubi": "https://mubi.com/es/search/films?query={title}",
     "vix": "https://www.vix.com/search?q={title}",
     "mercado": "https://play.mercadolibre.com.mx/buscar/{title}",
     "star+": "https://www.starplus.com/en-us/search?q={title}",
