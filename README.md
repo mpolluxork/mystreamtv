@@ -54,6 +54,11 @@ Al seleccionar cualquier programa, se despliega una ficha detallada con la sinop
 - **EPG Multi-Canal**: Visualiza toda la programación en una interfaz fluida y moderna.
 - **Sintonización Directa**: Haz clic en cualquier programa para abrirlo directamente en la plataforma de streaming correspondiente.
 
+### 📱 Multi-plataforma y TV
+- **App Nativa (Flutter)**: Aplicación optimizada para Google TV, Android y Windows.
+- **Navegación por D-pad**: Soporte completo para control remoto de televisión (10-foot UI).
+- **EPG Fluida**: Rendimiento optimizado para hardware de TV menos potente.
+
 ### 🧠 Motor de Programación Inteligente (v2.0)
 - **Deduplicación de Contenido**: El mismo contenido no aparecerá en dos canales al mismo tiempo.
 - **Sistema de Cooldown (7 días)**: Las películas no se repiten en el mismo canal durante una semana (las series están exentas para permitir maratones).
@@ -96,6 +101,13 @@ Al seleccionar cualquier programa, se despliega una ficha detallada con la sinop
 - **Guía de TV (EPG)**: `http://localhost:8000`
 - **Consola de Administración**: `http://localhost:8000/admin.html`
 
+### 📱 App Nativa (Opcional)
+Para correr la versión de Google TV o Móvil:
+1. Asegúrate de tener [Flutter instalado](https://docs.flutter.dev/get-started/install).
+2. Ve a la carpeta de la app: `cd flutter_app`
+3. Instala dependencias: `flutter pub get`
+4. Ejecuta: `flutter run` (en una terminal separada mientras el backend está activo).
+
 ---
 
 ## � Próximos Pasos (TO-DO)
@@ -111,7 +123,8 @@ Al seleccionar cualquier programa, se despliega una ficha detallada con la sinop
 Este proyecto utiliza las últimas versiones estables para garantizar rendimiento y seguridad:
 
 - **Backend**: FastAPI 0.109+, Uvicorn 0.27+, Pydantic 2.5+
-- **Frontend**: Vanilla JS (ES6+), CSS3 Moderno (Glassmorphism, Flexbox/Grid)
+- **Frontend Web**: Vanilla JS (ES6+), CSS3 Moderno
+- **App Nativa**: Flutter 3.19+ (Dart 3.3+)
 - **Datos**: TMDB API v3
 
 ---
