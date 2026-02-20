@@ -118,6 +118,7 @@ class ProgramCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         if (program.slotLabel.isNotEmpty)
                           Text(
@@ -133,10 +134,10 @@ class ProgramCard extends StatelessWidget {
                           ),
                         Text(
                           program.title,
-                          style: GoogleFonts.shareTechMono(
+                          style: TextStyle(
                             color: isFocused ? kTextPrimary : kTextSecondary,
                             fontSize: 13,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: isFocused ? FontWeight.bold : FontWeight.normal,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,

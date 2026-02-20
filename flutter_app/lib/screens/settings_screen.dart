@@ -41,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       url = 'http://$url';
     }
     final uri = Uri.tryParse(url);
-    if (uri != null && uri.port == 0) {
+    if (uri != null && !uri.hasPort) {
       url = '${url.trimRight().replaceAll(RegExp(r'/+$'), '')}:8000';
     }
 

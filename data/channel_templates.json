@@ -2037,6 +2037,31 @@
                 }
             ],
             "id": "vampires"
+        },
+        {
+            "name": "Animated movies",
+            "icon": "",
+            "priority": 99,
+            "description": "",
+            "day_of_week": 0,
+            "enabled": true,
+            "slots": [
+                {
+                    "start": "00:00",
+                    "end": "23:59",
+                    "label": "Películas Madrugada",
+                    "content_type": "movie",
+                    "genres": [
+                        16
+                    ],
+                    "decade": null,
+                    "keywords": [],
+                    "with_people": [],
+                    "universes": [],
+                    "title_contains": []
+                }
+            ],
+            "id": "animated-movies"
         }
     ]
 }
