@@ -88,12 +88,6 @@ app.add_middleware(
 app.include_router(epg.router, prefix="/api/epg", tags=["EPG"])
 app.include_router(channel_management.router, tags=["Channel Management"])
 
-# Serve static frontend files
-frontend_path = Path(__file__).parent.parent / "frontend"
-if frontend_path.exists():
-    app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
-
-
 @app.get("/health")
 async def health_check():
     """Detailed health check."""
@@ -102,3 +96,8 @@ async def health_check():
         "tmdb": "configured",
         "region": "MX",
     }
+
+# Serve static frontend files
+frontend_path = Path(__file__).parent.parent / "frontend"
+if frontend_path.exists():
+    app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="frontend")

@@ -9,6 +9,7 @@ import 'providers/focus_provider.dart';
 import 'screens/server_setup_screen.dart';
 import 'screens/epg_screen.dart';
 import 'core/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,9 @@ class MyStreamTVApp extends StatelessWidget {
             surface: kSurfaceColor,
           ),
           scaffoldBackgroundColor: kBackgroundColor,
-          fontFamily: 'Roboto',
+          textTheme: GoogleFonts.notoSansTextTheme(
+            Theme.of(context).textTheme.apply(bodyColor: Colors.white, displayColor: Colors.white),
+          ),
           useMaterial3: true,
         ),
         home: const AppRouter(),

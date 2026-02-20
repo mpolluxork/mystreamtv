@@ -33,8 +33,8 @@ class ServerConfig {
     }
     // If no port specified and it's a plain IP/hostname, add :8000
     final uri = Uri.tryParse(url);
-    if (uri != null && uri.port == 0) {
-      url = '${url.trimRight().replaceAll('/', '')}:8000';
+    if (uri != null && !uri.hasPort) {
+      url = '${url.trimRight().replaceAll(RegExp(r'/+$'), '')}:8000';
     }
     return url;
   }

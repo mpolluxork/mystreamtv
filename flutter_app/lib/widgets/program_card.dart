@@ -94,6 +94,7 @@ class ProgramCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         if (program.slotLabel.isNotEmpty)
                           Text(
@@ -107,15 +108,17 @@ class ProgramCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                        Text(
-                          program.title,
-                          style: TextStyle(
-                            color: isFocused ? kTextPrimary : kTextSecondary,
-                            fontSize: 13,
-                            fontWeight: isFocused ? FontWeight.bold : FontWeight.normal,
+                        Flexible(
+                          child: Text(
+                            program.title,
+                            style: TextStyle(
+                              color: isFocused ? kTextPrimary : kTextSecondary,
+                              fontSize: 13,
+                              fontWeight: isFocused ? FontWeight.bold : FontWeight.normal,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 2),
                         Text(
