@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../core/constants.dart';
 import '../models/program.dart';
@@ -209,7 +210,7 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
     return Stack(
       children: [
         SizedBox(
-          height: tv ? 280 : 180,
+          height: tv ? 220 : 160, // Reduced from 280
           width: double.infinity,
           child: p.backdropPath != null
               ? CachedNetworkImage(
@@ -273,11 +274,14 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
                 ),
               Text(
                 p.title,
-                style: TextStyle(
+                style: GoogleFonts.orbitron(
                   color: Colors.white,
                   fontSize: tv ? 28 : 20,
-                  fontWeight: FontWeight.bold,
-                  shadows: [const Shadow(color: Colors.black, blurRadius: 8)],
+                  fontWeight: FontWeight.w900,
+                  shadows: [
+                    const Shadow(color: Colors.black, blurRadius: 8, offset: Offset(0, 2)),
+                    Shadow(color: kAccentColor.withOpacity(0.5), blurRadius: 20),
+                  ],
                 ),
               ),
             ],
@@ -289,7 +293,7 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
 
   Widget _buildContent(Program p, bool tv) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+      padding: EdgeInsets.fromLTRB(20, 8, 20, tv ? 40 : 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -308,13 +312,13 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
                 _metaChip(Icons.label_rounded, p.genres.take(2).join(', ')),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: tv ? 12 : 16),
           if (p.overview.isNotEmpty) ...[
             Text(
               p.overview,
-              style: TextStyle(
+              style: GoogleFonts.shareTechMono(
                 color: kTextSecondary,
-                fontSize: tv ? 16 : 13,
+                fontSize: tv ? 16 : 14,
                 height: 1.6,
               ),
             ),
@@ -371,7 +375,7 @@ class _ProgramDetailOverlayState extends State<ProgramDetailOverlay>
         const SizedBox(width: 4),
         Text(
           label,
-          style: TextStyle(color: color ?? kTextSecondary, fontSize: 13),
+          style: GoogleFonts.shareTechMono(color: color ?? kTextSecondary, fontSize: 13),
         ),
       ],
     );
@@ -412,20 +416,16 @@ class _ProviderButton extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
-                  color: focused ? kAccentColor : kCardColor,
-                  borderRadius: BorderRadius.circular(10),
+                  gradient: focused 
+                      ? const LinearGradient(colors: [kAccentColor, kAccentPink])
+                      : LinearGradient(colors: [kCardColor, kCardColor.withOpacity(0.8)]),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: focused ? kAccentColor : kBorderColor,
-                    width: focused ? 2 : 1,
+                    color: focused ? Colors.white : kBorderColor,
+                    width: focused ? 1.5 : 1,
                   ),
                   boxShadow: focused
-                      ? [
-                          BoxShadow(
-                            color: kAccentGlow,
-                            blurRadius: 10,
-                            spreadRadius: 1,
-                          )
-                        ]
+                      ? [BoxShadow(color: kAccentColor.withOpacity(0.6), blurRadius: 20, spreadRadius: 2)]
                       : null,
                 ),
                 child: Row(
@@ -445,11 +445,12 @@ class _ProviderButton extends StatelessWidget {
                       ),
                     if (provider.logoPath != null) const SizedBox(width: 8),
                     Text(
-                      'Ver en ${provider.providerName}',
-                      style: TextStyle(
+                      'VER EN ${provider.providerName.toUpperCase()}',
+                      style: GoogleFonts.orbitron(
                         color: focused ? Colors.white : kTextPrimary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
                       ),
                     ),
                     const SizedBox(width: 6),

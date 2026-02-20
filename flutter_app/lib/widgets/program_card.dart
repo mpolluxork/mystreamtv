@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../core/constants.dart';
 import '../models/program.dart';
 
@@ -28,40 +29,63 @@ class ProgramCard extends StatelessWidget {
         duration: const Duration(milliseconds: 150),
         width: width,
         height: kChannelRowHeight,
+        margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         decoration: BoxDecoration(
-          color: isFocused
-              ? kAccentColor.withOpacity(0.25)
-              : isNow
-                  ? kNowPlayingColor.withOpacity(0.08)
-                  : kCardColor.withOpacity(0.6),
-          border: Border(
-            left: BorderSide(color: kBorderColor, width: 0.5),
-            top: BorderSide(
-              color: isFocused
-                  ? kAccentColor
-                  : isNow
-                      ? kNowPlayingColor
-                      : Colors.transparent,
-              width: isFocused ? 2.5 : 2,
-            ),
+          // Sleek cyberpunk background gradient
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: isFocused
+                ? [kCardColor.withOpacity(0.9), kCardColor.withOpacity(0.7)]
+                : isNow
+                    ? [kCardColor.withOpacity(0.6), kNowPlayingColor.withOpacity(0.1)]
+                    : [kCardColor.withOpacity(0.6), kCardColor.withOpacity(0.8)],
+          ),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: isFocused
+                ? kAccentColor
+                : isNow
+                    ? kNowPlayingColor.withOpacity(0.5)
+                    : Colors.white.withOpacity(0.1),
+            width: isFocused ? 1.5 : 1,
           ),
           boxShadow: isFocused
-              ? [BoxShadow(color: kAccentGlow, blurRadius: 12, spreadRadius: 1)]
+              ? [
+                  BoxShadow(color: kAccentGlow, blurRadius: 15, spreadRadius: 1),
+                  BoxShadow(color: kAccentColor.withOpacity(0.1), blurRadius: 30, inset: true),
+                ]
               : null,
         ),
         child: Stack(
           children: [
+            // Top gradient line for focused items (Cyberpunk specific)
+            if (isFocused)
+              Positioned(
+                top: 0, left: 0, right: 0,
+                child: Container(
+                  height: 3,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+                    gradient: LinearGradient(
+                      colors: [kAccentColor, kAccentPink],
+                    ),
+                  ),
+                ),
+              ),
+
             // Progress bar for now-playing
             if (isNow)
               Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: LinearProgressIndicator(
-                  value: program.progressFraction,
-                  backgroundColor: Colors.transparent,
-                  valueColor: AlwaysStoppedAnimation(kNowPlayingColor.withOpacity(0.5)),
-                  minHeight: 2,
+                bottom: 0, left: 0, right: 0,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(5)),
+                  child: LinearProgressIndicator(
+                    value: program.progressFraction,
+                    backgroundColor: Colors.transparent,
+                    valueColor: AlwaysStoppedAnimation(kNowPlayingColor.withOpacity(0.5)),
+                    minHeight: 2,
+                  ),
                 ),
               ),
 
@@ -70,10 +94,10 @@ class ProgramCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               child: Row(
                 children: [
-                  // Poster thumbnail (only if card is wide enough)
-                  if (width > 160 && program.posterPath != null) ...[
+                  // Poster thumbnail
+                  if (width > 100 && program.posterPath != null) ...[
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(3),
                       child: CachedNetworkImage(
                         imageUrl: tmdbPoster(program.posterPath, size: 'w92'),
                         width: 40,
@@ -98,8 +122,8 @@ class ProgramCard extends StatelessWidget {
                         if (program.slotLabel.isNotEmpty)
                           Text(
                             program.slotLabel.toUpperCase(),
-                            style: TextStyle(
-                              color: isFocused ? kAccentColor : kTextDim,
+                            style: GoogleFonts.shareTechMono(
+                              color: isFocused ? kAccentColor : kAccentPink,
                               fontSize: 9,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1,
@@ -109,10 +133,10 @@ class ProgramCard extends StatelessWidget {
                           ),
                         Text(
                           program.title,
-                          style: TextStyle(
+                          style: GoogleFonts.shareTechMono(
                             color: isFocused ? kTextPrimary : kTextSecondary,
                             fontSize: 13,
-                            fontWeight: isFocused ? FontWeight.bold : FontWeight.normal,
+                            fontWeight: FontWeight.bold,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -120,7 +144,7 @@ class ProgramCard extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           program.formattedTime,
-                          style: TextStyle(
+                          style: GoogleFonts.shareTechMono(
                             color: kTextDim,
                             fontSize: 10,
                           ),
@@ -136,12 +160,12 @@ class ProgramCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                       decoration: BoxDecoration(
                         color: kNowPlayingColor,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(2),
                       ),
-                      child: const Text(
+                      child: Text(
                         'EN VIVO',
-                        style: TextStyle(
-                          color: Colors.white,
+                        style: GoogleFonts.orbitron(
+                          color: kBackgroundColor,
                           fontSize: 8,
                           fontWeight: FontWeight.bold,
                         ),

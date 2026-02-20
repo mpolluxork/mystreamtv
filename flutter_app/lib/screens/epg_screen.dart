@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../core/constants.dart';
 import '../models/program.dart';
@@ -11,6 +12,7 @@ import '../widgets/time_ruler.dart';
 import '../widgets/program_card.dart';
 import '../widgets/program_detail_overlay.dart';
 import 'settings_screen.dart';
+import 'channel_list_screen.dart';
 
 class EpgScreen extends StatefulWidget {
   const EpgScreen({super.key});
@@ -24,6 +26,11 @@ class _EpgScreenState extends State<EpgScreen> {
   final _gridScrollV = ScrollController(); // vertical (channels)
   final _sidebarScroll = ScrollController();
   final _focusNode = FocusNode();
+  
+  // Top bar focus nodes
+  final _settingsFocusNode = FocusNode();
+  final _adminFocusNode = FocusNode();
+  final _refreshFocusNode = FocusNode();
 
   Program? _selectedProgram;
   bool _detailOpen = false;
@@ -51,6 +58,9 @@ class _EpgScreenState extends State<EpgScreen> {
     _gridScrollV.dispose();
     _sidebarScroll.dispose();
     _focusNode.dispose();
+    _settingsFocusNode.dispose();
+    _adminFocusNode.dispose();
+    _refreshFocusNode.dispose();
     super.dispose();
   }
 
@@ -74,8 +84,13 @@ class _EpgScreenState extends State<EpgScreen> {
 
     final key = event.logicalKey;
     if (key == LogicalKeyboardKey.arrowUp) {
-      focus.moveUp(maxChannels);
-      _scrollToFocused(focus);
+      if (focus.channelIndex == 0) {
+        // Move to top bar
+        _settingsFocusNode.requestFocus();
+      } else {
+        focus.moveUp(maxChannels);
+        _scrollToFocused(focus);
+      }
     } else if (key == LogicalKeyboardKey.arrowDown) {
       focus.moveDown(maxChannels);
       _scrollToFocused(focus);
@@ -130,25 +145,34 @@ class _EpgScreenState extends State<EpgScreen> {
       child: KeyboardListener(
         focusNode: _focusNode,
         onKeyEvent: _handleKey,
-        child: Scaffold(
-          backgroundColor: kBackgroundColor,
-          body: Stack(
-            children: [
-              Column(
-                children: [
-                  _buildTopBar(context),
-                  Expanded(child: _buildBody(context)),
-                ],
-              ),
-              // Detail overlay
-              if (_detailOpen && _selectedProgram != null)
-                ProgramDetailOverlay(
-                  program: _selectedProgram!,
-                  onClose: _closeDetail,
+                child: PopScope(
+                  canPop: !_detailOpen,
+                  onPopInvokedWithResult: (didPop, result) {
+                    if (didPop) return;
+                    if (_detailOpen) {
+                      _closeDetail();
+                    }
+                  },
+                  child: Scaffold(
+                    backgroundColor: kBackgroundColor,
+                    body: Stack(
+                      children: [
+                        Column(
+                          children: [
+                            _buildTopBar(context),
+                            Expanded(child: _buildBody(context)),
+                          ],
+                        ),
+                        // Detail overlay
+                        if (_detailOpen && _selectedProgram != null)
+                          ProgramDetailOverlay(
+                            program: _selectedProgram!,
+                            onClose: _closeDetail,
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -168,10 +192,10 @@ class _EpgScreenState extends State<EpgScreen> {
           const SizedBox(width: 12),
           Text(
             'MyStreamTV',
-            style: TextStyle(
+            style: GoogleFonts.orbitron(
               color: kTextPrimary,
-              fontSize: tv ? 22 : 17,
-              fontWeight: FontWeight.bold,
+              fontSize: tv ? 24 : 19,
+              fontWeight: FontWeight.w900,
               letterSpacing: 1,
             ),
           ),
@@ -179,15 +203,38 @@ class _EpgScreenState extends State<EpgScreen> {
           _ClockWidget(),
           const SizedBox(width: 16),
           IconButton(
+            focusNode: _settingsFocusNode,
             icon: const Icon(Icons.settings_rounded, color: kTextSecondary),
+            style: IconButton.styleFrom(
+              focusColor: kAccentColor.withOpacity(0.3),
+            ),
             tooltip: 'Configuración',
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const SettingsScreen()),
-            ),
+            ).then((_) => _focusNode.requestFocus()),
           ),
           IconButton(
+            focusNode: _adminFocusNode,
+            icon: const Icon(Icons.playlist_add_check_rounded, color: kTextSecondary),
+            style: IconButton.styleFrom(
+              focusColor: kAccentColor.withOpacity(0.3),
+            ),
+            tooltip: 'Gestionar Canales',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ChannelListScreen()),
+            ).then((_) {
+              _focusNode.requestFocus();
+              context.read<EpgProvider>().loadGuide();
+            }),
+          ),
+          IconButton(
+            focusNode: _refreshFocusNode,
             icon: const Icon(Icons.refresh_rounded, color: kTextSecondary),
+            style: IconButton.styleFrom(
+              focusColor: kAccentColor.withOpacity(0.3),
+            ),
             tooltip: 'Actualizar',
             onPressed: () => context.read<EpgProvider>().loadGuide(),
           ),
@@ -272,8 +319,8 @@ class _EpgScreenState extends State<EpgScreen> {
                 padding: const EdgeInsets.only(left: 12),
                 child: Text(
                   'CANAL',
-                  style: TextStyle(
-                    color: kTextDim,
+                  style: GoogleFonts.orbitron(
+                    color: kAccentColor,
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.5,
@@ -326,7 +373,7 @@ class _EpgScreenState extends State<EpgScreen> {
                             ),
                           ),
                           child: SingleChildScrollView(
-                            controller: isActiveChannel ? _gridScrollH : ScrollController(),
+                            controller: _gridScrollH, // FIXED: Use the global controller to sync all rows
                             scrollDirection: Axis.horizontal,
                             physics: isActiveChannel
                                 ? const ClampingScrollPhysics()
@@ -401,10 +448,14 @@ class _ClockWidgetState extends State<_ClockWidget> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(_time,
-            style: const TextStyle(
-                color: kTextPrimary, fontSize: 18, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.orbitron(
+                color: kNowPlayingColor, 
+                fontSize: 18, 
+                fontWeight: FontWeight.bold,
+                shadows: [Shadow(color: kNowPlayingColor.withOpacity(0.5), blurRadius: 10)],
+            )),
         Text(_date,
-            style: const TextStyle(color: kTextDim, fontSize: 11)),
+            style: GoogleFonts.shareTechMono(color: kTextSecondary, fontSize: 11)),
       ],
     );
   }

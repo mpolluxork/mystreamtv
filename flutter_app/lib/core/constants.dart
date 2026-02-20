@@ -14,32 +14,33 @@ String tmdbLogo(String? path, {String size = 'w92'}) =>
     path != null ? '$kTmdbImageBase/$size$path' : '';
 
 // ── COLORS ────────────────────────────────────────────────────────────────────
-const Color kBackgroundColor = Color(0xFF080818);
-const Color kSurfaceColor    = Color(0xFF12122A);
-const Color kCardColor       = Color(0xFF1A1A35);
-const Color kAccentColor     = Color(0xFF7C3AED); // violet
-const Color kAccentGlow      = Color(0x557C3AED);
-const Color kNowPlayingColor = Color(0xFF10B981); // emerald
-const Color kTextPrimary     = Color(0xFFEEEEFF);
-const Color kTextSecondary   = Color(0xFF9999BB);
-const Color kTextDim         = Color(0xFF555577);
-const Color kBorderColor     = Color(0xFF2A2A4A);
+const Color kBackgroundColor = Color(0xFF0A0A12); // --epg-bg-dark
+const Color kSurfaceColor    = Color(0xFF12121E); // --epg-bg-medium
+const Color kCardColor       = Color(0xFF1A1A2E); // --epg-bg-light / card base
+const Color kAccentColor     = Color(0xFF00D9FF); // --epg-accent-cyan
+const Color kAccentGlow      = Color(0x6600D9FF);
+const Color kAccentPink      = Color(0xFFE94560); // --epg-accent-pink
+const Color kNowPlayingColor = Color(0xFF00FF41); // --epg-accent-green
+const Color kTextPrimary     = Color(0xFFFFFFFF);
+const Color kTextSecondary   = Color(0xFFA0AEC0);
+const Color kTextDim         = Color(0xFF64748B);
+const Color kBorderColor     = Color(0xFF334155); // --epg-time-line
 
 // ── LAYOUT ────────────────────────────────────────────────────────────────────
 /// Width of the channel sidebar in pixels
 const double kSidebarWidth = 220.0;
 
 /// Height of each channel row in the EPG grid
-const double kChannelRowHeight = 80.0;
+const double kChannelRowHeight = 70.0;
 
 /// Height of the time ruler
 const double kTimeRulerHeight = 40.0;
 
 /// Pixels per minute in the EPG grid
-const double kMinuteWidth = 5.0;
+const double kMinuteWidth = 4.0;
 
 /// Minimum card width (for very short programs)
-const double kMinCardWidth = 120.0;
+const double kMinCardWidth = 100.0;
 
 // ── TV vs MOBILE ──────────────────────────────────────────────────────────────
 /// Returns true when the app is running on an Android TV / Google TV device.

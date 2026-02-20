@@ -28,6 +28,9 @@ dependencies:
   # Deep links to streaming platforms
   url_launcher: ^6.2.6
 
+  # Google Fonts
+  google_fonts: ^6.2.1
+
   # Icons
   cupertino_icons: ^1.0.6
 

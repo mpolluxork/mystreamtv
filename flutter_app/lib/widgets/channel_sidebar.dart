@@ -3,6 +3,7 @@ import '../core/constants.dart';
 import '../models/channel.dart';
 import '../providers/focus_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChannelSidebar extends StatelessWidget {
   final List<Channel> channels;
@@ -33,15 +34,16 @@ class ChannelSidebar extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 150),
                 decoration: BoxDecoration(
-                  color: isActive ? kAccentColor.withOpacity(0.18) : Colors.transparent,
+                  color: isActive ? kCardColor.withOpacity(0.5) : Colors.transparent,
                   border: Border(
                     left: BorderSide(
                       color: isActive ? kAccentColor : Colors.transparent,
-                      width: 3,
+                      width: isActive ? 4 : 0,
                     ),
                     bottom: BorderSide(color: kBorderColor, width: 0.5),
                     right: BorderSide(color: kBorderColor, width: 1),
                   ),
+                  boxShadow: isActive ? [BoxShadow(color: kAccentGlow, blurRadius: 15)] : null,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
@@ -54,10 +56,11 @@ class ChannelSidebar extends StatelessWidget {
                     Expanded(
                       child: Text(
                         ch.name,
-                        style: TextStyle(
-                          color: isActive ? kTextPrimary : kTextSecondary,
-                          fontSize: isActive ? 14 : 13,
+                        style: GoogleFonts.shareTechMono(
+                          color: isActive ? kAccentColor : kTextSecondary,
+                          fontSize: isActive ? 14 : 12,
                           fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                          shadows: isActive ? [Shadow(color: kAccentGlow, blurRadius: 4)] : null,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
